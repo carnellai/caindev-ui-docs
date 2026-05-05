@@ -1,20 +1,18 @@
 const links = [
   {
-    group: 'Library',
+    group: 'Docs',
     items: [
-      { label: 'Components', href: '#components' },
-      { label: 'Foundations', href: '#' },
-      { label: 'AI Primitives', href: '#' },
-      { label: 'Changelog', href: '#' },
+      { label: 'Documentation', href: '/docs/button' },
+      { label: 'Changelog', href: '/changelog' },
+      { label: 'Themes', href: '#' },
     ],
   },
   {
-    group: 'Resources',
+    group: 'Components',
     items: [
-      { label: 'Documentation', href: '#' },
-      { label: 'GitHub', href: 'https://github.com' },
-      { label: 'Base UI', href: 'https://base-ui.com' },
-      { label: 'Tailwind CSS', href: 'https://tailwindcss.com' },
+      { label: 'Foundations', href: '/docs/button' },
+      { label: 'Chat & Generation', href: '/docs/streaming-text' },
+      { label: 'Observability', href: '/docs/trace-tree' },
     ],
   },
   {
@@ -22,6 +20,7 @@ const links = [
     items: [
       { label: 'Carnell Systems', href: '#' },
       { label: 'Arcora', href: '#' },
+      { label: 'GitHub', href: 'https://github.com' },
     ],
   },
 ]
@@ -30,7 +29,6 @@ export function Footer() {
   return (
     <footer style={{ borderTop: '1px solid var(--color-border)' }}>
       <div className='container-shell py-14'>
-        {/* Main row */}
         <div
           style={{
             display: 'grid',
@@ -62,7 +60,7 @@ export function Footer() {
             </span>
           </div>
 
-          {/* Link groups */}
+          {/* Links */}
           <div style={{ display: 'flex', gap: '56px' }}>
             {links.map((group) => (
               <div
