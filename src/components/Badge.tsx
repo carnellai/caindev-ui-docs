@@ -1,16 +1,18 @@
-type BadgeVariant =
+export type BadgeVariant =
   | 'default'
   | 'success'
   | 'warning'
   | 'error'
   | 'info'
   | 'outline'
-type BadgeSize = 'sm' | 'md'
+export type BadgeSize = 'sm' | 'md'
 
-type BadgeProps = {
+export type BadgeProps = {
   children: React.ReactNode
   variant?: BadgeVariant
   size?: BadgeSize
+  style?: React.CSSProperties
+  className?: string
 }
 
 const variantStyles: Record<BadgeVariant, React.CSSProperties> = {
@@ -50,9 +52,12 @@ export function Badge({
   children,
   variant = 'default',
   size = 'md',
+  style,
+  className,
 }: BadgeProps) {
   return (
     <span
+      className={className}
       style={{
         display: 'inline-flex',
         gap: '4px',
@@ -64,6 +69,7 @@ export function Badge({
         padding: size === 'sm' ? '1px 6px' : '2px 8px',
         whiteSpace: 'nowrap',
         ...variantStyles[variant],
+        ...style,
       }}>
       {children}
     </span>

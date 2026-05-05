@@ -1,20 +1,46 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { Button } from './Button'
 
-type DialogProps = {
-  trigger: React.ReactNode
+export type DialogProps = {
+  trigger: React.ReactElement
   title: string
   description?: string
   children?: React.ReactNode
   actions?: React.ReactNode
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
+  className?: string
+  style?: React.CSSProperties
 }
 
-export function Dialog({ trigger, title, description, children, actions }: DialogProps) {
+function CloseIcon() {
   return (
-    <BaseDialog.Root>
-      <BaseDialog.Trigger render={<span />} style={{ display: 'inline-flex' }}>
-        {trigger}
-      </BaseDialog.Trigger>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M3 3l8 8M11 3l-8 8" />
+    </svg>
+  )
+}
+
+export function Dialog({
+  trigger,
+  title,
+  description,
+  children,
+  actions,
+  open,
+  defaultOpen,
+  onOpenChange,
+  className,
+  style,
+}: DialogProps) {
+  return (
+    <BaseDialog.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
+      <BaseDialog.Trigger render={trigger} />
 
       <BaseDialog.Portal>
         {/* Backdrop */}
@@ -46,9 +72,38 @@ export function Dialog({ trigger, title, description, children, actions }: Dialo
             padding: '24px',
             outline: 'none',
             transition: 'transform 150ms, opacity 150ms',
+            ...style,
           }}
-          className="data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95"
+          className={[
+            'data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95',
+            className,
+          ].filter(Boolean).join(' ')}
         >
+          <BaseDialog.Close
+            type="button"
+            aria-label="Close dialog"
+            style={{
+              position: 'absolute',
+              top: '14px',
+              right: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '28px',
+              height: '28px',
+              padding: 0,
+              border: 'none',
+              borderRadius: '6px',
+              background: 'transparent',
+              color: 'var(--color-foreground-subtle)',
+              cursor: 'pointer',
+              outline: 'none',
+            }}
+            className="hover:bg-background-subtle hover:text-foreground focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+          >
+            <CloseIcon />
+          </BaseDialog.Close>
+
           {/* Header */}
           <div style={{ marginBottom: description || children ? '16px' : '24px' }}>
             <BaseDialog.Title
@@ -90,8 +145,8 @@ export function Dialog({ trigger, title, description, children, actions }: Dialo
             }}
           >
             {actions ?? (
-              <BaseDialog.Close render={<span />}>
-                <Button variant="outline">Close</Button>
+              <BaseDialog.Close render={<Button type="button" variant="outline" />}>
+                Close
               </BaseDialog.Close>
             )}
           </div>

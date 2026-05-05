@@ -66,6 +66,16 @@ export function DocsPage({
             color: 'var(--color-foreground-muted)',
             overflowX: 'auto',
           }}>
+          <span
+            style={{
+              display: 'block',
+              marginBottom: '16px',
+              color: 'var(--color-foreground-subtle)',
+              whiteSpace: 'normal',
+            }}>
+            Examples use the intended future @caindev/ui import path. This repo
+            currently renders local showcase components.
+          </span>
           <code>{code}</code>
         </pre>
       </div>

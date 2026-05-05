@@ -54,7 +54,7 @@ export function TablePage() {
     <DocsLayout>
       <DocsPage
         title='Table'
-        description='Dense data table with sortable columns, row click handlers, a built-in loading skeleton, and an empty state. Fully typed with generics — pass your data shape and column definitions.'
+        description='Dense data table with typed column definitions, custom cell renderers, keyboard-accessible row click handlers, horizontal overflow handling, and an empty state.'
         preview={
           <Table
             rows={runs}
@@ -166,11 +166,8 @@ type Run = { id: string; model: string; score: number }
   ]}
 />
 
-// Loading state
-<Table data={[]} loading columns={columns} keyField="id" />
-
 // Empty state
-<Table data={[]} emptyMessage="No runs yet" columns={columns} keyField="id" />`}
+<Table rows={[]} emptyMessage="No runs yet" columns={columns} keyField="id" />`}
         props={[
           {
             name: 'columns',
@@ -180,29 +177,23 @@ type Run = { id: string; model: string; score: number }
               'Column definitions with key, header, optional render function, and alignment.',
           },
           {
-            name: 'data',
+            name: 'rows',
             type: 'T[]',
             default: '—',
             description: 'Array of row data.',
           },
           {
-            name: 'keyExtractor',
-            type: '(row: T) => string',
-            default: '—',
-            description: 'Returns a unique key for each row.',
+            name: 'keyField',
+            type: 'string',
+            default: '"id"',
+            description: 'Field used as the row key.',
           },
           {
             name: 'onRowClick',
             type: '(row: T) => void',
             default: '—',
             description:
-              'Row click handler. Adds pointer cursor and hover highlight.',
-          },
-          {
-            name: 'loading',
-            type: 'boolean',
-            default: 'false',
-            description: 'Shows a skeleton loading state.',
+              'Row click handler. Adds pointer cursor, hover highlight, and Enter/Space keyboard activation.',
           },
           {
             name: 'emptyMessage',

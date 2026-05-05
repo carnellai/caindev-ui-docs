@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 
-type PromptInputProps = {
+export type PromptInputProps = {
   value?: string
   onValueChange?: (value: string) => void
   onSubmit?: (value: string) => void
@@ -10,6 +10,8 @@ type PromptInputProps = {
   onStop?: () => void
   maxRows?: number
   actions?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
 }
 
 function SendIcon() {
@@ -38,6 +40,8 @@ export function PromptInput({
   onStop,
   maxRows = 8,
   actions,
+  className,
+  style,
 }: PromptInputProps) {
   const [internalValue, setInternalValue] = useState('')
   const value = controlledValue ?? internalValue
@@ -80,18 +84,22 @@ export function PromptInput({
   const canSubmit = value.trim().length > 0 && !disabled
 
   return (
-    <div style={{
-      borderRadius: '10px',
-      border: '1px solid var(--color-border-strong)',
-      background: 'var(--color-background-elevated)',
-      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
-      transition: 'border-color 150ms',
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '10px',
+        border: '1px solid var(--color-border-strong)',
+        background: 'var(--color-background-elevated)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+        transition: 'border-color 150ms',
+        display: 'flex',
+        flexDirection: 'column',
+        ...style,
+      }}>
       {/* Textarea */}
       <textarea
         ref={textareaRef}
+        aria-label="Prompt"
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
@@ -135,7 +143,10 @@ export function PromptInput({
 
           {loading ? (
             <button
+              type="button"
+              aria-label="Stop generation"
               onClick={onStop}
+              disabled={disabled || !onStop}
               style={{
                 width: '30px',
                 height: '30px',
@@ -143,16 +154,19 @@ export function PromptInput({
                 border: 'none',
                 background: 'var(--color-foreground)',
                 color: 'var(--color-background)',
-                cursor: 'pointer',
+                cursor: disabled || !onStop ? 'not-allowed' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                opacity: disabled || !onStop ? 0.6 : 1,
               }}
             >
               <StopIcon />
             </button>
           ) : (
             <button
+              type="button"
+              aria-label="Send prompt"
               onClick={handleSubmit}
               disabled={!canSubmit}
               style={{

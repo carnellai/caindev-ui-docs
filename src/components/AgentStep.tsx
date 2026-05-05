@@ -1,6 +1,6 @@
-type StepStatus = 'pending' | 'running' | 'complete' | 'failed' | 'skipped'
+export type StepStatus = 'pending' | 'running' | 'complete' | 'failed' | 'skipped'
 
-type Step = {
+export type AgentStepItem = {
   id: string
   label: string
   description?: string
@@ -8,8 +8,39 @@ type Step = {
   duration?: number
 }
 
-type AgentStepProps = {
-  steps: Step[]
+export type AgentStepProps = {
+  steps: AgentStepItem[]
+  className?: string
+  style?: React.CSSProperties
+}
+
+function RunningIcon() {
+  return (
+    <>
+      <svg
+        className="agent-step-spinner"
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        style={{
+          animation: 'agent-step-spin 1s linear infinite',
+          transformOrigin: 'center',
+        }}
+      >
+        <circle cx="7" cy="7" r="6" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="28" strokeDashoffset="10" />
+      </svg>
+      <style>{`
+        @keyframes agent-step-spin {
+          to { transform: rotate(360deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .agent-step-spinner {
+            animation: none !important;
+          }
+        }
+      `}</style>
+    </>
+  )
 }
 
 const statusConfig: Record<StepStatus, { icon: React.ReactNode; color: string }> = {
@@ -22,13 +53,7 @@ const statusConfig: Record<StepStatus, { icon: React.ReactNode; color: string }>
     color: 'var(--color-foreground-subtle)',
   },
   running: {
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14">
-        <circle cx="7" cy="7" r="6" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="28" strokeDashoffset="10">
-          <animateTransform attributeName="transform" type="rotate" from="0 7 7" to="360 7 7" dur="1s" repeatCount="indefinite"/>
-        </circle>
-      </svg>
-    ),
+    icon: <RunningIcon />,
     color: '#a78bfa',
   },
   complete: {
@@ -59,9 +84,9 @@ const statusConfig: Record<StepStatus, { icon: React.ReactNode; color: string }>
   },
 }
 
-export function AgentStep({ steps }: AgentStepProps) {
+export function AgentStep({ steps, className, style }: AgentStepProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '0', ...style }}>
       {steps.map((step, i) => {
         const cfg = statusConfig[step.status]
         const isLast = i === steps.length - 1

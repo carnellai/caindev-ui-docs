@@ -1,10 +1,12 @@
 import { useState } from 'react'
 
-type CodeBlockProps = {
+export type CodeBlockProps = {
   code: string
   language?: string
   filename?: string
   showLineNumbers?: boolean
+  style?: React.CSSProperties
+  className?: string
 }
 
 function CopyIcon() {
@@ -29,25 +31,35 @@ export function CodeBlock({
   language,
   filename,
   showLineNumbers = false,
+  style,
+  className,
 }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code).then(() => {
+  const handleCopy = async () => {
+    if (!navigator.clipboard) return
+
+    try {
+      await navigator.clipboard.writeText(code)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    })
+    } catch {
+      setCopied(false)
+    }
   }
 
   const lines = code.split('\n')
 
   return (
-    <div style={{
-      borderRadius: '8px',
-      border: '1px solid var(--color-border)',
-      overflow: 'hidden',
-      background: 'var(--color-background)',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '8px',
+        border: '1px solid var(--color-border)',
+        overflow: 'hidden',
+        background: 'var(--color-background)',
+        ...style,
+      }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -81,6 +93,8 @@ export function CodeBlock({
         </div>
 
         <button
+          type="button"
+          aria-label={copied ? 'Code copied' : 'Copy code'}
           onClick={handleCopy}
           style={{
             display: 'flex',

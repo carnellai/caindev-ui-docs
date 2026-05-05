@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-type StreamingTextProps = {
+export type StreamingTextProps = {
   // Pass the full text as it grows — each render adds more chars
   text: string
   // Whether the stream is still active (shows cursor)
@@ -8,6 +8,11 @@ type StreamingTextProps = {
   // Optional class for the container
   className?: string
   style?: React.CSSProperties
+}
+
+export type SimulatedStreamState = {
+  text: string
+  streaming: boolean
 }
 
 export function StreamingText({
@@ -31,6 +36,7 @@ export function StreamingText({
       {text}
       {streaming && (
         <span
+          className="streaming-text-caret"
           style={{
             display: 'inline-block',
             width: '2px',
@@ -48,13 +54,18 @@ export function StreamingText({
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .streaming-text-caret {
+            animation: none !important;
+          }
+        }
       `}</style>
     </span>
   )
 }
 
 // Demo hook — simulates a stream for previews/docs
-export function useSimulatedStream(fullText: string, speed = 18) {
+export function useSimulatedStream(fullText: string, speed = 18): SimulatedStreamState {
   const [text, setText] = useState('')
   const [streaming, setStreaming] = useState(true)
   const indexRef = useRef(0)

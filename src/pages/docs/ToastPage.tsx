@@ -66,6 +66,7 @@ function SaveButton() {
             { name: 'success(title, description?)', type: 'function', default: '—', description: 'Show a success toast.' },
             { name: 'error(title, description?)', type: 'function', default: '—', description: 'Show an error toast.' },
             { name: 'warning(title, description?)', type: 'function', default: '—', description: 'Show a warning toast.' },
+            { name: 'ToastProvider className/style', type: 'string / React.CSSProperties', default: '—', description: 'Optional passthrough props for the toast viewport.' },
           ]}
         />
       </ToastProvider>

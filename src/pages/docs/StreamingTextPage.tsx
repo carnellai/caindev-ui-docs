@@ -25,7 +25,7 @@ export function StreamingTextPage() {
     <DocsLayout>
       <DocsPage
         title="StreamingText"
-        description="Renders text as it streams from an LLM with an animated blinking cursor. Designed for real token streams — pass the growing text string as it arrives, not a complete string to animate."
+        description="Experimental prototype renderer for text as it streams from an LLM with an animated blinking cursor. For real token streams, pass the growing text string as it arrives, not a complete string to animate."
         preview={<StreamingDemo />}
         code={`import { StreamingText, useSimulatedStream } from '@caindev/ui'
 

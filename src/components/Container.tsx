@@ -1,6 +1,6 @@
-type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
+export type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
-type ContainerProps = {
+export type ContainerProps = {
   children: React.ReactNode
   size?: ContainerSize
   center?: boolean

@@ -16,9 +16,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'Unstyled by default',
+    label: 'Styled foundations',
     description:
-      'Zero styles shipped. Bring your own design system or use ours — no specificity battles.',
+      'Dark-first primitives using the current caindev/ui tokens and Tailwind v4.',
   },
   {
     icon: (
@@ -33,9 +33,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'Accessibility built in',
+    label: 'Accessibility-minded',
     description:
-      'WAI-ARIA compliant. Focus management, keyboard nav, and screen reader support handled for you.',
+      'Built on Base UI primitives for keyboard, focus, and ARIA foundations where those primitives apply.',
   },
   {
     icon: (
@@ -65,9 +65,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'AI-first primitives',
+    label: 'AI prototypes included',
     description:
-      'Streaming text, eval scores, tool calls, and token displays are first-class — not afterthoughts.',
+      'Streaming text, eval scores, tool calls, and token displays are available as showcase-quality patterns.',
   },
   {
     icon: (
@@ -110,9 +110,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'Composable API',
+    label: 'Composable direction',
     description:
-      'Every component exposes its parts. Wrap, extend, or replace anything without fighting abstractions.',
+      'Components are intentionally small and can be wrapped while the future package API is refined.',
   },
   {
     icon: (
@@ -126,9 +126,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'TypeScript strict',
+    label: 'TypeScript checked',
     description:
-      'Full type coverage. Prop types, state types, and ref types all exported and documented.',
+      'The showcase is type-checked; exported package types will be finalized during extraction.',
   },
 ]
 

@@ -1,19 +1,23 @@
 import { Select as BaseSelect } from '@base-ui/react/select'
 
-type SelectOption = {
+export type SelectOption = {
   label: string
   value: string
   disabled?: boolean
 }
 
-type SelectProps = {
+export type SelectProps = {
   label?: string
   placeholder?: string
   options: SelectOption[]
-  value?: string
-  defaultValue?: string
-  onValueChange?: (value: string) => void
+  value?: string | null
+  defaultValue?: string | null
+  onValueChange?: (value: string | null) => void
   disabled?: boolean
+  style?: React.CSSProperties
+  className?: string
+  triggerStyle?: React.CSSProperties
+  triggerClassName?: string
 }
 
 function ChevronUpDownIcon() {
@@ -39,6 +43,10 @@ function CheckIcon() {
   )
 }
 
+function mergeClassName(base: string, className?: string) {
+  return [base, className].filter(Boolean).join(' ')
+}
+
 export function Select({
   label,
   placeholder = 'Select an option',
@@ -47,26 +55,37 @@ export function Select({
   defaultValue,
   onValueChange,
   disabled,
+  style,
+  className,
+  triggerStyle,
+  triggerClassName,
 }: SelectProps) {
+  const isDisabled = disabled || options.length === 0
+
+  const handleValueChange = (nextValue: string | null) => {
+    onValueChange?.(nextValue)
+  }
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-      {label && (
-        <span
-          style={{
-            fontSize: '0.8125rem',
-            fontWeight: 500,
-            color: 'var(--color-foreground)',
-          }}>
-          {label}
-        </span>
-      )}
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '6px', ...style }}>
       <BaseSelect.Root
         items={options}
         value={value}
         defaultValue={defaultValue}
-        onValueChange={onValueChange}
-        disabled={disabled}>
+        onValueChange={handleValueChange}
+        disabled={isDisabled}>
+        {label && (
+          <BaseSelect.Label
+            style={{
+              fontSize: '0.8125rem',
+              fontWeight: 500,
+              color: isDisabled ? 'var(--color-foreground-subtle)' : 'var(--color-foreground)',
+            }}>
+            {label}
+          </BaseSelect.Label>
+        )}
         <BaseSelect.Trigger
+          aria-label={label ? undefined : placeholder}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -81,16 +100,21 @@ export function Select({
             color: 'var(--color-foreground)',
             fontSize: '0.875rem',
             fontFamily: 'inherit',
-            cursor: 'pointer',
+            cursor: isDisabled ? 'not-allowed' : 'pointer',
             outline: 'none',
             userSelect: 'none',
             minWidth: '160px',
+            opacity: isDisabled ? 0.5 : 1,
+            ...triggerStyle,
           }}
-          className='data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[popup-open]:border-accent focus-visible:border-accent'>
+          className={mergeClassName(
+            'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[popup-open]:border-accent focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+            triggerClassName,
+          )}>
           <BaseSelect.Value
             style={{ color: 'var(--color-foreground)' }}
             className='data-[placeholder]:text-foreground-subtle'
-            placeholder={placeholder}
+            placeholder={options.length === 0 ? 'No options' : placeholder}
           />
           <BaseSelect.Icon
             style={{ color: 'var(--color-foreground-muted)', display: 'flex' }}>
@@ -141,7 +165,7 @@ export function Select({
                         borderRadius: '6px',
                         fontSize: '0.875rem',
                         color: 'var(--color-foreground-muted)',
-                        cursor: 'default',
+                        cursor: optDisabled ? 'not-allowed' : 'default',
                         userSelect: 'none',
                         outline: 'none',
                         whiteSpace: 'nowrap',

@@ -1,28 +1,41 @@
 import { Menu as BaseMenu } from '@base-ui/react/menu'
 
-type MenuItem = {
+export type MenuItem = {
   label: string
   onSelect?: () => void
   disabled?: boolean
   destructive?: boolean
 }
 
-type MenuGroup = {
+export type MenuGroup = {
   items: MenuItem[]
 }
 
-type MenuProps = {
+export type MenuProps = {
   trigger: React.ReactElement
   groups: MenuGroup[]
+  open?: boolean
+  defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
+  className?: string
+  style?: React.CSSProperties
 }
 
-export function Menu({ trigger, groups }: MenuProps) {
+export function Menu({ trigger, groups, open, defaultOpen, onOpenChange, className, style }: MenuProps) {
   return (
-    <BaseMenu.Root>
+    <BaseMenu.Root
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={(nextOpen) => onOpenChange?.(nextOpen)}
+    >
       <BaseMenu.Trigger render={trigger} />
       <BaseMenu.Portal>
         <BaseMenu.Positioner sideOffset={6}>
           <BaseMenu.Popup
+            className={[
+              'data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95',
+              className,
+            ].filter(Boolean).join(' ')}
             style={{
               minWidth: '180px',
               borderRadius: '8px',
@@ -33,8 +46,8 @@ export function Menu({ trigger, groups }: MenuProps) {
               outline: 'none',
               transformOrigin: 'var(--transform-origin)',
               transition: 'transform 120ms, opacity 120ms',
+              ...style,
             }}
-            className="data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95"
           >
             {groups.map((group, gi) => (
               <div key={gi}>
@@ -50,6 +63,7 @@ export function Menu({ trigger, groups }: MenuProps) {
                 {group.items.map((item) => (
                   <BaseMenu.Item
                     key={item.label}
+                    label={item.label}
                     disabled={item.disabled}
                     onClick={item.onSelect}
                     style={{

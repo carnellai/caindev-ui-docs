@@ -15,7 +15,7 @@ export function AccordionPage() {
                 {
                   value: 'what',
                   trigger: 'What is @caindev/ui?',
-                  content: 'A component library built on Base UI primitives, styled with Tailwind v4. It includes standard UI components and AI-first primitives for streaming text, eval scores, and tool calls.',
+                  content: 'A showcase and development environment for a future component library built on Base UI primitives and styled with Tailwind v4.',
                 },
                 {
                   value: 'base-ui',
@@ -25,7 +25,7 @@ export function AccordionPage() {
                 {
                   value: 'ai',
                   trigger: 'What are AI primitives?',
-                  content: 'Components designed for AI application UIs — StreamingText for token-by-token rendering, EvalScore for threshold-based scoring displays, ToolCallCard for collapsible tool invocations, and more.',
+                  content: 'Prototype components for AI application UIs — StreamingText for token-by-token rendering, ScoreBar and EvalBadge for evaluation displays, ToolCallCard for collapsible tool invocations, and more.',
                 },
                 {
                   value: 'disabled',
@@ -55,11 +55,21 @@ export function AccordionPage() {
 />
 
 // Allow multiple open at once
-<Accordion multiple items={items} />`}
+<Accordion multiple items={items} />
+
+// Controlled
+const [openItems, setOpenItems] = useState<string[]>(['item-1'])
+<Accordion
+  items={items}
+  value={openItems}
+  onValueChange={setOpenItems}
+/>`}
         props={[
           { name: 'items', type: '{ value: string; trigger: ReactNode; content: ReactNode; disabled?: boolean }[]', default: '—', description: 'Array of accordion items.' },
           { name: 'multiple', type: 'boolean', default: 'false', description: 'Allow multiple panels open simultaneously.' },
-          { name: 'defaultValue', type: 'string[]', default: '[]', description: 'Initially open items (uncontrolled).' },
+          { name: 'defaultValue', type: 'string[]', default: '[]', description: 'Initially open items. Base UI uses an array even when multiple is false.' },
+          { name: 'value', type: 'string[]', default: '—', description: 'Controlled open item values.' },
+          { name: 'onValueChange', type: '(value: string[]) => void', default: '—', description: 'Callback when open item values change.' },
         ]}
       />
     </DocsLayout>

@@ -48,8 +48,8 @@ export function Footer() {
                 lineHeight: 1.6,
                 color: 'var(--color-foreground-muted)',
               }}>
-              Unstyled, accessible components for AI-first React applications.
-              Built on Base UI and Tailwind v4.
+              Dark-first component showcase for AI-oriented React applications,
+              built on Base UI and Tailwind v4.
             </p>
             <span
               style={{

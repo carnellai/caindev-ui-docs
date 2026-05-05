@@ -1,6 +1,7 @@
+import { useId } from 'react'
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 
-type CheckboxProps = React.ComponentProps<typeof BaseCheckbox.Root> & {
+export type CheckboxProps = React.ComponentProps<typeof BaseCheckbox.Root> & {
   label?: string
 }
 
@@ -12,19 +13,53 @@ function CheckIcon() {
   )
 }
 
-export function Checkbox({ label, ...props }: CheckboxProps) {
+function MinusIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <path d="M2 5h6" />
+    </svg>
+  )
+}
+
+function mergeClassName(
+  base: string,
+  className: CheckboxProps['className'],
+): CheckboxProps['className'] {
+  if (typeof className === 'function') {
+    return (state) => [base, className(state)].filter(Boolean).join(' ')
+  }
+
+  return [base, className].filter(Boolean).join(' ')
+}
+
+export function Checkbox({
+  label,
+  id,
+  disabled,
+  indeterminate,
+  style,
+  className,
+  ...props
+}: CheckboxProps) {
+  const generatedId = useId()
+  const checkboxId = id ?? generatedId
+
   return (
     <label
+      htmlFor={checkboxId}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: '10px',
-        cursor: props.disabled ? 'not-allowed' : 'pointer',
+        cursor: disabled ? 'not-allowed' : 'pointer',
         userSelect: 'none',
-        opacity: props.disabled ? 0.5 : 1,
+        opacity: disabled ? 0.5 : 1,
       }}
     >
       <BaseCheckbox.Root
+        id={checkboxId}
+        disabled={disabled}
+        indeterminate={indeterminate}
         style={{
           width: '18px',
           height: '18px',
@@ -39,8 +74,12 @@ export function Checkbox({ label, ...props }: CheckboxProps) {
           background: 'rgba(255,255,255,0.05)',
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
           transition: 'background 120ms, border-color 120ms',
+          ...(typeof style === 'object' ? style : {}),
         }}
-        className="data-[checked]:bg-accent data-[checked]:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className={mergeClassName(
+          'data-[checked]:bg-accent data-[checked]:border-accent data-[indeterminate]:bg-accent data-[indeterminate]:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent data-[disabled]:cursor-not-allowed',
+          className,
+        )}
         {...props}
       >
         <BaseCheckbox.Indicator
@@ -50,7 +89,7 @@ export function Checkbox({ label, ...props }: CheckboxProps) {
             color: '#fff',
           }}
         >
-          <CheckIcon />
+          {indeterminate ? <MinusIcon /> : <CheckIcon />}
         </BaseCheckbox.Indicator>
       </BaseCheckbox.Root>
 

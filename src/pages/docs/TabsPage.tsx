@@ -70,8 +70,8 @@ export function TabsPage() {
         props={[
           { name: 'tabs', type: '{ value: string; label: string; content: ReactNode; disabled?: boolean }[]', default: '—', description: 'Array of tab definitions.' },
           { name: 'defaultValue', type: 'string', default: 'First tab', description: 'Initially active tab (uncontrolled).' },
-          { name: 'value', type: 'string', default: '—', description: 'Controlled active tab.' },
-          { name: 'onValueChange', type: '(value: string) => void', default: '—', description: 'Callback when active tab changes.' },
+          { name: 'value', type: 'string | null', default: '—', description: 'Controlled active tab. Use null for no active tab.' },
+          { name: 'onValueChange', type: '(value: string | null) => void', default: '—', description: 'Callback when active tab changes.' },
         ]}
       />
     </DocsLayout>

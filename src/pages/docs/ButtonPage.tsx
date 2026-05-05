@@ -28,6 +28,9 @@ export function ButtonPage() {
             <Button variant='solid' disabled>
               Disabled
             </Button>
+            <Button variant='solid' loading>
+              Saving
+            </Button>
           </div>
         }
         code={`import { Button } from '@caindev/ui'
@@ -45,10 +48,8 @@ export function ButtonPage() {
 // Disabled — stays focusable
 <Button disabled>Disabled</Button>
 
-// Loading — keeps focus when disabled
-<Button disabled focusableWhenDisabled>
-  Loading...
-</Button>
+// Loading
+<Button loading>Saving</Button>
 
 // Render as a link
 <Button render={<a href="/somewhere" />}>
@@ -66,6 +67,13 @@ export function ButtonPage() {
             type: '"sm" | "md" | "lg"',
             default: '"md"',
             description: 'Size of the button.',
+          },
+          {
+            name: 'loading',
+            type: 'boolean',
+            default: 'false',
+            description:
+              'Shows a spinner, sets aria-busy, and disables the button while preserving its label.',
           },
           {
             name: 'disabled',

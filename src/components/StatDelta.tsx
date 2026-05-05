@@ -1,13 +1,17 @@
-type StatDeltaProps = {
+export type StatDeltaFormat = 'number' | 'percent' | 'currency' | 'duration'
+
+export type StatDeltaProps = {
   label: string
   current: number
   previous: number
   unit?: string
-  format?: 'number' | 'percent' | 'currency' | 'duration'
+  format?: StatDeltaFormat
   higherIsBetter?: boolean
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function StatDelta({ label, current, previous, unit, format = 'number', higherIsBetter = true }: StatDeltaProps) {
+export function StatDelta({ label, current, previous, unit, format = 'number', higherIsBetter = true, style, className }: StatDeltaProps) {
   const delta = current - previous
   const deltaPercent = previous !== 0 ? (delta / previous) * 100 : 0
   const isImproved = higherIsBetter ? delta > 0 : delta < 0
@@ -22,7 +26,7 @@ export function StatDelta({ label, current, previous, unit, format = 'number', h
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '4px', ...style }}>
       <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
         {label}
       </span>

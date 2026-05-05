@@ -1,22 +1,40 @@
+import { useId } from 'react'
 import { Switch as BaseSwitch } from '@base-ui/react/switch'
 
-type SwitchProps = React.ComponentProps<typeof BaseSwitch.Root> & {
+export type SwitchProps = React.ComponentProps<typeof BaseSwitch.Root> & {
   label?: string
 }
 
-export function Switch({ label, id, ...props }: SwitchProps) {
+function mergeClassName(
+  base: string,
+  className: SwitchProps['className'],
+): SwitchProps['className'] {
+  if (typeof className === 'function') {
+    return (state) => [base, className(state)].filter(Boolean).join(' ')
+  }
+
+  return [base, className].filter(Boolean).join(' ')
+}
+
+export function Switch({ label, id, disabled, style, className, ...props }: SwitchProps) {
+  const generatedId = useId()
+  const switchId = id ?? generatedId
+
   return (
     <label
+      htmlFor={switchId}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: '10px',
-        cursor: 'pointer',
+        cursor: disabled ? 'not-allowed' : 'pointer',
         userSelect: 'none',
+        opacity: disabled ? 0.5 : 1,
       }}
     >
       <BaseSwitch.Root
-        id={id}
+        id={switchId}
+        disabled={disabled}
         style={{
           position: 'relative',
           display: 'flex',
@@ -28,12 +46,16 @@ export function Switch({ label, id, ...props }: SwitchProps) {
           border: '1px solid rgba(255,255,255,0.1)',
           background: 'var(--color-background-subtle)',
           boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.3)',
-          cursor: 'pointer',
+          cursor: 'inherit',
           transition: 'background 150ms, border-color 150ms',
           outline: 'none',
           flexShrink: 0,
+          ...(typeof style === 'object' ? style : {}),
         }}
-        className="data-[checked]:bg-accent data-[checked]:border-accent/50"
+        className={mergeClassName(
+          'data-[checked]:bg-accent data-[checked]:border-accent/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent data-[disabled]:cursor-not-allowed',
+          className,
+        )}
         {...props}
       >
         <BaseSwitch.Thumb

@@ -1,18 +1,20 @@
 import { useEffect, useRef } from 'react'
 import { MessageBubble } from './MessageBubble'
+import type { MessageRole } from './MessageBubble'
 
-type Message = {
+export type MessageThreadMessage = {
   id: string
-  role: 'user' | 'assistant' | 'system'
+  role: MessageRole
   content: string
   streaming?: boolean
   timestamp?: string
 }
 
-type MessageThreadProps = {
-  messages: Message[]
+export type MessageThreadProps = {
+  messages: MessageThreadMessage[]
   autoScroll?: boolean
   maxHeight?: string | number
+  className?: string
   style?: React.CSSProperties
 }
 
@@ -20,6 +22,7 @@ export function MessageThread({
   messages,
   autoScroll = true,
   maxHeight = '480px',
+  className,
   style,
 }: MessageThreadProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -32,6 +35,7 @@ export function MessageThread({
 
   return (
     <div
+      className={className}
       style={{
         display: 'flex',
         flexDirection: 'column',

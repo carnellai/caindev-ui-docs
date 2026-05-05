@@ -8,7 +8,7 @@ export function SelectPage() {
     <DocsLayout>
       <DocsPage
         title="Select"
-        description="Choose a value from a dropdown list. Built on Base UI's Select primitive with keyboard navigation, search, and accessible labeling."
+        description="Choose a value from a dropdown list. Built on Base UI's Select primitive with keyboard navigation and accessible labeling."
         preview={
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
             <Select
@@ -45,7 +45,7 @@ export function SelectPage() {
 />
 
 // Controlled
-const [model, setModel] = useState('gpt-4o')
+const [model, setModel] = useState<string | null>('gpt-4o')
 <Select
   value={model}
   onValueChange={setModel}
@@ -55,9 +55,9 @@ const [model, setModel] = useState('gpt-4o')
           { name: 'options', type: '{ label: string; value: string; disabled?: boolean }[]', default: '—', description: 'Array of options to display.' },
           { name: 'label', type: 'string', default: '—', description: 'Label rendered above the trigger.' },
           { name: 'placeholder', type: 'string', default: '"Select an option"', description: 'Placeholder when no value is selected.' },
-          { name: 'value', type: 'string', default: '—', description: 'Controlled value.' },
-          { name: 'defaultValue', type: 'string', default: '—', description: 'Initial value (uncontrolled).' },
-          { name: 'onValueChange', type: '(value: string) => void', default: '—', description: 'Callback when value changes.' },
+          { name: 'value', type: 'string | null', default: '—', description: 'Controlled value. Use null for no selection.' },
+          { name: 'defaultValue', type: 'string | null', default: '—', description: 'Initial value (uncontrolled). Use null for no initial selection.' },
+          { name: 'onValueChange', type: '(value: string | null) => void', default: '—', description: 'Callback when value changes or clears.' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the select.' },
         ]}
       />

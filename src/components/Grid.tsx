@@ -1,4 +1,4 @@
-type GridProps = {
+export type GridProps = {
   children: React.ReactNode
   cols?: number | string  // number = repeat(n, 1fr), string = custom template
   gap?: string | number

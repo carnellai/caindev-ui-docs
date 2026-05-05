@@ -1,17 +1,17 @@
 const steps = [
   {
     step: '01',
-    label: 'Install',
+    label: 'Future install',
     code: 'pnpm add @caindev/ui',
   },
   {
     step: '02',
-    label: 'Import the styles',
+    label: 'Future style import',
     code: `import '@caindev/ui/styles'`,
   },
   {
     step: '03',
-    label: 'Use a component',
+    label: 'Future package import',
     code: `import { Button } from '@caindev/ui'
 
 export default function App() {
@@ -38,11 +38,11 @@ export function QuickStart() {
           {/* Left */}
           <div
             style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <span className='eyebrow'>Quick start</span>
+            <span className='eyebrow'>Future package direction</span>
             <h2 style={{ color: 'var(--color-foreground)', margin: 0 }}>
-              Up and running{' '}
+              Planned package usage{' '}
               <span style={{ color: 'var(--color-foreground-subtle)' }}>
-                in minutes.
+                after extraction.
               </span>
             </h2>
             <p
@@ -51,8 +51,8 @@ export function QuickStart() {
                 maxWidth: '320px',
                 margin: 0,
               }}>
-              Install the package, import the stylesheet, and start using
-              components. No configuration required.
+              The current repo is the showcase and development environment.
+              These commands describe the intended package flow after extraction.
             </p>
             <a
               href='#'

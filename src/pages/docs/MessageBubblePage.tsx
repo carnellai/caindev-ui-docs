@@ -1,7 +1,7 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { MessageBubble } from '../../components/MessageBubble'
-import { StreamingText, useSimulatedStream } from '../../components/StreamingText'
+import { useSimulatedStream } from '../../components/StreamingText'
 
 function StreamingAssistant() {
   const { text, streaming } = useSimulatedStream(
@@ -23,7 +23,7 @@ export function MessageBubblePage() {
     <DocsLayout>
       <DocsPage
         title="MessageBubble"
-        description="A single message in a conversation. Handles user, assistant, and system roles with distinct visual treatments. Supports streaming content, timestamps, and custom action slots."
+        description="Experimental prototype single-message presentation for AI conversations. Handles user, assistant, and system roles with distinct visual treatments. Supports streaming content, timestamps, and custom action slots."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%', maxWidth: '540px' }}>
             <MessageBubble
@@ -72,7 +72,9 @@ export function MessageBubblePage() {
           { name: 'streaming', type: 'boolean', default: 'false', description: 'Pass true while the assistant is still generating to show the streaming cursor.' },
           { name: 'avatar', type: 'React.ReactNode', default: 'Built-in', description: 'Custom avatar element. Defaults to a user icon or the caindev/ui logomark.' },
           { name: 'timestamp', type: 'string', default: '—', description: 'Timestamp string shown below the message.' },
-          { name: 'actions', type: 'React.ReactNode', default: '—', description: 'Action buttons rendered below the message (copy, retry, etc).' },
+          { name: 'actions', type: 'React.ReactNode', default: '—', description: 'Action buttons rendered below the message.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

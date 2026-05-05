@@ -7,7 +7,7 @@ export function AgentStepPage() {
     <DocsLayout>
       <DocsPage
         title="AgentStep"
-        description="A vertical step list showing the progress of a multi-step agent plan. Each step has a status with an icon — pending, running (animated spinner), complete, failed, or skipped."
+        description="Experimental prototype vertical step list showing the progress of a multi-step agent plan. Each step has a status with an icon: pending, running, complete, failed, or skipped."
         preview={
           <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
             <AgentStep
@@ -53,6 +53,8 @@ export function AgentStepPage() {
 />`}
         props={[
           { name: 'steps', type: 'Step[]', default: '—', description: 'Array of step definitions.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

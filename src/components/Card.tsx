@@ -1,8 +1,10 @@
-type CardProps = {
+export type CardPadding = 'none' | 'sm' | 'md' | 'lg'
+
+export type CardProps = {
   children: React.ReactNode
   header?: React.ReactNode
   footer?: React.ReactNode
-  padding?: 'none' | 'sm' | 'md' | 'lg'
+  padding?: CardPadding
   style?: React.CSSProperties
   className?: string
 }

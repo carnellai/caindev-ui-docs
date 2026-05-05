@@ -1,30 +1,42 @@
-type ScoreBarProps = {
+export type ScoreBarSize = 'sm' | 'md'
+
+export type ScoreBarProps = {
   score: number
   threshold?: number
   label?: string
   showValue?: boolean
-  size?: 'sm' | 'md'
+  size?: ScoreBarSize
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function ScoreBar({ score, threshold, label, showValue = true, size = 'md' }: ScoreBarProps) {
-  const pct = Math.min(Math.max(score, 0), 1) * 100
+export function ScoreBar({ score, threshold, label, showValue = true, size = 'md', style, className }: ScoreBarProps) {
+  const clampedScore = Math.min(Math.max(score, 0), 1)
+  const pct = clampedScore * 100
   const passing = threshold !== undefined ? score >= threshold : true
   const barColor = passing ? '#34d399' : '#f87171'
   const height = size === 'sm' ? '4px' : '6px'
+  const meterLabel = label ?? 'Score'
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%' }}>
+    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%', ...style }}>
       {(label || showValue) && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {label && <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-muted)' }}>{label}</span>}
           {showValue && (
             <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: barColor }}>
-              {(score * 100).toFixed(1)}%
+              {(clampedScore * 100).toFixed(1)}%
             </span>
           )}
         </div>
       )}
-      <div style={{ position: 'relative', width: '100%', height, background: 'var(--color-background-subtle)', borderRadius: '999px', overflow: 'visible' }}>
+      <div
+        role="meter"
+        aria-valuemin={0}
+        aria-valuemax={1}
+        aria-valuenow={clampedScore}
+        aria-label={meterLabel}
+        style={{ position: 'relative', width: '100%', height, background: 'var(--color-background-subtle)', borderRadius: '999px', overflow: 'visible' }}>
         <div style={{
           position: 'absolute',
           left: 0, top: 0, bottom: 0,

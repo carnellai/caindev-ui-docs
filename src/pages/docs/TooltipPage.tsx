@@ -38,6 +38,8 @@ import { Button } from '@caindev/ui'
           { name: 'children', type: 'React.ReactElement', default: '—', description: 'Element that triggers the tooltip.' },
           { name: 'side', type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: 'Side the tooltip appears on.' },
           { name: 'delay', type: 'number', default: '300', description: 'Delay in ms before showing the tooltip.' },
+          { name: 'closeDelay', type: 'number', default: '—', description: 'Delay in ms before hiding after pointer leave.' },
+          { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the tooltip.' },
         ]}
       />
     </DocsLayout>

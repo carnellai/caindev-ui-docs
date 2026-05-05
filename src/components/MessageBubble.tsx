@@ -1,17 +1,19 @@
 import { StreamingText } from './StreamingText'
 
-type Role = 'user' | 'assistant' | 'system'
+export type MessageRole = 'user' | 'assistant' | 'system'
 
-type MessageBubbleProps = {
-  role: Role
+export type MessageBubbleProps = {
+  role: MessageRole
   content: string
   streaming?: boolean
   avatar?: React.ReactNode
   timestamp?: string
   actions?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
 }
 
-const roleStyles: Record<Role, React.CSSProperties> = {
+const roleStyles: Record<MessageRole, React.CSSProperties> = {
   user: {
     background: 'var(--color-background-subtle)',
     border: '1px solid var(--color-border)',
@@ -82,18 +84,23 @@ export function MessageBubble({
   avatar,
   timestamp,
   actions,
+  className,
+  style,
 }: MessageBubbleProps) {
   const isUser = role === 'user'
   const isAssistant = role === 'assistant'
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: isUser ? 'row-reverse' : 'row',
-      alignItems: 'flex-start',
-      gap: '10px',
-      width: '100%',
-    }}>
+    <div
+      className={className}
+      style={{
+        display: 'flex',
+        flexDirection: isUser ? 'row-reverse' : 'row',
+        alignItems: 'flex-start',
+        gap: '10px',
+        width: '100%',
+        ...style,
+      }}>
       {/* Avatar */}
       {isUser && (avatar ?? <UserAvatar />)}
       {isAssistant && (avatar ?? <AssistantAvatar />)}

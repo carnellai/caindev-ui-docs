@@ -18,11 +18,11 @@ export function DialogPage() {
               description="This action cannot be undone. This will permanently delete your account and remove your data from our servers."
               actions={
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <DialogClose render={<span />}>
-                    <Button variant="ghost">Cancel</Button>
+                  <DialogClose render={<Button type="button" variant="ghost" />}>
+                    Cancel
                   </DialogClose>
-                  <DialogClose render={<span />}>
-                    <Button variant="solid">Confirm</Button>
+                  <DialogClose render={<Button type="button" variant="solid" />}>
+                    Confirm
                   </DialogClose>
                 </div>
               }
@@ -33,11 +33,11 @@ export function DialogPage() {
               description="Make changes to your profile here."
               actions={
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <DialogClose render={<span />}>
-                    <Button variant="ghost">Cancel</Button>
+                  <DialogClose render={<Button type="button" variant="ghost" />}>
+                    Cancel
                   </DialogClose>
-                  <DialogClose render={<span />}>
-                    <Button variant="solid">Save changes</Button>
+                  <DialogClose render={<Button type="button" variant="solid" />}>
+                    Save changes
                   </DialogClose>
                 </div>
               }
@@ -65,11 +65,11 @@ import { Button } from '@caindev/ui'
   title="Edit profile"
   actions={
     <div style={{ display: 'flex', gap: '8px' }}>
-      <DialogClose render={<span />}>
-        <Button variant="ghost">Cancel</Button>
+      <DialogClose render={<Button type="button" variant="ghost" />}>
+        Cancel
       </DialogClose>
-      <DialogClose render={<span />}>
-        <Button variant="solid">Save</Button>
+      <DialogClose render={<Button type="button" variant="solid" />}>
+        Save
       </DialogClose>
     </div>
   }
@@ -79,7 +79,7 @@ import { Button } from '@caindev/ui'
         props={[
           {
             name: 'trigger',
-            type: 'React.ReactNode',
+            type: 'React.ReactElement',
             default: '—',
             description: 'Element that opens the dialog when clicked.',
           },
@@ -106,6 +106,18 @@ import { Button } from '@caindev/ui'
             type: 'React.ReactNode',
             default: 'Close button',
             description: 'Custom action buttons. Defaults to a single Close button.',
+          },
+          {
+            name: 'open',
+            type: 'boolean',
+            default: '—',
+            description: 'Controlled open state.',
+          },
+          {
+            name: 'onOpenChange',
+            type: '(open: boolean) => void',
+            default: '—',
+            description: 'Callback when the dialog opens or closes.',
           },
         ]}
       />

@@ -1,12 +1,16 @@
-type ApprovalCardProps = {
+export type ApprovalRisk = 'low' | 'medium' | 'high'
+
+export type ApprovalCardProps = {
   title: string
   description?: string
   action: string
   reasoning?: string
-  risk?: 'low' | 'medium' | 'high'
+  risk?: ApprovalRisk
   onApprove: () => void
   onReject: () => void
   loading?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 const riskConfig = {
@@ -32,17 +36,22 @@ export function ApprovalCard({
   onApprove,
   onReject,
   loading = false,
+  className,
+  style,
 }: ApprovalCardProps) {
   const rc = riskConfig[risk]
 
   return (
-    <div style={{
-      borderRadius: '10px',
-      border: '1px solid var(--color-border-strong)',
-      background: 'var(--color-background-elevated)',
-      overflow: 'hidden',
-      boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '10px',
+        border: '1px solid var(--color-border-strong)',
+        background: 'var(--color-background-elevated)',
+        overflow: 'hidden',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
+        ...style,
+      }}>
       {/* Header */}
       <div style={{
         display: 'flex',
@@ -135,6 +144,7 @@ export function ApprovalCard({
         {/* Actions */}
         <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
           <button
+            type="button"
             onClick={onApprove}
             disabled={loading}
             style={{
@@ -155,6 +165,7 @@ export function ApprovalCard({
             {loading ? 'Processing…' : 'Approve'}
           </button>
           <button
+            type="button"
             onClick={onReject}
             disabled={loading}
             style={{

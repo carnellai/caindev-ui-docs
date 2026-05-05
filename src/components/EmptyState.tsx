@@ -1,9 +1,13 @@
-type EmptyStateProps = {
+export type EmptyStateVariant = 'default' | 'error'
+
+export type EmptyStateProps = {
   icon?: React.ReactNode
   title: string
   description?: string
   action?: React.ReactNode
-  variant?: 'default' | 'error'
+  variant?: EmptyStateVariant
+  style?: React.CSSProperties
+  className?: string
 }
 
 function DefaultIcon() {
@@ -24,18 +28,21 @@ function ErrorIcon() {
   )
 }
 
-export function EmptyState({ icon, title, description, action, variant = 'default' }: EmptyStateProps) {
+export function EmptyState({ icon, title, description, action, variant = 'default', style, className }: EmptyStateProps) {
   const isError = variant === 'error'
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '48px 24px',
-      gap: '12px',
-      textAlign: 'center',
-    }}>
+    <div
+      className={className}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px 24px',
+        gap: '12px',
+        textAlign: 'center',
+        ...style,
+      }}>
       <span style={{ color: isError ? '#f87171' : 'var(--color-foreground-subtle)', opacity: 0.6 }}>
         {icon ?? (isError ? <ErrorIcon /> : <DefaultIcon />)}
       </span>

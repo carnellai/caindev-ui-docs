@@ -58,7 +58,7 @@ export function ApprovalCardPage() {
     <DocsLayout>
       <DocsPage
         title="ApprovalCard"
-        description="Human-in-the-loop interrupt UI. Shown when an agent pauses execution and requires human approval before proceeding. Supports three risk levels and displays the proposed action alongside the agent's reasoning."
+        description="Experimental prototype human-in-the-loop interrupt UI. Shown when an agent pauses execution and requires human approval before proceeding. Supports three risk levels and displays the proposed action alongside reasoning text."
         preview={
           <div style={{ width: '100%', maxWidth: '480px' }}>
             <InteractiveDemo />
@@ -90,6 +90,8 @@ export function ApprovalCardPage() {
           { name: 'onApprove', type: '() => void', default: '—', description: 'Called when the user clicks Approve.' },
           { name: 'onReject', type: '() => void', default: '—', description: 'Called when the user clicks Reject.' },
           { name: 'loading', type: 'boolean', default: 'false', description: 'Disables buttons and shows loading state while processing.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

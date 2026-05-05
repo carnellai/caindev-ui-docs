@@ -7,7 +7,7 @@ function DismissableDemo() {
   const [shown, setShown] = useState(true)
   return shown ? (
     <Alert variant="info" title="Update available" onDismiss={() => setShown(false)}>
-      A new version of the library is available. Run <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }}>pnpm update @caindev/ui</code> to upgrade.
+      New showcase docs are available. Review the component examples before extraction.
     </Alert>
   ) : (
     <button
@@ -28,7 +28,7 @@ export function AlertPage() {
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
             <Alert variant="info" title="Did you know?">
-              You can use the render prop to swap the underlying element on any Base UI component.
+              These docs currently render local showcase components before package extraction.
             </Alert>
             <Alert variant="success" title="Deployment complete">
               Version 1.4.1 is now live. 247 components deployed successfully.
@@ -45,7 +45,7 @@ export function AlertPage() {
         code={`import { Alert } from '@caindev/ui'
 
 <Alert variant="info" title="Did you know?">
-  You can swap any Base UI element via the render prop.
+  These docs currently render local showcase components.
 </Alert>
 
 <Alert variant="success" title="Deployed">
@@ -64,7 +64,7 @@ export function AlertPage() {
   title="Update available"
   onDismiss={() => setVisible(false)}
 >
-  Run pnpm update to upgrade.
+  Review the component examples before extraction.
 </Alert>`}
         props={[
           { name: 'variant', type: '"info" | "success" | "warning" | "error"', default: '"info"', description: 'Color and icon variant.' },

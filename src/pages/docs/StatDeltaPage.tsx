@@ -12,8 +12,8 @@ export function StatDeltaPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px 40px' }}>
             <StatDelta
               label="Pass rate"
-              current={0.91}
-              previous={0.87}
+              current={91}
+              previous={87}
               format="percent"
               higherIsBetter
             />
@@ -45,8 +45,8 @@ export function StatDeltaPage() {
 // Score improved (higher is better)
 <StatDelta
   label="Pass rate"
-  current={0.91}
-  previous={0.87}
+  current={91}
+  previous={87}
   format="percent"
   higherIsBetter={true}
 />

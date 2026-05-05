@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
-type ToolStatus = 'pending' | 'running' | 'success' | 'error'
+export type ToolStatus = 'pending' | 'running' | 'success' | 'error'
 
-type ToolCallCardProps = {
+export type ToolCallCardProps = {
   name: string
   status: ToolStatus
   input?: Record<string, unknown>
   output?: unknown
   duration?: number
   defaultOpen?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 const statusConfig: Record<ToolStatus, { label: string; color: string; bg: string }> = {
@@ -28,7 +30,7 @@ function WrenchIcon() {
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 150ms' }}>
+    <svg className="tool-call-chevron" width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 150ms' }}>
       <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
@@ -38,19 +40,32 @@ function RunningDots() {
   return (
     <span style={{ display: 'inline-flex', gap: '2px' }}>
       {[0,1,2].map(i => (
-        <span key={i} style={{
+        <span key={i} className="tool-call-dot" style={{
           width: '3px', height: '3px', borderRadius: '50%',
           background: '#a78bfa',
           animation: `tc-dot 1s ease-in-out ${i * 0.15}s infinite`,
           display: 'inline-block',
         }} />
       ))}
-      <style>{`@keyframes tc-dot { 0%,80%,100%{opacity:.3;transform:scaleY(.7)}40%{opacity:1;transform:scaleY(1)} }`}</style>
+      <style>{`
+        @keyframes tc-dot { 0%,80%,100%{opacity:.3;transform:scaleY(.7)}40%{opacity:1;transform:scaleY(1)} }
+        @media (prefers-reduced-motion: reduce) {
+          .tool-call-dot {
+            animation: none !important;
+          }
+          .tool-call-chevron {
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+          }
+        }
+      `}</style>
     </span>
   )
 }
 
 function JsonDisplay({ value }: { value: unknown }) {
+  const json = safeJsonStringify(value)
+
   return (
     <pre style={{
       margin: 0,
@@ -66,9 +81,30 @@ function JsonDisplay({ value }: { value: unknown }) {
       whiteSpace: 'pre-wrap',
       wordBreak: 'break-word',
     }}>
-      {JSON.stringify(value, null, 2)}
+      {json}
     </pre>
   )
+}
+
+function safeJsonStringify(value: unknown) {
+  const seen = new WeakSet<object>()
+
+  try {
+    const json = JSON.stringify(value, (_key, nestedValue) => {
+      if (typeof nestedValue === 'bigint') return `${nestedValue.toString()}n`
+      if (typeof nestedValue === 'function') return '[Function]'
+      if (typeof nestedValue === 'symbol') return nestedValue.toString()
+      if (typeof nestedValue === 'object' && nestedValue !== null) {
+        if (seen.has(nestedValue)) return '[Circular]'
+        seen.add(nestedValue)
+      }
+      return nestedValue
+    }, 2)
+
+    return json ?? String(value)
+  } catch {
+    return String(value)
+  }
 }
 
 export function ToolCallCard({
@@ -78,20 +114,30 @@ export function ToolCallCard({
   output,
   duration,
   defaultOpen = false,
+  className,
+  style,
 }: ToolCallCardProps) {
   const [open, setOpen] = useState(defaultOpen)
+  const contentId = useId()
   const cfg = statusConfig[status]
   const hasContent = input !== undefined || output !== undefined
 
   return (
-    <div style={{
-      borderRadius: '8px',
-      border: '1px solid var(--color-border)',
-      overflow: 'hidden',
-      background: 'var(--color-background-elevated)',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '8px',
+        border: '1px solid var(--color-border)',
+        overflow: 'hidden',
+        background: 'var(--color-background-elevated)',
+        ...style,
+      }}>
       {/* Header */}
       <button
+        type="button"
+        aria-expanded={hasContent ? open : undefined}
+        aria-controls={hasContent ? contentId : undefined}
+        disabled={!hasContent}
         onClick={() => hasContent && setOpen(o => !o)}
         style={{
           width: '100%',
@@ -141,13 +187,15 @@ export function ToolCallCard({
 
       {/* Body */}
       {open && (
-        <div style={{
-          borderTop: '1px solid var(--color-border)',
-          padding: '12px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-        }}>
+        <div
+          id={contentId}
+          style={{
+            borderTop: '1px solid var(--color-border)',
+            padding: '12px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+          }}>
           {input !== undefined && (
             <div>
               <span style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-foreground-subtle)', display: 'block', marginBottom: '6px' }}>

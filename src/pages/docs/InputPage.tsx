@@ -35,12 +35,12 @@ export function InputPage() {
   error="Username is already taken."
 />
 
-// Controlled
+// Controlled with normal input props
 const [value, setValue] = useState('')
 <Input
   label="Search"
   value={value}
-  onValueChange={setValue}
+  onChange={(event) => setValue(event.currentTarget.value)}
 />`}
         props={[
           {
@@ -68,10 +68,10 @@ const [value, setValue] = useState('')
             description: 'Controlled value.',
           },
           {
-            name: 'onValueChange',
-            type: '(value: string) => void',
+            name: 'onChange',
+            type: 'React.ChangeEventHandler<HTMLInputElement>',
             default: '—',
-            description: 'Callback when the value changes.',
+            description: 'Standard input change handler.',
           },
           {
             name: 'placeholder',

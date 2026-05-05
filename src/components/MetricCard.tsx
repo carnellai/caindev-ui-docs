@@ -1,27 +1,34 @@
-type MetricCardProps = {
+export type MetricTrend = 'up' | 'down' | 'neutral'
+
+export type MetricCardProps = {
   label: string
   value: string | number
   unit?: string
-  trend?: 'up' | 'down' | 'neutral'
+  trend?: MetricTrend
   trendValue?: string
   trendPositive?: boolean
   sublabel?: string
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function MetricCard({ label, value, unit, trend, trendValue, trendPositive = true, sublabel }: MetricCardProps) {
+export function MetricCard({ label, value, unit, trend, trendValue, trendPositive = true, sublabel, style, className }: MetricCardProps) {
   const isGood = trend === 'neutral' ? null : trendPositive ? trend === 'up' : trend === 'down'
   const trendColor = isGood === null ? 'var(--color-foreground-subtle)' : isGood ? '#34d399' : '#f87171'
 
   return (
-    <div style={{
-      padding: '14px 16px',
-      borderRadius: '8px',
-      border: '1px solid var(--color-border)',
-      background: 'var(--color-background-elevated)',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '6px',
-    }}>
+    <div
+      className={className}
+      style={{
+        padding: '14px 16px',
+        borderRadius: '8px',
+        border: '1px solid var(--color-border)',
+        background: 'var(--color-background-elevated)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '6px',
+        ...style,
+      }}>
       <span style={{ fontSize: '0.6875rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-foreground-subtle)' }}>
         {label}
       </span>

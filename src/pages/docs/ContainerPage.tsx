@@ -1,6 +1,5 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Container } from '../../components/Container'
 
 export function ContainerPage() {
   return (
@@ -91,11 +90,11 @@ export function ContainerPage() {
 </Container>
 
 // Sizes
-<Container size="sm" />   // 640px
-<Container size="md" />   // 768px
-<Container size="lg" />   // 1024px
-<Container size="xl" />   // 1280px (default)
-<Container size="full" /> // 100%`}
+<Container size="sm">Content</Container>   // 640px
+<Container size="md">Content</Container>   // 768px
+<Container size="lg">Content</Container>   // 1024px
+<Container size="xl">Content</Container>   // 1280px (default)
+<Container size="full">Content</Container> // 100%`}
         props={[
           {
             name: 'size',

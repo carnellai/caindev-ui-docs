@@ -4,16 +4,18 @@ import { Input } from './Input'
 
 // ─── Form ─────────────────────────────────────────────────────────────────────
 
-type FormProps = {
+export type FormProps = {
   children: React.ReactNode
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
   gap?: number
   style?: React.CSSProperties
+  className?: string
 }
 
-export function Form({ children, onSubmit, gap = 16, style }: FormProps) {
+export function Form({ children, onSubmit, gap = 16, style, className }: FormProps) {
   return (
     <BaseForm
+      className={className}
       onSubmit={onSubmit}
       style={{ display: 'flex', flexDirection: 'column', gap, ...style }}
     >
@@ -24,17 +26,40 @@ export function Form({ children, onSubmit, gap = 16, style }: FormProps) {
 
 // ─── FormField ────────────────────────────────────────────────────────────────
 
-type FormFieldProps = {
+export type FormFieldProps = {
   name: string
   label: string
   hint?: string
+  error?: React.ReactNode
   required?: boolean
+  disabled?: boolean
+  invalid?: boolean
   children: React.ReactNode
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function FormField({ name, label, hint, required, children }: FormFieldProps) {
+export function FormField({
+  name,
+  label,
+  hint,
+  error,
+  required,
+  disabled,
+  invalid,
+  children,
+  style,
+  className,
+}: FormFieldProps) {
+  const hasError = Boolean(error)
+
   return (
-    <Field.Root name={name} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+    <Field.Root
+      name={name}
+      disabled={disabled}
+      invalid={invalid || hasError || undefined}
+      className={className}
+      style={{ display: 'flex', flexDirection: 'column', gap: '6px', ...style }}>
       <Field.Label style={{
         fontSize: '0.8125rem',
         fontWeight: 500,
@@ -44,7 +69,7 @@ export function FormField({ name, label, hint, required, children }: FormFieldPr
         gap: '4px',
       }}>
         {label}
-        {required && <span style={{ color: '#f87171' }}>*</span>}
+        {required && <span aria-hidden="true" style={{ color: '#f87171' }}>*</span>}
       </Field.Label>
 
       {children}
@@ -55,7 +80,9 @@ export function FormField({ name, label, hint, required, children }: FormFieldPr
         </Field.Description>
       )}
 
-      <Field.Error style={{ fontSize: '0.75rem', color: '#f87171' }} />
+      <Field.Error match={hasError || undefined} style={{ fontSize: '0.75rem', color: '#f87171' }}>
+        {error}
+      </Field.Error>
     </Field.Root>
   )
 }
@@ -63,19 +90,43 @@ export function FormField({ name, label, hint, required, children }: FormFieldPr
 // ─── FormInput ────────────────────────────────────────────────────────────────
 // Convenience — FormField + Input wired together
 
-type FormInputProps = {
+export type FormInputProps = {
   name: string
   label: string
   hint?: string
+  error?: string
   required?: boolean
+  disabled?: boolean
   placeholder?: string
   type?: string
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function FormInput({ name, label, hint, required, placeholder, type = 'text' }: FormInputProps) {
+export function FormInput({
+  name,
+  label,
+  hint,
+  error,
+  required,
+  disabled,
+  placeholder,
+  type = 'text',
+  style,
+  className,
+}: FormInputProps) {
   return (
-    <FormField name={name} label={label} hint={hint} required={required}>
-      <Input name={name} placeholder={placeholder} type={type} />
+    <FormField name={name} label={label} hint={hint} error={error} required={required} disabled={disabled}>
+      <Input
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        required={required}
+        disabled={disabled}
+        aria-label={label}
+        style={style}
+        className={className}
+      />
     </FormField>
   )
 }

@@ -16,7 +16,7 @@ export function ThinkingBlockPage() {
     <DocsLayout>
       <DocsPage
         title="ThinkingBlock"
-        description="Collapsible display for LLM reasoning and chain-of-thought output. Shows an animated pulse while streaming and a word count when complete. Inspired by Claude's extended thinking UI."
+        description="Experimental prototype collapsible display for model thinking summaries or internal reasoning-like text. Shows an animated pulse while streaming and a word count when complete."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', maxWidth: '520px' }}>
             <StreamingThinking />
@@ -48,6 +48,8 @@ export function ThinkingBlockPage() {
           { name: 'streaming', type: 'boolean', default: 'false', description: 'Shows the animated pulse indicator when true.' },
           { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Whether the block starts expanded. Defaults to true while streaming.' },
           { name: 'label', type: 'string', default: '"Thinking"', description: 'Label shown in the header.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

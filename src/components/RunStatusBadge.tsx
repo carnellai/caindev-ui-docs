@@ -1,8 +1,11 @@
 export type RunStatus = 'running' | 'completed' | 'failed' | 'error' | 'queued' | 'cancelled'
+export type RunStatusBadgeSize = 'sm' | 'md'
 
-type RunStatusBadgeProps = {
+export type RunStatusBadgeProps = {
   status: RunStatus
-  size?: 'sm' | 'md'
+  size?: RunStatusBadgeSize
+  style?: React.CSSProperties
+  className?: string
 }
 
 const runConfig: Record<RunStatus, { label: string; color: string; bg: string; pulse?: boolean }> = {
@@ -14,24 +17,27 @@ const runConfig: Record<RunStatus, { label: string; color: string; bg: string; p
   cancelled: { label: 'Cancelled', color: '#94a3b8', bg: 'rgba(148,163,184,0.1)' },
 }
 
-export function RunStatusBadge({ status, size = 'md' }: RunStatusBadgeProps) {
+export function RunStatusBadge({ status, size = 'md', style, className }: RunStatusBadgeProps) {
   const cfg = runConfig[status]
   const isSmall = size === 'sm'
   return (
-    <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '5px',
-      padding: isSmall ? '2px 6px' : '3px 9px',
-      borderRadius: '4px',
-      background: cfg.bg,
-      fontSize: isSmall ? '0.625rem' : '0.6875rem',
-      fontWeight: 600,
-      letterSpacing: '0.04em',
-      color: cfg.color,
-      whiteSpace: 'nowrap',
-    }}>
-      <span style={{
+    <span
+      className={className}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '5px',
+        padding: isSmall ? '2px 6px' : '3px 9px',
+        borderRadius: '4px',
+        background: cfg.bg,
+        fontSize: isSmall ? '0.625rem' : '0.6875rem',
+        fontWeight: 600,
+        letterSpacing: '0.04em',
+        color: cfg.color,
+        whiteSpace: 'nowrap',
+        ...style,
+      }}>
+      <span className="run-status-dot" style={{
         width: isSmall ? '5px' : '6px',
         height: isSmall ? '5px' : '6px',
         borderRadius: '50%',
@@ -39,7 +45,14 @@ export function RunStatusBadge({ status, size = 'md' }: RunStatusBadgeProps) {
         flexShrink: 0,
         animation: cfg.pulse ? 'status-pulse 1.5s ease-in-out infinite' : 'none',
       }} />
-      <style>{`@keyframes status-pulse { 0%,100%{opacity:1}50%{opacity:0.4} }`}</style>
+      <style>{`
+        @keyframes status-pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+        @media (prefers-reduced-motion: reduce) {
+          .run-status-dot {
+            animation: none !important;
+          }
+        }
+      `}</style>
       {cfg.label}
     </span>
   )

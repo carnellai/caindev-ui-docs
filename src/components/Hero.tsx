@@ -15,9 +15,9 @@ export function Hero() {
           </h1>
 
           <p className='max-w-md text-lg text-foreground-muted'>
-            Base UI primitives styled with Tailwind v4. Every component you
-            expect, plus streaming text, eval scores, and tool calls built in
-            from the start.
+            Base UI primitives styled with Tailwind v4. A focused foundation
+            set, plus prototype AI interface patterns for streaming text, eval
+            scores, and tool calls.
           </p>
 
           <div className='flex items-center gap-3 pt-2'>

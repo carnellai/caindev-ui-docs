@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "typecheck": "tsc --noEmit --pretty false -p tsconfig.app.json",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

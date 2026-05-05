@@ -226,7 +226,7 @@ const foundations: ComponentEntry[] = [
           fontSize: '0.8125rem',
           color: 'var(--color-foreground-muted)',
         }}>
-        Keyboard-navigable dropdown with search
+        Keyboard-navigable dropdown
       </div>
     ),
   },
@@ -269,20 +269,6 @@ const foundations: ComponentEntry[] = [
           color: 'var(--color-foreground-muted)',
         }}>
         Animated height, single or multiple open
-      </div>
-    ),
-  },
-  {
-    name: 'Popover',
-    description: 'Anchored floating content',
-    href: '/docs/popover',
-    preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
-        Positioned to trigger, dismisses on outside click
       </div>
     ),
   },
@@ -645,13 +631,13 @@ export function ComponentGrid() {
         <div style={{ height: '1px', background: 'var(--color-border)' }} />
         <ComponentGroup
           eyebrow='Chat & Generation'
-          label='For AI interfaces'
+          label='Prototype AI interface patterns'
           components={chatComponents}
         />
         <div style={{ height: '1px', background: 'var(--color-border)' }} />
         <ComponentGroup
           eyebrow='Observability'
-          label='For eval & tracing'
+          label='Prototype eval & tracing patterns'
           components={obsComponents}
         />
       </div>

@@ -1,16 +1,23 @@
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 
-type AccordionItem = {
+export type AccordionItem = {
   value: string
   trigger: React.ReactNode
   content: React.ReactNode
   disabled?: boolean
 }
 
-type AccordionProps = {
+export type AccordionValue = string[]
+
+export type AccordionProps = {
   items: AccordionItem[]
   multiple?: boolean
-  defaultValue?: string[]
+  value?: AccordionValue
+  defaultValue?: AccordionValue
+  onValueChange?: (value: AccordionValue) => void
+  disabled?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 function PlusIcon() {
@@ -21,12 +28,25 @@ function PlusIcon() {
   )
 }
 
-export function Accordion({ items, multiple = false, defaultValue }: AccordionProps) {
+export function Accordion({
+  items,
+  multiple = false,
+  value,
+  defaultValue,
+  onValueChange,
+  disabled,
+  className,
+  style,
+}: AccordionProps) {
   return (
     <BaseAccordion.Root
-      openMultiple={multiple}
+      multiple={multiple}
+      value={value}
       defaultValue={defaultValue}
-      style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+      onValueChange={onValueChange}
+      disabled={disabled}
+      className={className}
+      style={{ display: 'flex', flexDirection: 'column', width: '100%', ...style }}
     >
       {items.map((item) => (
         <BaseAccordion.Item

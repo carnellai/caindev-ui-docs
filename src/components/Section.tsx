@@ -1,6 +1,8 @@
-type SectionProps = {
+export type SectionSize = 'sm' | 'md' | 'lg'
+
+export type SectionProps = {
   children: React.ReactNode
-  size?: 'sm' | 'md' | 'lg'
+  size?: SectionSize
   style?: React.CSSProperties
   className?: string
   id?: string

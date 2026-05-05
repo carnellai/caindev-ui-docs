@@ -16,7 +16,7 @@ export function StackPage() {
               <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>VStack (vertical)</span>
               <div style={{ padding: '12px 16px', borderRadius: '8px', background: 'var(--color-background-subtle)', border: '1px solid var(--color-border)' }}>
                 <VStack gap="8px">
-                  <Badge variant="accent">Item one</Badge>
+                  <Badge variant="default">Item one</Badge>
                   <Badge variant="info">Item two</Badge>
                   <Badge variant="success">Item three</Badge>
                 </VStack>

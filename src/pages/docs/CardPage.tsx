@@ -67,14 +67,14 @@ export function CardPage() {
                 2.4M tokens used this month across 247 runs.
               </p>
             </Card>
-            <Card variant='raised'>
+            <Card>
               <p
                 style={{
                   margin: 0,
                   fontSize: '0.875rem',
                   color: 'var(--color-foreground-muted)',
                 }}>
-                Raised variant — elevated shadow for featured content.
+                Default card surface with consistent border, background, and shadow.
               </p>
             </Card>
           </div>
@@ -94,16 +94,11 @@ export function CardPage() {
   <p>Card body</p>
 </Card>
 
-// Variants
-<Card variant="default" />  // border + bg
-<Card variant="ghost" />    // border only
-<Card variant="raised" />   // border + shadow
-
 // Padding
-<Card padding="sm" />   // 12px
-<Card padding="md" />   // 20px (default)
-<Card padding="lg" />   // 28px
-<Card padding="none" /> // 0 — control your own`}
+<Card padding="sm">Compact content</Card>   // 12px
+<Card padding="md">Default content</Card>   // 20px (default)
+<Card padding="lg">Roomy content</Card>     // 28px
+<Card padding="none">Custom content</Card>  // 0 — control your own`}
         props={[
           {
             name: 'children',
@@ -122,12 +117,6 @@ export function CardPage() {
             type: 'React.ReactNode',
             default: '—',
             description: 'Rendered in a bottom slot with a top border.',
-          },
-          {
-            name: 'variant',
-            type: '"default" | "ghost" | "raised"',
-            default: '"default"',
-            description: 'Visual style of the card.',
           },
           {
             name: 'padding',

@@ -1,15 +1,30 @@
 import { Slider as BaseSlider } from '@base-ui/react/slider'
 
-type SliderProps = {
+export type SliderValue = number | number[]
+
+export type SliderProps = {
   label?: string
   min?: number
   max?: number
   step?: number
-  defaultValue?: number | number[]
-  value?: number | number[]
-  onValueChange?: (value: number | number[]) => void
+  defaultValue?: SliderValue
+  value?: SliderValue
+  onValueChange?: (value: SliderValue) => void
   disabled?: boolean
   ariaLabel?: string
+  style?: React.CSSProperties
+  className?: string
+}
+
+const thumbStyle: React.CSSProperties = {
+  width: '16px',
+  height: '16px',
+  borderRadius: '50%',
+  background: '#fff',
+  border: '1px solid var(--color-border-strong)',
+  boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
+  outline: 'none',
+  cursor: 'pointer',
 }
 
 export function Slider({
@@ -22,44 +37,36 @@ export function Slider({
   onValueChange,
   disabled,
   ariaLabel,
+  style,
+  className,
 }: SliderProps) {
   const isRange = Array.isArray(defaultValue) || Array.isArray(value)
+  const thumbLabel = ariaLabel ?? label
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
-      {label && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.8125rem', fontWeight: 500, color: 'var(--color-foreground)' }}>
+    <BaseSlider.Root
+      min={min}
+      max={max}
+      step={step}
+      defaultValue={defaultValue}
+      value={value}
+      onValueChange={onValueChange}
+      disabled={disabled}
+      className={className}
+      style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', opacity: disabled ? 0.5 : 1, ...style }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        {label ? (
+          <BaseSlider.Label style={{ fontSize: '0.8125rem', fontWeight: 500, color: disabled ? 'var(--color-foreground-subtle)' : 'var(--color-foreground)' }}>
             {label}
-          </span>
-          <BaseSlider.Root
-            min={min}
-            max={max}
-            step={step}
-            defaultValue={defaultValue}
-            value={value}
-            onValueChange={onValueChange}
-            disabled={disabled}
-            render={(root) => (
-              <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)' }}>
-                <BaseSlider.Value />
-              </span>
-            )}
-          />
-        </div>
-      )}
+          </BaseSlider.Label>
+        ) : <span />}
+        <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)' }}>
+          <BaseSlider.Value />
+        </span>
+      </div>
 
-      <BaseSlider.Root
-        min={min}
-        max={max}
-        step={step}
-        defaultValue={defaultValue}
-        value={value}
-        onValueChange={onValueChange}
-        disabled={disabled}
-        style={{ width: '100%' }}
-        className="data-[disabled]:opacity-50"
-      >
+      <div>
         <BaseSlider.Control
           style={{
             display: 'flex',
@@ -68,6 +75,7 @@ export function Slider({
             padding: '10px 0',
             touchAction: 'none',
             userSelect: 'none',
+            cursor: disabled ? 'not-allowed' : undefined,
           }}
         >
           <BaseSlider.Track
@@ -90,54 +98,27 @@ export function Slider({
               <>
                 <BaseSlider.Thumb
                   index={0}
-                  aria-label={ariaLabel ?? label ?? 'Min value'}
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    borderRadius: '50%',
-                    background: '#fff',
-                    border: '1px solid var(--color-border-strong)',
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
-                    outline: 'none',
-                    cursor: 'pointer',
-                  }}
-                  className="has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background"
+                  aria-label={thumbLabel ? `${thumbLabel} minimum` : 'Minimum value'}
+                  style={thumbStyle}
+                  className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
                 />
                 <BaseSlider.Thumb
                   index={1}
-                  aria-label={ariaLabel ?? label ?? 'Max value'}
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    borderRadius: '50%',
-                    background: '#fff',
-                    border: '1px solid var(--color-border-strong)',
-                    boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
-                    outline: 'none',
-                    cursor: 'pointer',
-                  }}
-                  className="has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background"
+                  aria-label={thumbLabel ? `${thumbLabel} maximum` : 'Maximum value'}
+                  style={thumbStyle}
+                  className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
                 />
               </>
             ) : (
               <BaseSlider.Thumb
-                aria-label={ariaLabel ?? label ?? 'Value'}
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  borderRadius: '50%',
-                  background: '#fff',
-                  border: '1px solid var(--color-border-strong)',
-                  boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
-                  outline: 'none',
-                  cursor: 'pointer',
-                }}
-                className="has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent has-[:focus-visible]:ring-offset-2 has-[:focus-visible]:ring-offset-background"
+                aria-label={thumbLabel ?? 'Value'}
+                style={thumbStyle}
+                className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
               />
             )}
           </BaseSlider.Track>
         </BaseSlider.Control>
-      </BaseSlider.Root>
-    </div>
+      </div>
+    </BaseSlider.Root>
   )
 }

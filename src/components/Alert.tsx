@@ -1,10 +1,12 @@
-type AlertVariant = 'info' | 'success' | 'warning' | 'error'
+export type AlertVariant = 'info' | 'success' | 'warning' | 'error'
 
-type AlertProps = {
+export type AlertProps = {
   variant?: AlertVariant
   title?: string
   children: React.ReactNode
   onDismiss?: () => void
+  style?: React.CSSProperties
+  className?: string
 }
 
 const alertConfig: Record<AlertVariant, { color: string; bg: string; border: string; icon: React.ReactNode }> = {
@@ -34,18 +36,24 @@ const alertConfig: Record<AlertVariant, { color: string; bg: string; border: str
   },
 }
 
-export function Alert({ variant = 'info', title, children, onDismiss }: AlertProps) {
+export function Alert({ variant = 'info', title, children, onDismiss, style, className }: AlertProps) {
   const cfg = alertConfig[variant]
+  const role = variant === 'warning' || variant === 'error' ? 'alert' : 'status'
   return (
-    <div style={{
-      display: 'flex',
-      gap: '12px',
-      padding: '12px 14px',
-      borderRadius: '8px',
-      border: `1px solid ${cfg.border}`,
-      background: cfg.bg,
-    }}>
-      <span style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
+    <div
+      className={className}
+      role={role}
+      aria-atomic="true"
+      style={{
+        display: 'flex',
+        gap: '12px',
+        padding: '12px 14px',
+        borderRadius: '8px',
+        border: `1px solid ${cfg.border}`,
+        background: cfg.bg,
+        ...style,
+      }}>
+      <span aria-hidden="true" style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
         {title && (
           <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-foreground)' }}>
@@ -58,6 +66,8 @@ export function Alert({ variant = 'info', title, children, onDismiss }: AlertPro
       </div>
       {onDismiss && (
         <button
+          type="button"
+          aria-label="Dismiss alert"
           onClick={onDismiss}
           style={{
             background: 'none',

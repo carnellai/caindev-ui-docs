@@ -1,6 +1,8 @@
-type StackProps = {
+export type StackDirection = 'vertical' | 'horizontal'
+
+export type StackProps = {
   children: React.ReactNode
-  direction?: 'vertical' | 'horizontal'
+  direction?: StackDirection
   gap?: string | number
   align?: React.CSSProperties['alignItems']
   justify?: React.CSSProperties['justifyContent']
@@ -8,6 +10,9 @@ type StackProps = {
   style?: React.CSSProperties
   className?: string
 }
+
+export type HStackProps = Omit<StackProps, 'direction'>
+export type VStackProps = Omit<StackProps, 'direction'>
 
 export function Stack({
   children,
@@ -38,10 +43,10 @@ export function Stack({
 }
 
 // Convenience aliases
-export function HStack(props: Omit<StackProps, 'direction'>) {
+export function HStack(props: HStackProps) {
   return <Stack {...props} direction="horizontal" />
 }
 
-export function VStack(props: Omit<StackProps, 'direction'>) {
+export function VStack(props: VStackProps) {
   return <Stack {...props} direction="vertical" />
 }

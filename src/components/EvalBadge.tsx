@@ -1,10 +1,13 @@
 export type EvalVerdict = 'pass' | 'fail' | 'review' | 'insufficient'
+export type EvalBadgeSize = 'sm' | 'md'
 
-type EvalBadgeProps = {
+export type EvalBadgeProps = {
   verdict: EvalVerdict
   score?: number
   label?: string
-  size?: 'sm' | 'md'
+  size?: EvalBadgeSize
+  style?: React.CSSProperties
+  className?: string
 }
 
 const evalConfig: Record<EvalVerdict, { label: string; color: string; bg: string }> = {
@@ -14,24 +17,27 @@ const evalConfig: Record<EvalVerdict, { label: string; color: string; bg: string
   insufficient: { label: 'Insufficient', color: '#94a3b8', bg: 'rgba(148,163,184,0.1)' },
 }
 
-export function EvalBadge({ verdict, score, label, size = 'md' }: EvalBadgeProps) {
+export function EvalBadge({ verdict, score, label, size = 'md', style, className }: EvalBadgeProps) {
   const cfg = evalConfig[verdict]
   const isSmall = size === 'sm'
   return (
-    <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '5px',
-      padding: isSmall ? '2px 6px' : '3px 9px',
-      borderRadius: '4px',
-      border: `1px solid ${cfg.color}22`,
-      background: cfg.bg,
-      fontSize: isSmall ? '0.625rem' : '0.6875rem',
-      fontWeight: 600,
-      letterSpacing: '0.04em',
-      color: cfg.color,
-      whiteSpace: 'nowrap',
-    }}>
+    <span
+      className={className}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '5px',
+        padding: isSmall ? '2px 6px' : '3px 9px',
+        borderRadius: '4px',
+        border: `1px solid ${cfg.color}22`,
+        background: cfg.bg,
+        fontSize: isSmall ? '0.625rem' : '0.6875rem',
+        fontWeight: 600,
+        letterSpacing: '0.04em',
+        color: cfg.color,
+        whiteSpace: 'nowrap',
+        ...style,
+      }}>
       <span style={{ width: isSmall ? '5px' : '6px', height: isSmall ? '5px' : '6px', borderRadius: '50%', background: cfg.color, flexShrink: 0 }} />
       {label ?? cfg.label}
       {score !== undefined && (

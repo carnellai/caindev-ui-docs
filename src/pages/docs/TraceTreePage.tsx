@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { TraceTree, SpanCard } from '../../components/TraceTree'
+import { TraceTree } from '../../components/TraceTree'
 import type { SpanNode } from '../../components/TraceTree'
 
 const ragTrace: SpanNode[] = [
@@ -114,7 +114,7 @@ export function TraceTreePage() {
     <DocsLayout>
       <DocsPage
         title="TraceTree + SpanCard"
-        description="Hierarchical trace visualization for LLM pipelines. SpanCard renders a single span with kind-aware styling. TraceTree composes them into a nested, expandable tree with a trace header."
+        description="Experimental prototype hierarchical trace visualization for LLM pipelines. SpanCard renders a single span with kind-aware styling. TraceTree composes them into a nested, expandable tree with a trace header."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
             <TraceTree
@@ -196,6 +196,8 @@ const spans: SpanNode[] = [
           { name: 'traceId', type: 'string', default: '—', description: 'Trace ID shown in monospace in the header.' },
           { name: 'totalDuration', type: 'number', default: '—', description: 'Total trace duration in ms.' },
           { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Whether spans start expanded.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

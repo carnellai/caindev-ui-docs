@@ -9,7 +9,9 @@ import { useState } from 'react'
 function FormDemo() {
   const [submitted, setSubmitted] = useState<Record<string, string> | null>(null)
 
-  const handleSubmit = (data: FormData) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
     const obj: Record<string, string> = {}
     data.forEach((v, k) => { obj[k] = String(v) })
     setSubmitted(obj)
@@ -44,7 +46,14 @@ export function FormPage() {
         code={`import { Form, FormField, FormInput } from '@caindev/ui'
 import { Button, Switch } from '@caindev/ui'
 
-<Form onSubmit={(data) => console.log(Object.fromEntries(data))}>
+<Form
+  gap={20}
+  onSubmit={(event) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    console.log(Object.fromEntries(data))
+  }}
+>
   {/* Quick text field */}
   <FormInput
     name="email"
@@ -55,6 +64,12 @@ import { Button, Switch } from '@caindev/ui'
     hint="We'll never share your email."
   />
 
+  <FormInput
+    name="username"
+    label="Username"
+    error="Username is already taken."
+  />
+
   {/* Wrap any input component */}
   <FormField name="notifications" label="Notifications">
     <Switch name="notifications" label="Send me updates" />
@@ -63,12 +78,13 @@ import { Button, Switch } from '@caindev/ui'
   <Button type="submit">Submit</Button>
 </Form>`}
         props={[
-          { name: 'onSubmit', type: '(data: FormData) => void', default: '—', description: 'Called on valid submission with the FormData object.' },
-          { name: 'gap', type: 'string', default: '"16px"', description: 'Gap between form fields.' },
+          { name: 'onSubmit', type: '(event: React.FormEvent<HTMLFormElement>) => void', default: '—', description: 'Standard form submit handler.' },
+          { name: 'gap', type: 'number', default: '16', description: 'Numeric gap between form fields, interpreted as pixels by React inline styles.' },
           { name: 'name (FormInput)', type: 'string', default: '—', description: 'Field name used in FormData and for label association.' },
           { name: 'label (FormInput)', type: 'string', default: '—', description: 'Field label.' },
           { name: 'hint (FormInput)', type: 'string', default: '—', description: 'Helper text below the field.' },
-          { name: 'required (FormInput)', type: 'boolean', default: 'false', description: 'Marks the field required with a red asterisk.' },
+          { name: 'error (FormInput/FormField)', type: 'React.ReactNode', default: '—', description: 'Marks the field invalid and renders an error message.' },
+          { name: 'required (FormInput)', type: 'boolean', default: 'false', description: 'Marks the field required and passes required to the input.' },
         ]}
       />
     </DocsLayout>

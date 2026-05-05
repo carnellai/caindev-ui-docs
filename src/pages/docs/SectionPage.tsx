@@ -1,7 +1,5 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Section } from '../../components/Section'
-import { Container } from '../../components/Container'
 
 export function SectionPage() {
   return (
@@ -67,9 +65,9 @@ export function SectionPage() {
 </Section>
 
 // Sizes
-<Section size="sm" />  // 40px padding
-<Section size="md" />  // 64px padding (default)
-<Section size="lg" />  // 96px padding
+<Section size="sm">Content</Section>  // 40px padding
+<Section size="md">Content</Section>  // 64px padding (default)
+<Section size="lg">Content</Section>  // 96px padding
 
 // With id for anchor links
 <Section id="features" size="lg">

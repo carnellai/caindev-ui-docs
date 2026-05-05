@@ -1,26 +1,29 @@
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 
-type Tab = {
+export type Tab = {
   value: string
   label: string
   content: React.ReactNode
   disabled?: boolean
 }
 
-type TabsProps = {
+export type TabsProps = {
   tabs: Tab[]
   defaultValue?: string
-  value?: string
-  onValueChange?: (value: string) => void
+  value?: string | null
+  onValueChange?: (value: string | null) => void
+  className?: string
+  style?: React.CSSProperties
 }
 
-export function Tabs({ tabs, defaultValue, value, onValueChange }: TabsProps) {
+export function Tabs({ tabs, defaultValue, value, onValueChange, className, style }: TabsProps) {
   return (
     <BaseTabs.Root
       defaultValue={defaultValue ?? tabs[0]?.value}
       value={value}
-      onValueChange={onValueChange}
-      style={{ display: 'flex', flexDirection: 'column', gap: '0' }}
+      onValueChange={(nextValue) => onValueChange?.(nextValue)}
+      className={className}
+      style={{ display: 'flex', flexDirection: 'column', gap: '0', ...style }}
     >
       {/* Tab list */}
       <BaseTabs.List
@@ -49,7 +52,7 @@ export function Tabs({ tabs, defaultValue, value, onValueChange }: TabsProps) {
               fontFamily: 'inherit',
               background: 'none',
               border: 'none',
-              cursor: 'pointer',
+              cursor: tab.disabled ? 'not-allowed' : 'pointer',
               userSelect: 'none',
               outline: 'none',
               color: 'var(--color-foreground-subtle)',

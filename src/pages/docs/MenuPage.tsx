@@ -18,7 +18,7 @@ export function MenuPage() {
                   items: [
                     { label: 'View details', onSelect: () => {} },
                     { label: 'Duplicate', onSelect: () => {} },
-                    { label: 'Export', onSelect: () => {} },
+                    { label: 'Export', onSelect: () => {}, disabled: true },
                   ],
                 },
                 {
@@ -53,6 +53,8 @@ import { Button } from '@caindev/ui'
         props={[
           { name: 'trigger', type: 'React.ReactElement', default: '—', description: 'Element that opens the menu.' },
           { name: 'groups', type: '{ items: MenuItem[] }[]', default: '—', description: 'Groups of items separated by dividers.' },
+          { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state.' },
+          { name: 'onOpenChange', type: '(open: boolean) => void', default: '—', description: 'Callback when the menu opens or closes.' },
         ]}
       />
     </DocsLayout>

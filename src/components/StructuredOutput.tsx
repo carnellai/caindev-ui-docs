@@ -1,7 +1,9 @@
-type StructuredOutputProps = {
+export type StructuredOutputProps = {
   data: Record<string, unknown>
   title?: string
   collapsible?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 function ValueDisplay({ value, depth = 0 }: { value: unknown; depth?: number }) {
@@ -38,9 +40,14 @@ function ValueDisplay({ value, depth = 0 }: { value: unknown; depth?: number }) 
 }
 
 function StructuredOutputInner({ data, depth = 0 }: { data: Record<string, unknown>; depth?: number }) {
+  const entries = Object.entries(data)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-      {Object.entries(data).map(([key, value]) => (
+      {entries.length === 0 && (
+        <span style={{ color: 'var(--color-foreground-subtle)', fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }}>{'{ }'}</span>
+      )}
+      {entries.map(([key, value]) => (
         <div key={key} style={{
           display: 'grid',
           gridTemplateColumns: depth === 0 ? '140px 1fr' : '110px 1fr',
@@ -67,14 +74,17 @@ function StructuredOutputInner({ data, depth = 0 }: { data: Record<string, unkno
   )
 }
 
-export function StructuredOutput({ data, title }: StructuredOutputProps) {
+export function StructuredOutput({ data, title, className, style }: StructuredOutputProps) {
   return (
-    <div style={{
-      borderRadius: '8px',
-      border: '1px solid var(--color-border)',
-      overflow: 'hidden',
-      background: 'var(--color-background-elevated)',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '8px',
+        border: '1px solid var(--color-border)',
+        overflow: 'hidden',
+        background: 'var(--color-background-elevated)',
+        ...style,
+      }}>
       {title && (
         <div style={{
           padding: '8px 12px',

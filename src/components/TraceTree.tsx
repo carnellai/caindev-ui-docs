@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -114,6 +114,8 @@ const statusDot: Record<SpanStatus, string> = {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function JsonBlock({ value }: { value: unknown }) {
+  const json = safeJsonStringify(value)
+
   return (
     <pre style={{
       margin: 0,
@@ -129,9 +131,30 @@ function JsonBlock({ value }: { value: unknown }) {
       whiteSpace: 'pre-wrap',
       wordBreak: 'break-word',
     }}>
-      {JSON.stringify(value, null, 2)}
+      {json}
     </pre>
   )
+}
+
+function safeJsonStringify(value: unknown) {
+  const seen = new WeakSet<object>()
+
+  try {
+    const json = JSON.stringify(value, (_key, nestedValue) => {
+      if (typeof nestedValue === 'bigint') return `${nestedValue.toString()}n`
+      if (typeof nestedValue === 'function') return '[Function]'
+      if (typeof nestedValue === 'symbol') return nestedValue.toString()
+      if (typeof nestedValue === 'object' && nestedValue !== null) {
+        if (seen.has(nestedValue)) return '[Circular]'
+        seen.add(nestedValue)
+      }
+      return nestedValue
+    }, 2)
+
+    return json ?? String(value)
+  } catch {
+    return String(value)
+  }
 }
 
 function MetaRow({ label, value }: { label: string; value: React.ReactNode }) {
@@ -165,26 +188,37 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 // ─── SpanCard ─────────────────────────────────────────────────────────────────
 
-type SpanCardProps = {
+export type SpanCardProps = {
   span: SpanNode
   defaultOpen?: boolean
   depth?: number
+  className?: string
+  style?: React.CSSProperties
 }
 
-export function SpanCard({ span, defaultOpen = false, depth = 0 }: SpanCardProps) {
+export function SpanCard({ span, defaultOpen = false, className, style }: SpanCardProps) {
   const [open, setOpen] = useState(defaultOpen)
+  const detailId = useId()
   const cfg = kindConfig[span.kind]
   const hasDetails = span.input !== undefined || span.output !== undefined || span.model || span.query
 
   return (
-    <div style={{
-      borderRadius: '7px',
-      border: '1px solid var(--color-border)',
-      background: 'var(--color-background-elevated)',
-      overflow: 'hidden',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '7px',
+        border: '1px solid var(--color-border)',
+        background: 'var(--color-background-elevated)',
+        overflow: 'hidden',
+        ...style,
+      }}>
       {/* Header row */}
       <button
+        type="button"
+        aria-label={hasDetails ? `${open ? 'Collapse' : 'Expand'} ${span.name} details` : `${span.name} span`}
+        aria-expanded={hasDetails ? open : undefined}
+        aria-controls={hasDetails ? detailId : undefined}
+        disabled={!hasDetails}
         onClick={() => hasDetails && setOpen(o => !o)}
         style={{
           width: '100%',
@@ -269,13 +303,15 @@ export function SpanCard({ span, defaultOpen = false, depth = 0 }: SpanCardProps
 
       {/* Expanded detail */}
       {open && (
-        <div style={{
-          borderTop: '1px solid var(--color-border)',
-          padding: '10px 12px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px',
-        }}>
+        <div
+          id={detailId}
+          style={{
+            borderTop: '1px solid var(--color-border)',
+            padding: '10px 12px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+          }}>
           {/* Kind-specific meta */}
           {(span.model || span.inputTokens || span.outputTokens || span.cost) && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -322,12 +358,14 @@ export function SpanCard({ span, defaultOpen = false, depth = 0 }: SpanCardProps
 
 // ─── TraceTree ────────────────────────────────────────────────────────────────
 
-type TraceTreeProps = {
+export type TraceTreeProps = {
   spans: SpanNode[]
   traceName?: string
   traceId?: string
   totalDuration?: number
   defaultOpen?: boolean
+  className?: string
+  style?: React.CSSProperties
 }
 
 function SpanTreeNode({ span, depth, defaultOpen }: { span: SpanNode; depth: number; defaultOpen: boolean }) {
@@ -361,14 +399,19 @@ export function TraceTree({
   traceId,
   totalDuration,
   defaultOpen = false,
+  className,
+  style,
 }: TraceTreeProps) {
   return (
-    <div style={{
-      borderRadius: '10px',
-      border: '1px solid var(--color-border-strong)',
-      overflow: 'hidden',
-      background: 'var(--color-background)',
-    }}>
+    <div
+      className={className}
+      style={{
+        borderRadius: '10px',
+        border: '1px solid var(--color-border-strong)',
+        overflow: 'hidden',
+        background: 'var(--color-background)',
+        ...style,
+      }}>
       {/* Trace header */}
       {(traceName || traceId || totalDuration) && (
         <div style={{

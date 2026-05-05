@@ -1,24 +1,31 @@
-type TokenCostProps = {
+export type TokenCostLayout = 'row' | 'stack'
+
+export type TokenCostProps = {
   inputTokens?: number
   outputTokens?: number
   totalTokens?: number
   cost?: number
   model?: string
-  layout?: 'row' | 'stack'
+  layout?: TokenCostLayout
+  style?: React.CSSProperties
+  className?: string
 }
 
-export function TokenCost({ inputTokens, outputTokens, totalTokens, cost, model, layout = 'row' }: TokenCostProps) {
+export function TokenCost({ inputTokens, outputTokens, totalTokens, cost, model, layout = 'row', style, className }: TokenCostProps) {
   const total = totalTokens ?? (inputTokens !== undefined && outputTokens !== undefined ? inputTokens + outputTokens : undefined)
   const isRow = layout === 'row'
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: isRow ? 'row' : 'column',
-      alignItems: isRow ? 'center' : 'flex-start',
-      gap: isRow ? '12px' : '4px',
-      flexWrap: 'wrap',
-    }}>
+    <div
+      className={className}
+      style={{
+        display: 'flex',
+        flexDirection: isRow ? 'row' : 'column',
+        alignItems: isRow ? 'center' : 'flex-start',
+        gap: isRow ? '12px' : '4px',
+        flexWrap: 'wrap',
+        ...style,
+      }}>
       {model && (
         <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>{model}</span>
       )}

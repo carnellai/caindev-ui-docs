@@ -7,7 +7,7 @@ export function CodeBlockPage() {
     <DocsLayout>
       <DocsPage
         title="CodeBlock"
-        description="Syntax-aware code display with a one-click copy button. Supports filename labels, language badges, and optional line numbers. Essential for AI-generated code output."
+        description="Code display with a one-click copy button. Supports filename labels, language badges, and optional line numbers. Useful for generated code, setup snippets, and examples."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
             <CodeBlock
@@ -34,7 +34,7 @@ export function Agent() {
             />
             <CodeBlock
               language="bash"
-              code={`pnpm add @caindev/ui`}
+              code={`npm run dev`}
             />
           </div>
         }

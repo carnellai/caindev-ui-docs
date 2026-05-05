@@ -7,7 +7,7 @@ export function StructuredOutputPage() {
     <DocsLayout>
       <DocsPage
         title="StructuredOutput"
-        description="Renders a typed JSON object as a readable key-value display. Type-aware syntax coloring — strings in amber, numbers in green, booleans in violet. Handles nested objects and arrays up to 2 levels deep."
+        description="Experimental prototype renderer for a typed JSON object as a readable key-value display. Type-aware syntax coloring for strings, numbers, and booleans. Handles nested objects and arrays up to 2 levels deep."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', maxWidth: '520px' }}>
             <StructuredOutput
@@ -47,6 +47,8 @@ export function StructuredOutputPage() {
         props={[
           { name: 'data', type: 'Record<string, unknown>', default: '—', description: 'The object to render. Handles strings, numbers, booleans, null, arrays, and nested objects.' },
           { name: 'title', type: 'string', default: '—', description: 'Optional header label — useful for showing the schema or type name.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

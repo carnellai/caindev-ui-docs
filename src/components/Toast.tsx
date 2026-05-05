@@ -1,7 +1,19 @@
 import { Toast as BaseToast } from '@base-ui/react/toast'
-import { createContext, useContext } from 'react'
 
-type ToastVariant = 'default' | 'success' | 'error' | 'warning'
+export type ToastVariant = 'default' | 'success' | 'error' | 'warning'
+
+export type ToastOptions = {
+  description?: string
+  variant?: ToastVariant
+  className?: string
+  style?: React.CSSProperties
+}
+
+export type ToastProviderProps = {
+  children: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
+}
 
 const variantConfig: Record<ToastVariant, { color: string; icon: React.ReactNode }> = {
   default: {
@@ -28,11 +40,16 @@ function ToastList() {
     <>
       {toasts.map((toast) => {
         const variant = (toast.data?.variant as ToastVariant) ?? 'default'
+        const className = toast.data?.className as string | undefined
+        const style = toast.data?.style as React.CSSProperties | undefined
         const cfg = variantConfig[variant]
+        const role = variant === 'error' || variant === 'warning' ? 'alert' : 'status'
         return (
           <BaseToast.Root
             key={toast.id}
             toast={toast}
+            role={role}
+            aria-atomic="true"
             style={{
               position: 'absolute',
               right: 0,
@@ -48,15 +65,21 @@ function ToastList() {
               alignItems: 'flex-start',
               gap: '10px',
               userSelect: 'none',
+              ...style,
             }}
-            className="data-[starting-style]:translate-y-full data-[starting-style]:opacity-0 data-[ending-style]:translate-y-full data-[ending-style]:opacity-0 transition-all duration-200"
+            className={[
+              'data-[starting-style]:translate-y-full data-[starting-style]:opacity-0 data-[ending-style]:translate-y-full data-[ending-style]:opacity-0 transition-all duration-200',
+              className,
+            ].filter(Boolean).join(' ')}
           >
-            <span style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
+            <span aria-hidden="true" style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <BaseToast.Title style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-foreground)', margin: 0 }} />
               <BaseToast.Description style={{ fontSize: '0.8125rem', color: 'var(--color-foreground-muted)', margin: 0, lineHeight: 1.5 }} />
             </div>
             <BaseToast.Close
+              type="button"
+              aria-label="Dismiss toast"
               style={{
                 background: 'none',
                 border: 'none',
@@ -65,7 +88,9 @@ function ToastList() {
                 padding: 0,
                 flexShrink: 0,
                 display: 'flex',
+                outline: 'none',
               }}
+              className="hover:text-foreground focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 focus-visible:rounded-sm"
             >
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                 <path d="M3 3l8 8M11 3l-8 8"/>
@@ -79,18 +104,20 @@ function ToastList() {
 }
 
 // Provider — wrap your app root with this
-export function ToastProvider({ children }: { children: React.ReactNode }) {
+export function ToastProvider({ children, className, style }: ToastProviderProps) {
   return (
     <BaseToast.Provider>
       {children}
       <BaseToast.Portal>
         <BaseToast.Viewport
+          className={className}
           style={{
             position: 'fixed',
             bottom: '24px',
             right: '24px',
             width: '320px',
             zIndex: 9999,
+            ...style,
           }}
         >
           <ToastList />
@@ -104,8 +131,16 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 export function useToast() {
   const manager = BaseToast.useToastManager()
   return {
-    toast: (title: string, options?: { description?: string; variant?: ToastVariant }) =>
-      manager.add({ title, description: options?.description, data: { variant: options?.variant ?? 'default' } }),
+    toast: (title: string, options?: ToastOptions) =>
+      manager.add({
+        title,
+        description: options?.description,
+        data: {
+          variant: options?.variant ?? 'default',
+          className: options?.className,
+          style: options?.style,
+        },
+      }),
     success: (title: string, description?: string) =>
       manager.add({ title, description, data: { variant: 'success' } }),
     error: (title: string, description?: string) =>

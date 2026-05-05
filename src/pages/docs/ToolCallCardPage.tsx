@@ -7,7 +7,7 @@ export function ToolCallCardPage() {
     <DocsLayout>
       <DocsPage
         title="ToolCallCard"
-        description="Expandable display for a single tool invocation. Shows the tool name, status, and optionally the input arguments and output. Supports all lifecycle states — pending, running, success, and error."
+        description="Experimental prototype expandable display for a single tool invocation. Shows the tool name, status, and optionally the input arguments and output. Supports pending, running, success, and error states."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', maxWidth: '520px' }}>
             <ToolCallCard
@@ -68,6 +68,8 @@ export function ToolCallCardPage() {
           { name: 'output', type: 'unknown', default: '—', description: 'Tool output rendered as formatted JSON.' },
           { name: 'duration', type: 'number', default: '—', description: 'Execution time in milliseconds.' },
           { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Whether the card starts expanded.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>

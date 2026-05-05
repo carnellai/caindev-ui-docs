@@ -7,7 +7,7 @@ export function SliderPage() {
     <DocsLayout>
       <DocsPage
         title="Slider"
-        description="Select a numeric value or range by dragging a thumb. Built on Base UI's Slider primitive with keyboard support, range mode, and accessible labeling."
+        description="Select one numeric value, or a range when value/defaultValue is an array. Built on Base UI's Slider primitive with keyboard support and accessible labeling."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '100%', maxWidth: '360px' }}>
             <Slider label="Temperature" defaultValue={72} ariaLabel="Temperature" />
@@ -48,9 +48,9 @@ const [value, setValue] = useState(50)
           { name: 'min', type: 'number', default: '0', description: 'Minimum value.' },
           { name: 'max', type: 'number', default: '100', description: 'Maximum value.' },
           { name: 'step', type: 'number', default: '1', description: 'Step increment.' },
-          { name: 'defaultValue', type: 'number | number[]', default: '50', description: 'Initial value. Pass an array for a range slider.' },
-          { name: 'value', type: 'number | number[]', default: '—', description: 'Controlled value.' },
-          { name: 'onValueChange', type: '(value: number | number[]) => void', default: '—', description: 'Callback when value changes.' },
+          { name: 'defaultValue', type: 'number | number[]', default: '50', description: 'Initial value. A number creates one thumb; an array creates a range slider.' },
+          { name: 'value', type: 'number | number[]', default: '—', description: 'Controlled value. Keep the shape as number for one thumb or number[] for range.' },
+          { name: 'onValueChange', type: '(value: number | number[]) => void', default: '—', description: 'Callback when value changes. Receives the same shape as the slider value.' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the slider.' },
           { name: 'ariaLabel', type: 'string', default: '—', description: 'Accessible label for the thumb(s).' },
         ]}

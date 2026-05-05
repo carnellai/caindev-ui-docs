@@ -52,7 +52,7 @@ export function PromptInputPage() {
     <DocsLayout>
       <DocsPage
         title="PromptInput"
-        description="An auto-resizing textarea optimized for AI chat interfaces. Submits on Enter, supports Shift+Enter for newlines, flips to a stop button while loading, and exposes an actions slot for attachments and other controls."
+        description="Experimental prototype auto-resizing textarea for AI chat interfaces. Submits on Enter, supports Shift+Enter for newlines, flips to a stop button while loading, and exposes an actions slot for simple local controls."
         preview={<InteractiveDemo />}
         code={`import { PromptInput } from '@caindev/ui'
 
@@ -74,13 +74,11 @@ const [input, setInput] = useState('')
   onStop={handleStop}
 />
 
-// With action buttons
+// With auxiliary action buttons
 <PromptInput
   onSubmit={handleSubmit}
   actions={
-    <button onClick={handleAttach}>
-      <PaperclipIcon />
-    </button>
+    <button type="button">Option</button>
   }
 />`}
         props={[
@@ -92,7 +90,9 @@ const [input, setInput] = useState('')
           { name: 'placeholder', type: 'string', default: '"Message…"', description: 'Placeholder text.' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input entirely.' },
           { name: 'maxRows', type: 'number', default: '8', description: 'Maximum rows before the textarea scrolls internally.' },
-          { name: 'actions', type: 'React.ReactNode', default: '—', description: 'Elements rendered in the bottom-left of the input (file upload, etc).' },
+          { name: 'actions', type: 'React.ReactNode', default: '—', description: 'Elements rendered in the bottom-left of the input.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
+          { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
     </DocsLayout>
