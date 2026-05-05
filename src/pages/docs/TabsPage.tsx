@@ -1,0 +1,79 @@
+import { DocsLayout } from '../../layouts/DocsLayout'
+import { DocsPage } from '../../layouts/DocsPage'
+import { Tabs } from '../../components/Tabs'
+
+export function TabsPage() {
+  return (
+    <DocsLayout>
+      <DocsPage
+        title="Tabs"
+        description="Switch between related panels. Built on Base UI's Tabs primitive with keyboard navigation, animated indicator, and accessible panel association."
+        preview={
+          <div style={{ width: '100%', maxWidth: '480px' }}>
+            <Tabs
+              defaultValue="overview"
+              tabs={[
+                {
+                  value: 'overview',
+                  label: 'Overview',
+                  content: (
+                    <div style={{ fontSize: '0.875rem', color: 'var(--color-foreground-muted)', lineHeight: 1.6 }}>
+                      Overview content goes here. This panel is associated with the Overview tab via ARIA attributes.
+                    </div>
+                  ),
+                },
+                {
+                  value: 'components',
+                  label: 'Components',
+                  content: (
+                    <div style={{ fontSize: '0.875rem', color: 'var(--color-foreground-muted)', lineHeight: 1.6 }}>
+                      Components content goes here. Keyboard navigation works out of the box — use arrow keys to move between tabs.
+                    </div>
+                  ),
+                },
+                {
+                  value: 'changelog',
+                  label: 'Changelog',
+                  content: (
+                    <div style={{ fontSize: '0.875rem', color: 'var(--color-foreground-muted)', lineHeight: 1.6 }}>
+                      Changelog content goes here.
+                    </div>
+                  ),
+                },
+                {
+                  value: 'disabled',
+                  label: 'Disabled',
+                  disabled: true,
+                  content: <div />,
+                },
+              ]}
+            />
+          </div>
+        }
+        code={`import { Tabs } from '@caindev/ui'
+
+<Tabs
+  defaultValue="overview"
+  tabs={[
+    {
+      value: 'overview',
+      label: 'Overview',
+      content: <p>Overview content</p>,
+    },
+    {
+      value: 'components',
+      label: 'Components',
+      content: <p>Components content</p>,
+    },
+  ]}
+/>`}
+        props={[
+          { name: 'tabs', type: '{ value: string; label: string; content: ReactNode; disabled?: boolean }[]', default: '—', description: 'Array of tab definitions.' },
+          { name: 'defaultValue', type: 'string', default: 'First tab', description: 'Initially active tab (uncontrolled).' },
+          { name: 'value', type: 'string', default: '—', description: 'Controlled active tab.' },
+          { name: 'onValueChange', type: '(value: string) => void', default: '—', description: 'Callback when active tab changes.' },
+        ]}
+      />
+    </DocsLayout>
+  )
+}
