@@ -41,26 +41,22 @@ export function Alert({ variant = 'info', title, children, onDismiss, style, cla
   const role = variant === 'warning' || variant === 'error' ? 'alert' : 'status'
   return (
     <div
-      className={className}
+      className={['flex gap-3 rounded-[8px] px-3.5 py-3', className].filter(Boolean).join(' ')}
       role={role}
       aria-atomic="true"
       style={{
-        display: 'flex',
-        gap: '12px',
-        padding: '12px 14px',
-        borderRadius: '8px',
         border: `1px solid ${cfg.border}`,
         background: cfg.bg,
         ...style,
       }}>
-      <span aria-hidden="true" style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+      <span aria-hidden="true" className="mt-px shrink-0" style={{ color: cfg.color }}>{cfg.icon}</span>
+      <div className="flex flex-1 flex-col gap-[3px]">
         {title && (
-          <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-foreground)' }}>
+          <span className="text-sm font-semibold text-foreground">
             {title}
           </span>
         )}
-        <div style={{ fontSize: '0.875rem', color: 'var(--color-foreground-muted)', lineHeight: 1.55 }}>
+        <div className="text-sm leading-[1.55] text-foreground-muted">
           {children}
         </div>
       </div>
@@ -69,16 +65,7 @@ export function Alert({ variant = 'info', title, children, onDismiss, style, cla
           type="button"
           aria-label="Dismiss alert"
           onClick={onDismiss}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: 'var(--color-foreground-subtle)',
-            padding: '0',
-            flexShrink: 0,
-            display: 'flex',
-            alignItems: 'flex-start',
-          }}
+          className="flex shrink-0 cursor-pointer items-start border-0 bg-transparent p-0 text-foreground-subtle"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
             <path d="M3 3l8 8M11 3l-8 8"/>

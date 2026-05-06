@@ -7,38 +7,17 @@ const stats = [
 
 export function TrustBar() {
   return (
-    <div
-      style={{
-        borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
-      }}>
+    <div className='border-y border-border'>
       <div className='container-shell'>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '48px',
-            paddingTop: '14px',
-            paddingBottom: '14px',
-          }}>
+        <div className='flex items-center justify-center gap-12 py-3.5'>
           {stats.map((stat, i) => (
             <div
               key={i}
-              style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-              <span
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  color: 'var(--color-foreground)',
-                }}>
+              className='flex items-baseline gap-1.5'>
+              <span className='text-sm font-semibold text-foreground'>
                 {stat.value}
               </span>
-              <span
-                style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--color-foreground-subtle)',
-                }}>
+              <span className='text-sm text-foreground-subtle'>
                 {stat.label}
               </span>
             </div>

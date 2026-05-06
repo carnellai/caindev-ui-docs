@@ -85,17 +85,8 @@ export function PromptInput({
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '10px',
-        border: '1px solid var(--color-border-strong)',
-        background: 'var(--color-background-elevated)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
-        transition: 'border-color 150ms',
-        display: 'flex',
-        flexDirection: 'column',
-        ...style,
-      }}>
+      className={['flex flex-col rounded-md border border-border-strong bg-background-elevated shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-[border-color] duration-150', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Textarea */}
       <textarea
         ref={textareaRef}
@@ -106,38 +97,17 @@ export function PromptInput({
         placeholder={placeholder}
         disabled={disabled || loading}
         rows={1}
-        style={{
-          width: '100%',
-          resize: 'none',
-          border: 'none',
-          outline: 'none',
-          background: 'transparent',
-          padding: '12px 14px 4px',
-          fontFamily: 'inherit',
-          fontSize: '0.9375rem',
-          lineHeight: '24px',
-          color: 'var(--color-foreground)',
-          boxSizing: 'border-box',
-          overflowY: 'hidden',
-        }}
+        className="box-border w-full resize-none overflow-y-hidden border-0 bg-transparent px-3.5 pb-1 pt-3 text-[0.9375rem] leading-6 text-foreground outline-none"
       />
 
       {/* Footer */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '6px 10px 10px',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+      <div className="flex items-center justify-between px-2.5 pb-2.5 pt-1.5">
+        <div className="flex items-center gap-1">
           {actions}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{
-            fontSize: '0.6875rem',
-            color: 'var(--color-foreground-subtle)',
-          }}>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[0.6875rem] text-foreground-subtle">
             {loading ? '' : 'Enter to send · Shift+Enter for newline'}
           </span>
 
@@ -147,19 +117,7 @@ export function PromptInput({
               aria-label="Stop generation"
               onClick={onStop}
               disabled={disabled || !onStop}
-              style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '7px',
-                border: 'none',
-                background: 'var(--color-foreground)',
-                color: 'var(--color-background)',
-                cursor: disabled || !onStop ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                opacity: disabled || !onStop ? 0.6 : 1,
-              }}
+              className="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-[7px] border-0 bg-foreground text-background disabled:cursor-not-allowed disabled:opacity-60"
             >
               <StopIcon />
             </button>
@@ -169,19 +127,10 @@ export function PromptInput({
               aria-label="Send prompt"
               onClick={handleSubmit}
               disabled={!canSubmit}
-              style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '7px',
-                border: 'none',
-                background: canSubmit ? 'var(--color-accent)' : 'var(--color-background-subtle)',
-                color: canSubmit ? 'white' : 'var(--color-foreground-subtle)',
-                cursor: canSubmit ? 'pointer' : 'not-allowed',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'background 150ms, color 150ms',
-              }}
+              className={[
+                'flex h-[30px] w-[30px] items-center justify-center rounded-[7px] border-0 transition-[background,color] duration-150',
+                canSubmit ? 'cursor-pointer bg-accent text-white' : 'cursor-not-allowed bg-background-subtle text-foreground-subtle',
+              ].join(' ')}
             >
               <SendIcon />
             </button>

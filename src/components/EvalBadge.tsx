@@ -22,26 +22,21 @@ export function EvalBadge({ verdict, score, label, size = 'md', style, className
   const isSmall = size === 'sm'
   return (
     <span
-      className={className}
+      className={[
+        'inline-flex items-center gap-[5px] whitespace-nowrap rounded-[4px] font-semibold tracking-[0.04em]',
+        isSmall ? 'px-1.5 py-0.5 text-[0.625rem]' : 'px-[9px] py-[3px] text-[0.6875rem]',
+        className,
+      ].filter(Boolean).join(' ')}
       style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '5px',
-        padding: isSmall ? '2px 6px' : '3px 9px',
-        borderRadius: '4px',
         border: `1px solid ${cfg.color}22`,
         background: cfg.bg,
-        fontSize: isSmall ? '0.625rem' : '0.6875rem',
-        fontWeight: 600,
-        letterSpacing: '0.04em',
         color: cfg.color,
-        whiteSpace: 'nowrap',
         ...style,
       }}>
-      <span style={{ width: isSmall ? '5px' : '6px', height: isSmall ? '5px' : '6px', borderRadius: '50%', background: cfg.color, flexShrink: 0 }} />
+      <span className={['shrink-0 rounded-full', isSmall ? 'h-[5px] w-[5px]' : 'h-1.5 w-1.5'].join(' ')} style={{ background: cfg.color }} />
       {label ?? cfg.label}
       {score !== undefined && (
-        <span style={{ fontFamily: 'var(--font-mono)', opacity: 0.8 }}>
+        <span className="font-mono opacity-80">
           {score.toFixed(2)}
         </span>
       )}

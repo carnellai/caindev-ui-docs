@@ -13,15 +13,13 @@ export type ThinkingBlockProps = {
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
-      className="thinking-block-chevron"
+      className="cd-thinking-block-chevron shrink-0 transition-transform duration-150 ease-[ease]"
       width="12"
       height="12"
       viewBox="0 0 12 12"
       fill="none"
       style={{
         transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-        transition: 'transform 150ms ease',
-        flexShrink: 0,
       }}
     >
       <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -31,35 +29,13 @@ function ChevronIcon({ open }: { open: boolean }) {
 
 function PulsingDot() {
   return (
-    <span style={{ display: 'flex', gap: '3px', alignItems: 'center' }}>
+    <span className="flex items-center gap-[3px]">
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="thinking-block-dot"
-          style={{
-            width: '4px',
-            height: '4px',
-            borderRadius: '50%',
-            background: 'var(--color-foreground-subtle)',
-            animation: `thinking-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
-          }}
+          className="cd-thinking-block-dot h-1 w-1 rounded-full bg-foreground-subtle"
         />
       ))}
-      <style>{`
-        @keyframes thinking-dot {
-          0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-          40% { opacity: 1; transform: scale(1); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .thinking-block-dot {
-            animation: none !important;
-          }
-          .thinking-block-chevron {
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.001ms !important;
-          }
-        }
-      `}</style>
     </span>
   )
 }
@@ -77,45 +53,21 @@ export function ThinkingBlock({
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '8px',
-        border: '1px solid var(--color-border)',
-        overflow: 'hidden',
-        background: 'var(--color-background-subtle)',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-[8px] border border-border bg-background-subtle', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Header */}
       <button
         type="button"
         aria-expanded={open}
         aria-controls={contentId}
         onClick={() => setOpen((o) => !o)}
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '10px 12px',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          color: 'var(--color-foreground-muted)',
-          fontSize: '0.8125rem',
-          fontWeight: 500,
-          textAlign: 'left',
-        }}
+        className="flex w-full cursor-pointer items-center gap-2 border-0 bg-transparent px-3 py-2.5 text-left text-[0.8125rem] font-medium text-foreground-muted"
       >
         <ChevronIcon open={open} />
         <span>{label}</span>
         {streaming && <PulsingDot />}
         {!streaming && (
-          <span style={{
-            marginLeft: 'auto',
-            fontSize: '0.6875rem',
-            color: 'var(--color-foreground-subtle)',
-          }}>
+          <span className="ml-auto text-[0.6875rem] text-foreground-subtle">
             {content.split(' ').length} words
           </span>
         )}
@@ -125,19 +77,8 @@ export function ThinkingBlock({
       {open && (
         <div
           id={contentId}
-          style={{
-            padding: '0 12px 12px',
-            borderTop: '1px solid var(--color-border)',
-          }}>
-          <p style={{
-            margin: '10px 0 0',
-            fontSize: '0.8125rem',
-            lineHeight: 1.65,
-            color: 'var(--color-foreground-muted)',
-            fontStyle: 'italic',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-          }}>
+          className="border-t border-border px-3 pb-3">
+          <p className="m-0 mt-2.5 whitespace-pre-wrap break-words text-[0.8125rem] italic leading-[1.65] text-foreground-muted">
             {streaming ? (
               <StreamingText text={content} streaming={streaming} />
             ) : content}

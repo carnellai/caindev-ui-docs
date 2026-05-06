@@ -37,11 +37,7 @@ export function Hero() {
         {/* Right — floating card preview */}
         <div className='flex items-center justify-center lg:justify-end'>
           <div
-            className='w-full max-w-sm rounded-xl border border-border-strong bg-background-elevated p-6'
-            style={{
-              boxShadow:
-                '0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3)',
-            }}>
+            className='w-full max-w-sm rounded-xl border border-border-strong bg-background-elevated p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_2px_8px_rgba(0,0,0,0.3)]'>
             <PreviewCard />
           </div>
         </div>

@@ -47,60 +47,29 @@ export function Checkbox({
   return (
     <label
       htmlFor={checkboxId}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '10px',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-        userSelect: 'none',
-        opacity: disabled ? 0.5 : 1,
-      }}
+      className={['inline-flex select-none items-center gap-2.5', disabled ? 'cursor-not-allowed' : 'cursor-pointer'].join(' ')}
+      style={{ opacity: disabled ? 0.5 : 1 }}
     >
       <BaseCheckbox.Root
         id={checkboxId}
         disabled={disabled}
         indeterminate={indeterminate}
-        style={{
-          width: '18px',
-          height: '18px',
-          borderRadius: '5px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          outline: 'none',
-          cursor: 'inherit',
-          border: '1px solid rgba(255,255,255,0.12)',
-          background: 'rgba(255,255,255,0.05)',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
-          transition: 'background 120ms, border-color 120ms',
-          ...(typeof style === 'object' ? style : {}),
-        }}
+        style={typeof style === 'object' ? style : undefined}
         className={mergeClassName(
-          'data-[checked]:bg-accent data-[checked]:border-accent data-[indeterminate]:bg-accent data-[indeterminate]:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent data-[disabled]:cursor-not-allowed',
+          'flex h-[18px] w-[18px] shrink-0 cursor-inherit items-center justify-center rounded-[5px] border border-white/[0.12] bg-white/5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] outline-none transition-[background,border-color] duration-[120ms] data-[checked]:border-accent data-[checked]:bg-accent data-[indeterminate]:border-accent data-[indeterminate]:bg-accent data-[disabled]:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
           className,
         )}
         {...props}
       >
         <BaseCheckbox.Indicator
-          className="data-[unchecked]:hidden"
-          style={{
-            display: 'flex',
-            color: '#fff',
-          }}
+          className="flex text-white data-[unchecked]:hidden"
         >
           {indeterminate ? <MinusIcon /> : <CheckIcon />}
         </BaseCheckbox.Indicator>
       </BaseCheckbox.Root>
 
       {label && (
-        <span
-          style={{
-            fontSize: '0.875rem',
-            color: 'var(--color-foreground-muted)',
-            lineHeight: 1,
-          }}
-        >
+        <span className="text-sm leading-none text-foreground-muted">
           {label}
         </span>
       )}

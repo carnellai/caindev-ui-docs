@@ -30,7 +30,7 @@ function WrenchIcon() {
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg className="tool-call-chevron" width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 150ms' }}>
+    <svg className="cd-tool-call-chevron transition-transform duration-150" width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)' }}>
       <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
@@ -38,27 +38,10 @@ function ChevronIcon({ open }: { open: boolean }) {
 
 function RunningDots() {
   return (
-    <span style={{ display: 'inline-flex', gap: '2px' }}>
+    <span className="inline-flex gap-0.5">
       {[0,1,2].map(i => (
-        <span key={i} className="tool-call-dot" style={{
-          width: '3px', height: '3px', borderRadius: '50%',
-          background: '#a78bfa',
-          animation: `tc-dot 1s ease-in-out ${i * 0.15}s infinite`,
-          display: 'inline-block',
-        }} />
+        <span key={i} className="cd-tool-call-dot inline-block h-[3px] w-[3px] rounded-full" />
       ))}
-      <style>{`
-        @keyframes tc-dot { 0%,80%,100%{opacity:.3;transform:scaleY(.7)}40%{opacity:1;transform:scaleY(1)} }
-        @media (prefers-reduced-motion: reduce) {
-          .tool-call-dot {
-            animation: none !important;
-          }
-          .tool-call-chevron {
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.001ms !important;
-          }
-        }
-      `}</style>
     </span>
   )
 }
@@ -67,20 +50,7 @@ function JsonDisplay({ value }: { value: unknown }) {
   const json = safeJsonStringify(value)
 
   return (
-    <pre style={{
-      margin: 0,
-      padding: '10px 12px',
-      borderRadius: '6px',
-      background: 'var(--color-background)',
-      border: '1px solid var(--color-border)',
-      fontFamily: 'var(--font-mono)',
-      fontSize: '0.75rem',
-      lineHeight: 1.55,
-      color: 'var(--color-foreground-muted)',
-      overflowX: 'auto',
-      whiteSpace: 'pre-wrap',
-      wordBreak: 'break-word',
-    }}>
+    <pre className="m-0 overflow-x-auto whitespace-pre-wrap break-words rounded-sm border border-border bg-background px-3 py-2.5 font-mono text-xs leading-[1.55] text-foreground-muted">
       {json}
     </pre>
   )
@@ -124,14 +94,8 @@ export function ToolCallCard({
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '8px',
-        border: '1px solid var(--color-border)',
-        overflow: 'hidden',
-        background: 'var(--color-background-elevated)',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-[8px] border border-border bg-background-elevated', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Header */}
       <button
         type="button"
@@ -139,46 +103,26 @@ export function ToolCallCard({
         aria-controls={hasContent ? contentId : undefined}
         disabled={!hasContent}
         onClick={() => hasContent && setOpen(o => !o)}
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '10px 12px',
-          background: 'none',
-          border: 'none',
-          cursor: hasContent ? 'pointer' : 'default',
-          fontFamily: 'inherit',
-          textAlign: 'left',
-        }}
+        className={['flex w-full items-center gap-2 border-0 bg-transparent px-3 py-2.5 text-left', hasContent ? 'cursor-pointer' : 'cursor-default'].join(' ')}
       >
         {hasContent && <ChevronIcon open={open} />}
-        <span style={{ color: 'var(--color-foreground-muted)', display: 'flex' }}>
+        <span className="flex text-foreground-muted">
           <WrenchIcon />
         </span>
-        <span style={{
-          fontSize: '0.8125rem',
-          fontWeight: 500,
-          color: 'var(--color-foreground)',
-          fontFamily: 'var(--font-mono)',
-        }}>
+        <span className="font-mono text-[0.8125rem] font-medium text-foreground">
           {name}
         </span>
 
-        <span style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <span className="ml-auto flex items-center gap-1.5">
           {status === 'running' && <RunningDots />}
-          <span style={{
-            fontSize: '0.6875rem',
-            fontWeight: 500,
-            padding: '2px 7px',
-            borderRadius: '4px',
+          <span className="rounded-[4px] px-[7px] py-0.5 text-[0.6875rem] font-medium" style={{
             color: cfg.color,
             background: cfg.bg,
           }}>
             {cfg.label}
           </span>
           {duration !== undefined && (
-            <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)', fontVariantNumeric: 'tabular-nums' }}>
+            <span className="text-[0.6875rem] text-foreground-subtle tabular-nums">
               {duration}ms
             </span>
           )}
@@ -189,16 +133,10 @@ export function ToolCallCard({
       {open && (
         <div
           id={contentId}
-          style={{
-            borderTop: '1px solid var(--color-border)',
-            padding: '12px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-          }}>
+          className="flex flex-col gap-2.5 border-t border-border p-3">
           {input !== undefined && (
             <div>
-              <span style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-foreground-subtle)', display: 'block', marginBottom: '6px' }}>
+              <span className="mb-1.5 block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-foreground-subtle">
                 Input
               </span>
               <JsonDisplay value={input} />
@@ -206,7 +144,7 @@ export function ToolCallCard({
           )}
           {output !== undefined && (
             <div>
-              <span style={{ fontSize: '0.6875rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-foreground-subtle)', display: 'block', marginBottom: '6px' }}>
+              <span className="mb-1.5 block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-foreground-subtle">
                 Output
               </span>
               <JsonDisplay value={output} />

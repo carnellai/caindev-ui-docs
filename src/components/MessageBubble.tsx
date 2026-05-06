@@ -13,43 +13,15 @@ export type MessageBubbleProps = {
   style?: React.CSSProperties
 }
 
-const roleStyles: Record<MessageRole, React.CSSProperties> = {
-  user: {
-    background: 'var(--color-background-subtle)',
-    border: '1px solid var(--color-border)',
-    borderRadius: '12px 12px 2px 12px',
-    alignSelf: 'flex-end',
-    maxWidth: '80%',
-  },
-  assistant: {
-    background: 'transparent',
-    border: 'none',
-    borderRadius: 0,
-    alignSelf: 'flex-start',
-    maxWidth: '85%',
-  },
-  system: {
-    background: 'var(--color-accent-muted)',
-    border: '1px solid rgba(124,58,237,0.2)',
-    borderRadius: '8px',
-    alignSelf: 'center',
-    maxWidth: '90%',
-  },
+const roleClasses: Record<MessageRole, string> = {
+  user: 'self-end max-w-[80%] rounded-[12px_12px_2px_12px] border border-border bg-background-subtle px-3.5 py-2.5',
+  assistant: 'self-start max-w-[85%] rounded-none border-0 bg-transparent p-0',
+  system: 'self-center max-w-[90%] rounded-[8px] border border-accent/20 bg-accent-muted px-3.5 py-2.5',
 }
 
 function UserAvatar() {
   return (
-    <div style={{
-      width: '28px',
-      height: '28px',
-      borderRadius: '50%',
-      background: 'var(--color-background-subtle)',
-      border: '1px solid var(--color-border)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexShrink: 0,
-    }}>
+    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-background-subtle">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="var(--color-foreground-muted)">
         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8 9a6 6 0 0 0-6 6h12a6 6 0 0 0-6-6z"/>
       </svg>
@@ -59,16 +31,7 @@ function UserAvatar() {
 
 function AssistantAvatar() {
   return (
-    <div style={{
-      width: '28px',
-      height: '28px',
-      borderRadius: '7px',
-      background: 'var(--color-accent)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexShrink: 0,
-    }}>
+    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[7px] bg-accent">
       <svg width="14" height="14" viewBox="0 0 22 22" fill="none">
         <path d="M2 17 L8 7 L14 17" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M10 17 L15 10 L20 17" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.65"/>
@@ -92,33 +55,16 @@ export function MessageBubble({
 
   return (
     <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: isUser ? 'row-reverse' : 'row',
-        alignItems: 'flex-start',
-        gap: '10px',
-        width: '100%',
-        ...style,
-      }}>
+      className={['flex w-full items-start gap-2.5', isUser ? 'flex-row-reverse' : 'flex-row', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Avatar */}
       {isUser && (avatar ?? <UserAvatar />)}
       {isAssistant && (avatar ?? <AssistantAvatar />)}
 
       {/* Bubble */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', minWidth: 0 }}>
-        <div style={{
-          padding: role === 'assistant' ? '0' : '10px 14px',
-          ...roleStyles[role],
-        }}>
-          <p style={{
-            margin: 0,
-            fontSize: '0.9375rem',
-            lineHeight: 1.65,
-            color: 'var(--color-foreground)',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-          }}>
+      <div className="flex min-w-0 flex-col gap-1.5">
+        <div className={roleClasses[role]}>
+          <p className="m-0 whitespace-pre-wrap break-words text-[0.9375rem] leading-[1.65] text-foreground">
             {streaming ? (
               <StreamingText text={content} streaming={streaming} />
             ) : content}
@@ -127,19 +73,9 @@ export function MessageBubble({
 
         {/* Footer */}
         {(timestamp || actions) && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            paddingLeft: isUser ? 0 : '2px',
-            justifyContent: isUser ? 'flex-end' : 'flex-start',
-          }}>
+          <div className={['flex items-center gap-2', isUser ? 'justify-end pl-0' : 'justify-start pl-0.5'].join(' ')}>
             {timestamp && (
-              <span style={{
-                fontSize: '0.6875rem',
-                color: 'var(--color-foreground-subtle)',
-                fontVariantNumeric: 'tabular-nums',
-              }}>
+              <span className="text-[0.6875rem] text-foreground-subtle tabular-nums">
                 {timestamp}
               </span>
             )}

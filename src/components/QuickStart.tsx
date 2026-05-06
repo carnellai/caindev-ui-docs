@@ -22,125 +22,53 @@ export default function App() {
 
 export function QuickStart() {
   return (
-    <section
-      style={{
-        borderTop: '1px solid var(--color-border)',
-        background: 'var(--color-background-elevated)',
-      }}>
+    <section className='border-t border-border bg-background-elevated'>
       <div className='container-shell py-16'>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '64px',
-            alignItems: 'start',
-          }}>
+        <div className='grid grid-cols-2 items-start gap-16'>
           {/* Left */}
-          <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div className='flex flex-col gap-5'>
             <span className='eyebrow'>Future package direction</span>
-            <h2 style={{ color: 'var(--color-foreground)', margin: 0 }}>
+            <h2 className='m-0 text-foreground'>
               Planned package usage{' '}
-              <span style={{ color: 'var(--color-foreground-subtle)' }}>
+              <span className='text-foreground-subtle'>
                 after extraction.
               </span>
             </h2>
-            <p
-              style={{
-                color: 'var(--color-foreground-muted)',
-                maxWidth: '320px',
-                margin: 0,
-              }}>
+            <p className='m-0 max-w-80 text-foreground-muted'>
               The current repo is the showcase and development environment.
               These commands describe the intended package flow after extraction.
             </p>
             <a
               href='#'
-              style={{
-                display: 'inline-flex',
-                width: 'fit-content',
-                padding: '8px 16px',
-                borderRadius: '8px',
-                border: '1px solid var(--color-border)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: 'var(--color-foreground-muted)',
-                textDecoration: 'none',
-              }}>
+              className='inline-flex w-fit rounded-[8px] border border-border px-4 py-2 text-sm font-medium text-foreground-muted no-underline'>
               Read the docs →
             </a>
           </div>
 
           {/* Right */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+          <div className='flex flex-col gap-0'>
             {steps.map((s, i) => (
-              <div key={s.step} style={{ display: 'flex', gap: '16px' }}>
+              <div key={s.step} className='flex gap-4'>
                 {/* Step indicator + line */}
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '0',
-                  }}>
-                  <div
-                    style={{
-                      width: '28px',
-                      height: '28px',
-                      borderRadius: '50%',
-                      border: '1px solid var(--color-border)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      color: 'var(--color-foreground-subtle)',
-                      flexShrink: 0,
-                    }}>
+                <div className='flex flex-col items-center gap-0'>
+                  <div className='flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-[11px] font-semibold text-foreground-subtle'>
                     {s.step}
                   </div>
                   {i < steps.length - 1 && (
-                    <div
-                      style={{
-                        width: '1px',
-                        flex: 1,
-                        minHeight: '24px',
-                        background: 'var(--color-border)',
-                      }}
-                    />
+                    <div className='min-h-6 w-px flex-1 bg-border' />
                   )}
                 </div>
 
                 {/* Content */}
                 <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '10px',
-                    paddingBottom: i < steps.length - 1 ? '24px' : '0',
-                  }}>
-                  <span
-                    style={{
-                      fontSize: '0.875rem',
-                      fontWeight: 500,
-                      color: 'var(--color-foreground)',
-                      lineHeight: '28px',
-                    }}>
+                  className={[
+                    'flex flex-col gap-2.5',
+                    i < steps.length - 1 ? 'pb-6' : 'pb-0',
+                  ].join(' ')}>
+                  <span className='text-sm font-medium leading-7 text-foreground'>
                     {s.label}
                   </span>
-                  <pre
-                    style={{
-                      margin: 0,
-                      padding: '12px 16px',
-                      borderRadius: '8px',
-                      border: '1px solid var(--color-border)',
-                      background: 'var(--color-background)',
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.8125rem',
-                      color: 'var(--color-foreground-muted)',
-                      overflowX: 'auto',
-                      lineHeight: 1.6,
-                    }}>
+                  <pre className='m-0 overflow-x-auto rounded-[8px] border border-border bg-background px-4 py-3 font-mono text-[0.8125rem] leading-[1.6] text-foreground-muted'>
                     <code>{s.code}</code>
                   </pre>
                 </div>

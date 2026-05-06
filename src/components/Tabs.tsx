@@ -22,59 +22,29 @@ export function Tabs({ tabs, defaultValue, value, onValueChange, className, styl
       defaultValue={defaultValue ?? tabs[0]?.value}
       value={value}
       onValueChange={(nextValue) => onValueChange?.(nextValue)}
-      className={className}
-      style={{ display: 'flex', flexDirection: 'column', gap: '0', ...style }}
+      className={['flex flex-col gap-0', className].filter(Boolean).join(' ')}
+      style={style}
     >
       {/* Tab list */}
       <BaseTabs.List
-        style={{
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2px',
-          borderBottom: '1px solid var(--color-border)',
-          padding: '0 2px',
-        }}
+        className="relative flex items-center gap-0.5 border-b border-border px-0.5"
       >
         {tabs.map((tab) => (
           <BaseTabs.Tab
             key={tab.value}
             value={tab.value}
             disabled={tab.disabled}
-            style={{
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              height: '36px',
-              padding: '0 12px',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              fontFamily: 'inherit',
-              background: 'none',
-              border: 'none',
-              cursor: tab.disabled ? 'not-allowed' : 'pointer',
-              userSelect: 'none',
-              outline: 'none',
-              color: 'var(--color-foreground-subtle)',
-              transition: 'color 120ms',
-            }}
-            className="data-[active]:text-foreground data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed hover:text-foreground-muted focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px] focus-visible:rounded-sm"
+            className="relative flex h-9 cursor-pointer select-none items-center border-0 bg-transparent px-3 text-sm font-medium text-foreground-subtle outline-none transition-colors duration-[120ms] data-[active]:text-foreground data-[disabled]:cursor-not-allowed data-[disabled]:opacity-40 hover:text-foreground-muted focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
           >
             {tab.label}
           </BaseTabs.Tab>
         ))}
         {/* Active indicator */}
         <BaseTabs.Indicator
+          className="absolute bottom-[-1px] left-0 h-0.5 rounded-[1px] bg-accent transition-[width,transform] duration-200"
           style={{
-            position: 'absolute',
-            bottom: '-1px',
-            left: 0,
-            height: '2px',
             width: 'var(--active-tab-width)',
             transform: 'translateX(var(--active-tab-left))',
-            borderRadius: '1px',
-            background: 'var(--color-accent)',
-            transition: 'width 200ms, transform 200ms',
           }}
         />
       </BaseTabs.List>
@@ -84,8 +54,7 @@ export function Tabs({ tabs, defaultValue, value, onValueChange, className, styl
         <BaseTabs.Panel
           key={tab.value}
           value={tab.value}
-          style={{ padding: '20px 0', outline: 'none' }}
-          className="focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 focus-visible:rounded-md"
+          className="py-5 outline-none focus-visible:rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {tab.content}
         </BaseTabs.Panel>

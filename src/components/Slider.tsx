@@ -16,16 +16,7 @@ export type SliderProps = {
   className?: string
 }
 
-const thumbStyle: React.CSSProperties = {
-  width: '16px',
-  height: '16px',
-  borderRadius: '50%',
-  background: '#fff',
-  border: '1px solid var(--color-border-strong)',
-  boxShadow: '0 1px 4px rgba(0,0,0,0.4)',
-  outline: 'none',
-  cursor: 'pointer',
-}
+const thumbClassName = 'h-4 w-4 cursor-pointer rounded-full border border-border-strong bg-white shadow-[0_1px_4px_rgba(0,0,0,0.4)] outline-none data-[disabled]:cursor-not-allowed focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background'
 
 export function Slider({
   label,
@@ -52,68 +43,47 @@ export function Slider({
       value={value}
       onValueChange={onValueChange}
       disabled={disabled}
-      className={className}
-      style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', opacity: disabled ? 0.5 : 1, ...style }}
+      className={['flex w-full flex-col gap-2.5', className].filter(Boolean).join(' ')}
+      style={{ opacity: disabled ? 0.5 : 1, ...style }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="flex items-center justify-between">
         {label ? (
-          <BaseSlider.Label style={{ fontSize: '0.8125rem', fontWeight: 500, color: disabled ? 'var(--color-foreground-subtle)' : 'var(--color-foreground)' }}>
+          <BaseSlider.Label className={['text-[0.8125rem] font-medium', disabled ? 'text-foreground-subtle' : 'text-foreground'].join(' ')}>
             {label}
           </BaseSlider.Label>
         ) : <span />}
-        <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)' }}>
+        <span className="font-mono text-xs text-foreground-muted">
           <BaseSlider.Value />
         </span>
       </div>
 
       <div>
         <BaseSlider.Control
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            padding: '10px 0',
-            touchAction: 'none',
-            userSelect: 'none',
-            cursor: disabled ? 'not-allowed' : undefined,
-          }}
+          className={['flex w-full select-none items-center py-2.5 touch-none', disabled ? 'cursor-not-allowed' : undefined].filter(Boolean).join(' ')}
         >
           <BaseSlider.Track
-            style={{
-              position: 'relative',
-              width: '100%',
-              height: '4px',
-              borderRadius: '2px',
-              background: 'var(--color-background-subtle)',
-              border: '1px solid var(--color-border)',
-            }}
+            className="relative h-1 w-full rounded-[2px] border border-border bg-background-subtle"
           >
             <BaseSlider.Indicator
-              style={{
-                borderRadius: '2px',
-                background: 'var(--color-accent)',
-              }}
+              className="rounded-[2px] bg-accent"
             />
             {isRange ? (
               <>
                 <BaseSlider.Thumb
                   index={0}
                   aria-label={thumbLabel ? `${thumbLabel} minimum` : 'Minimum value'}
-                  style={thumbStyle}
-                  className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
+                  className={thumbClassName}
                 />
                 <BaseSlider.Thumb
                   index={1}
                   aria-label={thumbLabel ? `${thumbLabel} maximum` : 'Maximum value'}
-                  style={thumbStyle}
-                  className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
+                  className={thumbClassName}
                 />
               </>
             ) : (
               <BaseSlider.Thumb
                 aria-label={thumbLabel ?? 'Value'}
-                style={thumbStyle}
-                className="focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background data-[disabled]:cursor-not-allowed"
+                className={thumbClassName}
               />
             )}
           </BaseSlider.Track>

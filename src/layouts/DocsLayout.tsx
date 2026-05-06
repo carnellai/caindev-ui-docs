@@ -65,8 +65,6 @@ const observability = [
 
 const allAiHrefs = [...chatGeneration, ...observability].map((i) => i.href)
 
-const SIDEBAR_WIDTH = 220
-
 function NavGroup({
   label,
   items,
@@ -76,17 +74,8 @@ function NavGroup({
 }) {
   const { pathname } = useLocation()
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}>
-      <span
-        style={{
-          fontSize: '0.625rem',
-          fontWeight: 600,
-          textTransform: 'uppercase',
-          letterSpacing: '0.12em',
-          color: 'var(--color-foreground-subtle)',
-          marginBottom: '4px',
-          paddingLeft: '8px',
-        }}>
+    <div className='flex flex-col gap-px'>
+      <span className='mb-1 pl-2 text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-foreground-subtle'>
         {label}
       </span>
       {items.map((item) => {
@@ -95,21 +84,12 @@ function NavGroup({
           <Link
             key={item.href}
             to={item.href}
-            style={{
-              display: 'block',
-              padding: '5px 8px',
-              borderRadius: '5px',
-              fontSize: '0.8125rem',
-              color: active
-                ? 'var(--color-foreground)'
-                : 'var(--color-foreground-muted)',
-              background: active
-                ? 'var(--color-background-subtle)'
-                : 'transparent',
-              textDecoration: 'none',
-              fontWeight: active ? 500 : 400,
-              whiteSpace: 'nowrap',
-            }}>
+            className={[
+              'block whitespace-nowrap rounded-[5px] px-2 py-[5px] text-[0.8125rem] no-underline',
+              active
+                ? 'bg-background-subtle font-medium text-foreground'
+                : 'font-normal text-foreground-muted',
+            ].join(' ')}>
             {item.label}
           </Link>
         )
@@ -126,38 +106,17 @@ function SectionToggle({
   onChange: (v: 'base' | 'ai') => void
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        background: 'var(--color-background-subtle)',
-        borderRadius: '7px',
-        padding: '3px',
-        gap: '2px',
-        marginBottom: '20px',
-        border: '1px solid var(--color-border)',
-      }}>
+    <div className='mb-5 flex gap-0.5 rounded-[7px] border border-border bg-background-subtle p-[3px]'>
       {(['base', 'ai'] as const).map((v) => (
         <button
           key={v}
           onClick={() => onChange(v)}
-          style={{
-            flex: 1,
-            padding: '5px 0',
-            borderRadius: '5px',
-            border: 'none',
-            fontSize: '0.75rem',
-            fontWeight: 500,
-            cursor: 'pointer',
-            fontFamily: 'inherit',
-            background:
-              active === v ? 'var(--color-background-elevated)' : 'transparent',
-            color:
-              active === v
-                ? 'var(--color-foreground)'
-                : 'var(--color-foreground-subtle)',
-            boxShadow: active === v ? '0 1px 2px rgba(0,0,0,0.3)' : 'none',
-            transition: 'all 120ms',
-          }}>
+          className={[
+            'flex-1 cursor-pointer rounded-[5px] border-0 py-[5px] font-[inherit] text-xs font-medium transition-all duration-[120ms]',
+            active === v
+              ? 'bg-background-elevated text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
+              : 'bg-transparent text-foreground-subtle',
+          ].join(' ')}>
           {v === 'base' ? 'Base UI' : 'AI'}
         </button>
       ))}
@@ -186,28 +145,21 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
       <ScrollToTop />
       <Header />
 
-      {/* Fixed sidebar */}
+      {/* Fixed sidebar — top/width/height/padding/scrollbarWidth kept inline:
+          pixel-exact values derived from Header height (56px) with no Tailwind token equivalent */}
       <aside
+        className='fixed left-0 z-40 flex flex-col overflow-y-auto border-r border-border bg-background'
         style={{
-          position: 'fixed',
           top: '56px',
-          left: 0,
-          width: `${SIDEBAR_WIDTH}px`,
+          width: '220px',
           height: 'calc(100vh - 56px)',
-          borderRight: '1px solid var(--color-border)',
-          background: 'var(--color-background)',
-          overflowY: 'auto',
-          scrollbarWidth: 'none',
           padding: '24px 12px 48px 16px',
-          display: 'flex',
-          flexDirection: 'column',
-          zIndex: 40,
+          scrollbarWidth: 'none',
         }}>
         <SectionToggle active={section} onChange={setSection} />
 
         {section === 'base' && (
-          <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div className='flex flex-col gap-6'>
             <NavGroup label='Layout' items={foundationsLayout} />
             <NavGroup label='Inputs' items={foundationsInputs} />
             <NavGroup label='Overlay' items={foundationsOverlay} />
@@ -217,21 +169,20 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
         )}
 
         {section === 'ai' && (
-          <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div className='flex flex-col gap-6'>
             <NavGroup label='Chat & Generation' items={chatGeneration} />
             <NavGroup label='Observability' items={observability} />
           </div>
         )}
       </aside>
 
-      {/* Everything offset by sidebar width */}
-      <div style={{ marginLeft: `${SIDEBAR_WIDTH}px` }}>
+      {/* Content offset — marginLeft kept inline: matches sidebar width (220px), no Tailwind equivalent */}
+      <div style={{ marginLeft: '220px' }}>
         <main
+          className='mx-auto'
           style={{
             minHeight: 'calc(100vh - 56px)',
             padding: '40px 80px 80px 80px',
-            margin: '0 auto',
             maxWidth: '1000px',
           }}>
           {children}

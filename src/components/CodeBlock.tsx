@@ -52,41 +52,18 @@ export function CodeBlock({
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '8px',
-        border: '1px solid var(--color-border)',
-        overflow: 'hidden',
-        background: 'var(--color-background)',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-[8px] border border-border bg-background', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '8px 12px',
-        borderBottom: '1px solid var(--color-border)',
-        background: 'var(--color-background-elevated)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      <div className="flex items-center justify-between border-b border-border bg-background-elevated px-3 py-2">
+        <div className="flex items-center gap-2">
           {filename && (
-            <span style={{
-              fontSize: '0.75rem',
-              fontFamily: 'var(--font-mono)',
-              color: 'var(--color-foreground-muted)',
-            }}>
+            <span className="font-mono text-xs text-foreground-muted">
               {filename}
             </span>
           )}
           {language && (
-            <span style={{
-              fontSize: '0.6875rem',
-              fontWeight: 500,
-              color: 'var(--color-foreground-subtle)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-            }}>
+            <span className="text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-foreground-subtle">
               {language}
             </span>
           )}
@@ -96,20 +73,10 @@ export function CodeBlock({
           type="button"
           aria-label={copied ? 'Code copied' : 'Copy code'}
           onClick={handleCopy}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px',
-            padding: '3px 8px',
-            borderRadius: '5px',
-            border: '1px solid var(--color-border)',
-            background: 'transparent',
-            cursor: 'pointer',
-            fontFamily: 'inherit',
-            fontSize: '0.6875rem',
-            color: copied ? '#34d399' : 'var(--color-foreground-muted)',
-            transition: 'color 150ms',
-          }}
+          className={[
+            'flex cursor-pointer items-center gap-[5px] rounded-[5px] border border-border bg-transparent px-2 py-[3px] text-[0.6875rem] transition-colors duration-150',
+            copied ? 'text-emerald-400' : 'text-foreground-muted',
+          ].join(' ')}
         >
           {copied ? <CheckIcon /> : <CopyIcon />}
           {copied ? 'Copied' : 'Copy'}
@@ -117,31 +84,17 @@ export function CodeBlock({
       </div>
 
       {/* Code */}
-      <div style={{ overflowX: 'auto' }}>
-        <pre style={{
-          margin: 0,
-          padding: '14px 16px',
-          fontFamily: 'var(--font-mono)',
-          fontSize: '0.8125rem',
-          lineHeight: 1.65,
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <div className="overflow-x-auto">
+        <pre className="m-0 px-4 py-3.5 font-mono text-[0.8125rem] leading-[1.65] text-foreground-muted">
           {showLineNumbers ? (
-            <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <table className="w-full border-collapse">
               <tbody>
                 {lines.map((line, i) => (
                   <tr key={i}>
-                    <td style={{
-                      userSelect: 'none',
-                      paddingRight: '16px',
-                      color: 'var(--color-foreground-subtle)',
-                      fontSize: '0.75rem',
-                      textAlign: 'right',
-                      minWidth: '2ch',
-                    }}>
+                    <td className="min-w-[2ch] select-none pr-4 text-right text-xs text-foreground-subtle">
                       {i + 1}
                     </td>
-                    <td style={{ width: '100%' }}>
+                    <td className="w-full">
                       <code>{line}</code>
                     </td>
                   </tr>

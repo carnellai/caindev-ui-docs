@@ -117,20 +117,7 @@ function JsonBlock({ value }: { value: unknown }) {
   const json = safeJsonStringify(value)
 
   return (
-    <pre style={{
-      margin: 0,
-      padding: '8px 10px',
-      borderRadius: '5px',
-      background: 'var(--color-background)',
-      border: '1px solid var(--color-border)',
-      fontFamily: 'var(--font-mono)',
-      fontSize: '0.6875rem',
-      lineHeight: 1.55,
-      color: 'var(--color-foreground-muted)',
-      overflowX: 'auto',
-      whiteSpace: 'pre-wrap',
-      wordBreak: 'break-word',
-    }}>
+    <pre className="m-0 overflow-x-auto whitespace-pre-wrap break-words rounded-[5px] border border-border bg-background px-2.5 py-2 font-mono text-[0.6875rem] leading-[1.55] text-foreground-muted">
       {json}
     </pre>
   )
@@ -159,11 +146,11 @@ function safeJsonStringify(value: unknown) {
 
 function MetaRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-      <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)', minWidth: '80px' }}>
+    <div className="flex items-center gap-2">
+      <span className="min-w-20 text-[0.6875rem] text-foreground-subtle">
         {label}
       </span>
-      <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)' }}>
+      <span className="font-mono text-xs text-foreground-muted">
         {value}
       </span>
     </div>
@@ -172,15 +159,7 @@ function MetaRow({ label, value }: { label: string; value: React.ReactNode }) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span style={{
-      fontSize: '0.5625rem',
-      fontWeight: 600,
-      textTransform: 'uppercase',
-      letterSpacing: '0.1em',
-      color: 'var(--color-foreground-subtle)',
-      display: 'block',
-      marginBottom: '5px',
-    }}>
+    <span className="mb-1 block text-[0.5625rem] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
       {children}
     </span>
   )
@@ -204,14 +183,8 @@ export function SpanCard({ span, defaultOpen = false, className, style }: SpanCa
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '7px',
-        border: '1px solid var(--color-border)',
-        background: 'var(--color-background-elevated)',
-        overflow: 'hidden',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-[7px] border border-border bg-background-elevated', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Header row */}
       <button
         type="button"
@@ -220,81 +193,52 @@ export function SpanCard({ span, defaultOpen = false, className, style }: SpanCa
         aria-controls={hasDetails ? detailId : undefined}
         disabled={!hasDetails}
         onClick={() => hasDetails && setOpen(o => !o)}
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '9px 10px',
-          background: 'none',
-          border: 'none',
-          cursor: hasDetails ? 'pointer' : 'default',
-          fontFamily: 'inherit',
-          textAlign: 'left',
-        }}
+        className={['flex w-full items-center gap-2 border-0 bg-transparent px-2.5 py-[9px] text-left', hasDetails ? 'cursor-pointer' : 'cursor-default'].join(' ')}
       >
         {/* Expand chevron */}
         {hasDetails && (
-          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style={{ flexShrink: 0, transform: open ? 'rotate(90deg)' : 'none', transition: 'transform 150ms', color: 'var(--color-foreground-subtle)' }}>
+          <svg className="shrink-0 text-foreground-subtle transition-transform duration-150" width="10" height="10" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'none' }}>
             <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         )}
-        {!hasDetails && <span style={{ width: '10px', flexShrink: 0 }} />}
+        {!hasDetails && <span className="w-2.5 shrink-0" />}
 
         {/* Status dot */}
-        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: statusDot[span.status], flexShrink: 0 }} />
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: statusDot[span.status] }} />
 
         {/* Kind badge */}
-        <span style={{
-          fontSize: '0.5625rem',
-          fontWeight: 700,
-          letterSpacing: '0.08em',
-          padding: '1px 5px',
-          borderRadius: '3px',
+        <span className="flex shrink-0 items-center gap-[3px] rounded-[3px] px-[5px] py-px text-[0.5625rem] font-bold tracking-[0.08em]" style={{
           color: cfg.color,
           background: cfg.bg,
-          flexShrink: 0,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '3px',
         }}>
           <span style={{ color: cfg.color }}>{cfg.icon}</span>
           {cfg.label}
         </span>
 
         {/* Name */}
-        <span style={{
-          fontSize: '0.8125rem',
-          fontWeight: 500,
-          color: 'var(--color-foreground)',
-          fontFamily: 'var(--font-mono)',
-          flex: 1,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}>
+        <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap font-mono text-[0.8125rem] font-medium text-foreground">
           {span.name}
         </span>
 
         {/* Right meta */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+        <div className="flex shrink-0 items-center gap-2.5">
           {span.model && (
-            <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>
+            <span className="text-[0.6875rem] text-foreground-subtle">
               {span.model}
             </span>
           )}
           {(span.inputTokens || span.outputTokens) && (
-            <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-subtle)' }}>
+            <span className="font-mono text-[0.6875rem] text-foreground-subtle">
               {(span.inputTokens ?? 0) + (span.outputTokens ?? 0)} tok
             </span>
           )}
           {span.cost !== undefined && (
-            <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-subtle)' }}>
+            <span className="font-mono text-[0.6875rem] text-foreground-subtle">
               ${span.cost.toFixed(4)}
             </span>
           )}
           {span.duration !== undefined && (
-            <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-subtle)', fontVariantNumeric: 'tabular-nums' }}>
+            <span className="font-mono text-[0.6875rem] text-foreground-subtle tabular-nums">
               {span.duration}ms
             </span>
           )}
@@ -305,16 +249,10 @@ export function SpanCard({ span, defaultOpen = false, className, style }: SpanCa
       {open && (
         <div
           id={detailId}
-          style={{
-            borderTop: '1px solid var(--color-border)',
-            padding: '10px 12px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-          }}>
+          className="flex flex-col gap-2.5 border-t border-border px-3 py-2.5">
           {/* Kind-specific meta */}
           {(span.model || span.inputTokens || span.outputTokens || span.cost) && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div className="flex flex-col gap-1">
               <SectionLabel>Model</SectionLabel>
               {span.model && <MetaRow label="model" value={span.model} />}
               {span.inputTokens && <MetaRow label="input tokens" value={span.inputTokens.toLocaleString()} />}
@@ -326,11 +264,11 @@ export function SpanCard({ span, defaultOpen = false, className, style }: SpanCa
           {span.query && (
             <div>
               <SectionLabel>Query</SectionLabel>
-              <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--color-foreground-muted)', fontStyle: 'italic' }}>
+              <p className="m-0 text-[0.8125rem] italic text-foreground-muted">
                 "{span.query}"
               </p>
               {span.resultCount !== undefined && (
-                <p style={{ margin: '4px 0 0', fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>
+                <p className="m-0 mt-1 text-xs text-foreground-subtle">
                   {span.resultCount} results returned
                 </p>
               )}
@@ -375,14 +313,8 @@ function SpanTreeNode({ span, depth, defaultOpen }: { span: SpanNode; depth: num
         <SpanCard span={span} defaultOpen={defaultOpen && depth === 0} depth={depth} />
       </div>
       {span.children && span.children.length > 0 && (
-        <div style={{
+        <div className="mt-1 flex flex-col gap-1 border-l border-border pl-2.5" style={{
           marginLeft: `${depth * 20 + 10}px`,
-          marginTop: '4px',
-          paddingLeft: '10px',
-          borderLeft: '1px solid var(--color-border)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
         }}>
           {span.children.map(child => (
             <SpanTreeNode key={child.id} span={child} depth={depth + 1} defaultOpen={defaultOpen} />
@@ -404,36 +336,23 @@ export function TraceTree({
 }: TraceTreeProps) {
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '10px',
-        border: '1px solid var(--color-border-strong)',
-        overflow: 'hidden',
-        background: 'var(--color-background)',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-md border border-border-strong bg-background', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Trace header */}
       {(traceName || traceId || totalDuration) && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '10px 14px',
-          borderBottom: '1px solid var(--color-border)',
-          background: 'var(--color-background-elevated)',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-foreground)' }}>
+        <div className="flex items-center justify-between border-b border-border bg-background-elevated px-3.5 py-2.5">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs font-semibold text-foreground">
               {traceName ?? 'Trace'}
             </span>
             {traceId && (
-              <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-subtle)' }}>
+              <span className="font-mono text-[0.6875rem] text-foreground-subtle">
                 {traceId}
               </span>
             )}
           </div>
           {totalDuration && (
-            <span style={{ fontSize: '0.6875rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-subtle)' }}>
+            <span className="font-mono text-[0.6875rem] text-foreground-subtle">
               {totalDuration}ms total
             </span>
           )}
@@ -441,7 +360,7 @@ export function TraceTree({
       )}
 
       {/* Spans */}
-      <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <div className="flex flex-col gap-1 p-2.5">
         {spans.map(span => (
           <SpanTreeNode key={span.id} span={span} depth={0} defaultOpen={defaultOpen} />
         ))}

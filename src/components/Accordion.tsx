@@ -45,46 +45,23 @@ export function Accordion({
       defaultValue={defaultValue}
       onValueChange={onValueChange}
       disabled={disabled}
-      className={className}
-      style={{ display: 'flex', flexDirection: 'column', width: '100%', ...style }}
+      className={['flex w-full flex-col', className].filter(Boolean).join(' ')}
+      style={style}
     >
       {items.map((item) => (
         <BaseAccordion.Item
           key={item.value}
           value={item.value}
           disabled={item.disabled}
-          style={{ borderBottom: '1px solid var(--color-border)' }}
+          className="border-b border-border"
         >
-          <BaseAccordion.Header style={{ margin: 0 }}>
+          <BaseAccordion.Header className="m-0">
             <BaseAccordion.Trigger
-              style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '16px',
-                padding: '14px 0',
-                background: 'none',
-                border: 'none',
-                fontFamily: 'inherit',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: 'var(--color-foreground)',
-                textAlign: 'left',
-                cursor: 'pointer',
-                outline: 'none',
-                userSelect: 'none',
-              }}
-              className="group data-[disabled]:opacity-40 data-[disabled]:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 focus-visible:rounded-sm hover:text-foreground-muted"
+              className="group flex w-full cursor-pointer select-none items-center justify-between gap-4 border-0 bg-transparent py-3.5 text-left text-sm font-medium text-foreground outline-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-40 hover:text-foreground-muted focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <span>{item.trigger}</span>
               <span
-                style={{
-                  color: 'var(--color-foreground-subtle)',
-                  flexShrink: 0,
-                  transition: 'transform 200ms ease',
-                }}
-                className="group-data-[panel-open]:rotate-45"
+                className="shrink-0 text-foreground-subtle transition-transform duration-200 ease-[ease] group-data-[panel-open]:rotate-45"
               >
                 <PlusIcon />
               </span>
@@ -92,20 +69,11 @@ export function Accordion({
           </BaseAccordion.Header>
 
           <BaseAccordion.Panel
-            style={{
-              height: 'var(--accordion-panel-height)',
-              overflow: 'hidden',
-              transition: 'height 200ms ease',
-            }}
-            className="data-[starting-style]:h-0 data-[ending-style]:h-0"
+            style={{ height: 'var(--accordion-panel-height)' }}
+            className="overflow-hidden transition-[height] duration-200 ease-[ease] data-[starting-style]:h-0 data-[ending-style]:h-0"
           >
             <div
-              style={{
-                paddingBottom: '14px',
-                fontSize: '0.875rem',
-                lineHeight: 1.6,
-                color: 'var(--color-foreground-muted)',
-              }}
+              className="pb-3.5 text-sm leading-[1.6] text-foreground-muted"
             >
               {item.content}
             </div>
