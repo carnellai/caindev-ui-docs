@@ -13,38 +13,29 @@ export function Separator({ orientation = 'horizontal', label, style, className 
   if (orientation === 'vertical') {
     return (
       <BaseSeparator
-        className={className}
+        className={['w-px self-stretch bg-border', className].filter(Boolean).join(' ')}
         orientation="vertical"
-        style={{
-          width: '1px',
-          alignSelf: 'stretch',
-          background: 'var(--color-border)',
-          ...style,
-        }}
+        style={style}
       />
     )
   }
 
   if (label) {
     return (
-      <div className={className} style={{ display: 'flex', alignItems: 'center', gap: '12px', ...style }}>
-        <BaseSeparator style={{ flex: 1, height: '1px', background: 'var(--color-border)' }} />
-        <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)', whiteSpace: 'nowrap' }}>
+      <div className={['flex items-center gap-3', className].filter(Boolean).join(' ')} style={style}>
+        <BaseSeparator className="h-px flex-1 bg-border" />
+        <span className="whitespace-nowrap text-xs text-foreground-subtle">
           {label}
         </span>
-        <BaseSeparator style={{ flex: 1, height: '1px', background: 'var(--color-border)' }} />
+        <BaseSeparator className="h-px flex-1 bg-border" />
       </div>
     )
   }
 
   return (
     <BaseSeparator
-      className={className}
-      style={{
-        height: '1px',
-        background: 'var(--color-border)',
-        ...style,
-      }}
+      className={['h-px bg-border', className].filter(Boolean).join(' ')}
+      style={style}
     />
   )
 }

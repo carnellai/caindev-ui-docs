@@ -16,7 +16,7 @@ import { MetricCard } from './MetricCard'
 
 function ButtonPreview() {
   return (
-    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+    <div className='flex flex-wrap gap-1.5'>
       <Button size='sm' variant='solid'>
         Solid
       </Button>
@@ -32,7 +32,7 @@ function ButtonPreview() {
 
 function SwitchPreview() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <div className='flex flex-col gap-2'>
       <Switch label='Notifications' defaultChecked />
       <Switch label='Dark mode' />
     </div>
@@ -41,7 +41,7 @@ function SwitchPreview() {
 
 function CheckboxPreview() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <div className='flex flex-col gap-2'>
       <Checkbox label='Accept terms' defaultChecked />
       <Checkbox label='Subscribe' />
     </div>
@@ -58,16 +58,14 @@ function StreamingPreview() {
     25,
   )
   return (
-    <p
-      style={{
-        margin: 0,
-        fontSize: '0.8125rem',
-        lineHeight: 1.6,
-        color: 'var(--color-foreground)',
-      }}>
+    <p className='m-0 text-[0.8125rem] leading-[1.6] text-foreground'>
       <StreamingText text={text} streaming={streaming} />
     </p>
   )
+}
+
+function MutedPreview({ children }: { children: React.ReactNode }) {
+  return <div className='text-[0.8125rem] text-foreground-muted'>{children}</div>
 }
 
 function ToolCallPreview() {
@@ -101,7 +99,7 @@ function AgentStepPreview() {
 
 function EvalBadgePreview() {
   return (
-    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+    <div className='flex flex-wrap gap-1.5'>
       <EvalBadge verdict='pass' score={0.94} />
       <EvalBadge verdict='fail' score={0.31} />
       <EvalBadge verdict='review' score={0.61} />
@@ -111,7 +109,7 @@ function EvalBadgePreview() {
 
 function RunStatusPreview() {
   return (
-    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+    <div className='flex flex-wrap gap-1.5'>
       <RunStatusBadge status='running' />
       <RunStatusBadge status='completed' />
       <RunStatusBadge status='failed' />
@@ -121,13 +119,7 @@ function RunStatusPreview() {
 
 function ScoreBarPreview() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        width: '100%',
-      }}>
+    <div className='flex w-full flex-col gap-2'>
       <ScoreBar label='Correctness' score={0.94} threshold={0.8} />
       <ScoreBar label='Relevance' score={0.58} threshold={0.8} />
     </div>
@@ -147,8 +139,7 @@ function TokenCostPreview() {
 
 function MetricCardPreview() {
   return (
-    <div
-      style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+    <div className='grid grid-cols-2 gap-2'>
       <MetricCard
         label='Pass rate'
         value='91.3'
@@ -207,13 +198,9 @@ const foundations: ComponentEntry[] = [
     description: 'Modal overlays with focus trap',
     href: '/docs/dialog',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Focus-trapped modal with backdrop and animations
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -221,13 +208,9 @@ const foundations: ComponentEntry[] = [
     description: 'Single value from a list',
     href: '/docs/select',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Keyboard-navigable dropdown
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -235,13 +218,9 @@ const foundations: ComponentEntry[] = [
     description: 'Switch between related panels',
     href: '/docs/tabs',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Animated indicator, arrow key navigation
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -249,13 +228,9 @@ const foundations: ComponentEntry[] = [
     description: 'Contextual hints on hover',
     href: '/docs/tooltip',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Delay groups, all four sides
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -263,13 +238,9 @@ const foundations: ComponentEntry[] = [
     description: 'Collapsible content panels',
     href: '/docs/accordion',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Animated height, single or multiple open
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -277,13 +248,9 @@ const foundations: ComponentEntry[] = [
     description: 'Dropdown action list',
     href: '/docs/menu',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Keyboard nav, groups, destructive items
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -291,13 +258,9 @@ const foundations: ComponentEntry[] = [
     description: 'Range value selection',
     href: '/docs/slider',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Single and range mode, accessible labels
-      </div>
+      </MutedPreview>
     ),
   },
 ]
@@ -326,13 +289,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'Auto-resizing AI chat input',
     href: '/docs/prompt-input',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Enter to send, stop button while loading
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -340,13 +299,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'User / assistant roles',
     href: '/docs/message-bubble',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Role-aware layout, streaming support
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -354,13 +309,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'Auto-scrolling conversation',
     href: '/docs/message-thread',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Scrolls to latest message during streaming
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -368,13 +319,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'Collapsible reasoning display',
     href: '/docs/thinking-block',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Pulsing dots while streaming, word count when done
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -382,13 +329,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'Syntax display with copy',
     href: '/docs/code-block',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Filename, language badge, line numbers
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -396,13 +339,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'HITL interrupt UI',
     href: '/docs/approval-card',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Approve / reject with risk level and reasoning
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -410,13 +349,9 @@ const chatComponents: ComponentEntry[] = [
     description: 'Type-aware JSON renderer',
     href: '/docs/structured-output',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Strings, numbers, booleans, nested objects
-      </div>
+      </MutedPreview>
     ),
   },
 ]
@@ -427,13 +362,9 @@ const obsComponents: ComponentEntry[] = [
     description: 'Hierarchical span tree',
     href: '/docs/trace-tree',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         LLM, TOOL, RETRIEVAL, AGENT, GUARDRAIL kinds
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -471,13 +402,9 @@ const obsComponents: ComponentEntry[] = [
     description: 'Metric vs baseline comparison',
     href: '/docs/stat-delta',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Direction-aware delta with format options
-      </div>
+      </MutedPreview>
     ),
   },
   {
@@ -485,24 +412,9 @@ const obsComponents: ComponentEntry[] = [
     description: 'Shimmer loading placeholder',
     href: '/docs/skeleton',
     preview: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <div
-          style={{
-            height: '12px',
-            borderRadius: '4px',
-            background: 'var(--color-background-subtle)',
-            animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
-          }}
-        />
-        <div
-          style={{
-            height: '12px',
-            width: '75%',
-            borderRadius: '4px',
-            background: 'var(--color-background-subtle)',
-            animation: 'skeleton-shimmer 1.5s ease-in-out infinite',
-          }}
-        />
+      <div className='flex flex-col gap-1.5'>
+        <div className='h-3 animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] rounded-[4px] bg-background-subtle' />
+        <div className='h-3 w-3/4 animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] rounded-[4px] bg-background-subtle' />
         <style>{`@keyframes skeleton-shimmer{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}`}</style>
       </div>
     ),
@@ -512,13 +424,9 @@ const obsComponents: ComponentEntry[] = [
     description: 'Empty and error placeholders',
     href: '/docs/empty-state',
     preview: (
-      <div
-        style={{
-          fontSize: '0.8125rem',
-          color: 'var(--color-foreground-muted)',
-        }}>
+      <MutedPreview>
         Default and error variants with action slot
-      </div>
+      </MutedPreview>
     ),
   },
 ]
@@ -529,58 +437,18 @@ function ComponentCard({ name, description, href, preview }: ComponentEntry) {
   return (
     <Link
       to={href}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0',
-        borderRadius: '10px',
-        border: '1px solid var(--color-border)',
-        background: 'var(--color-background-elevated)',
-        overflow: 'hidden',
-        textDecoration: 'none',
-        transition: 'border-color 150ms',
-      }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.borderColor = 'var(--color-border-strong)')
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.borderColor = 'var(--color-border)')
-      }>
+      className='flex flex-col gap-0 overflow-hidden rounded-md border border-border bg-background-elevated no-underline transition-colors duration-150 hover:border-border-strong'>
       {/* Preview area */}
-      <div
-        style={{
-          padding: '20px',
-          minHeight: '100px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderBottom: '1px solid var(--color-border)',
-          background: 'var(--color-background)',
-        }}>
-        <div style={{ width: '100%' }}>{preview}</div>
+      <div className='flex min-h-[100px] items-center justify-center border-b border-border bg-background p-5'>
+        <div className='w-full'>{preview}</div>
       </div>
 
       {/* Label */}
-      <div
-        style={{
-          padding: '12px 14px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '3px',
-        }}>
-        <span
-          style={{
-            fontSize: '0.875rem',
-            fontWeight: 500,
-            color: 'var(--color-foreground)',
-          }}>
+      <div className='flex flex-col gap-[3px] px-3.5 py-3'>
+        <span className='text-sm font-medium text-foreground'>
           {name}
         </span>
-        <span
-          style={{
-            fontSize: '0.75rem',
-            color: 'var(--color-foreground-muted)',
-          }}>
+        <span className='text-xs text-foreground-muted'>
           {description}
         </span>
       </div>
@@ -598,17 +466,12 @@ function ComponentGroup({
   components: ComponentEntry[]
 }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+    <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-1.5'>
         <span className='eyebrow'>{eyebrow}</span>
-        <h3 style={{ margin: 0, color: 'var(--color-foreground)' }}>{label}</h3>
+        <h3 className='m-0 text-foreground'>{label}</h3>
       </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: '12px',
-        }}>
+      <div className='grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3'>
         {components.map((c) => (
           <ComponentCard key={c.name} {...c} />
         ))}
@@ -622,19 +485,19 @@ function ComponentGroup({
 export function ComponentGrid() {
   return (
     <section id='components' className='container-shell py-24'>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
+      <div className='flex flex-col gap-16'>
         <ComponentGroup
           eyebrow='Foundations'
           label='Core components'
           components={foundations}
         />
-        <div style={{ height: '1px', background: 'var(--color-border)' }} />
+        <div className='h-px bg-border' />
         <ComponentGroup
           eyebrow='Chat & Generation'
           label='Prototype AI interface patterns'
           components={chatComponents}
         />
-        <div style={{ height: '1px', background: 'var(--color-border)' }} />
+        <div className='h-px bg-border' />
         <ComponentGroup
           eyebrow='Observability'
           label='Prototype eval & tracing patterns'

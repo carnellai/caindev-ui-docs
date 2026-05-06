@@ -26,17 +26,18 @@ export function Stack({
 }: StackProps) {
   return (
     <div
-      className={className}
+      className={['flex', className].filter(Boolean).join(' ')}
       style={{
-        display: 'flex',
+        // Intentional inline styles: all values below are prop-driven at
+        // runtime. direction, gap, align, justify, and wrap accept arbitrary
+        // consumer values that cannot be mapped to static Tailwind classes.
         flexDirection: direction === 'vertical' ? 'column' : 'row',
         gap: typeof gap === 'number' ? `${gap}px` : gap,
         alignItems: align,
         justifyContent: justify,
         flexWrap: wrap ? 'wrap' : 'nowrap',
         ...style,
-      }}
-    >
+      }}>
       {children}
     </div>
   )
@@ -44,9 +45,9 @@ export function Stack({
 
 // Convenience aliases
 export function HStack(props: HStackProps) {
-  return <Stack {...props} direction="horizontal" />
+  return <Stack {...props} direction='horizontal' />
 }
 
 export function VStack(props: VStackProps) {
-  return <Stack {...props} direction="vertical" />
+  return <Stack {...props} direction='vertical' />
 }

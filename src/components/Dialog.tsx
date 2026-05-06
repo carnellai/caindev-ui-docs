@@ -45,86 +45,35 @@ export function Dialog({
       <BaseDialog.Portal>
         {/* Backdrop */}
         <BaseDialog.Backdrop
-          style={{
-            position: 'fixed',
-            inset: 0,
-            minHeight: '100dvh',
-            background: 'rgba(0,0,0,0.6)',
-            backdropFilter: 'blur(4px)',
-            transition: 'opacity 150ms',
-          }}
-          className="data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 supports-[-webkit-touch-callout:none]:absolute"
+          className="fixed inset-0 min-h-dvh bg-black/60 backdrop-blur-[4px] transition-opacity duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 supports-[-webkit-touch-callout:none]:absolute"
         />
 
         {/* Popup */}
         <BaseDialog.Popup
-          style={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '420px',
-            maxWidth: 'calc(100vw - 2rem)',
-            borderRadius: '12px',
-            border: '1px solid var(--color-border-strong)',
-            background: 'var(--color-background-elevated)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3)',
-            padding: '24px',
-            outline: 'none',
-            transition: 'transform 150ms, opacity 150ms',
-            ...style,
-          }}
           className={[
-            'data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95',
+            'fixed left-1/2 top-1/2 w-[420px] max-w-[calc(100vw-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-[12px] border border-border-strong bg-background-elevated p-6 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_2px_8px_rgba(0,0,0,0.3)] outline-none transition-[transform,opacity] duration-150 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0',
             className,
           ].filter(Boolean).join(' ')}
+          style={style}
         >
           <BaseDialog.Close
             type="button"
             aria-label="Close dialog"
-            style={{
-              position: 'absolute',
-              top: '14px',
-              right: '14px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '28px',
-              height: '28px',
-              padding: 0,
-              border: 'none',
-              borderRadius: '6px',
-              background: 'transparent',
-              color: 'var(--color-foreground-subtle)',
-              cursor: 'pointer',
-              outline: 'none',
-            }}
-            className="hover:bg-background-subtle hover:text-foreground focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
+            className="absolute right-3.5 top-3.5 flex h-7 w-7 cursor-pointer items-center justify-center rounded-sm border-0 bg-transparent p-0 text-foreground-subtle outline-none hover:bg-background-subtle hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             <CloseIcon />
           </BaseDialog.Close>
 
           {/* Header */}
-          <div style={{ marginBottom: description || children ? '16px' : '24px' }}>
+          <div className={description || children ? 'mb-4' : 'mb-6'}>
             <BaseDialog.Title
-              style={{
-                margin: 0,
-                fontSize: '1rem',
-                fontWeight: 600,
-                color: 'var(--color-foreground)',
-                letterSpacing: '-0.01em',
-              }}
+              className="m-0 text-base font-semibold tracking-[-0.01em] text-foreground"
             >
               {title}
             </BaseDialog.Title>
             {description && (
               <BaseDialog.Description
-                style={{
-                  margin: '6px 0 0',
-                  fontSize: '0.875rem',
-                  color: 'var(--color-foreground-muted)',
-                  lineHeight: 1.55,
-                }}
+                className="m-0 mt-1.5 text-sm leading-[1.55] text-foreground-muted"
               >
                 {description}
               </BaseDialog.Description>
@@ -133,17 +82,11 @@ export function Dialog({
 
           {/* Body */}
           {children && (
-            <div style={{ marginBottom: '24px' }}>{children}</div>
+            <div className="mb-6">{children}</div>
           )}
 
           {/* Actions */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '8px',
-            }}
-          >
+          <div className="flex justify-end gap-2">
             {actions ?? (
               <BaseDialog.Close render={<Button type="button" variant="outline" />}>
                 Close

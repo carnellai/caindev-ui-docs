@@ -67,7 +67,7 @@ export function Select({
   }
 
   return (
-    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '6px', ...style }}>
+    <div className={['flex flex-col gap-1.5', className].filter(Boolean).join(' ')} style={style}>
       <BaseSelect.Root
         items={options}
         value={value}
@@ -76,48 +76,24 @@ export function Select({
         disabled={isDisabled}>
         {label && (
           <BaseSelect.Label
-            style={{
-              fontSize: '0.8125rem',
-              fontWeight: 500,
-              color: isDisabled ? 'var(--color-foreground-subtle)' : 'var(--color-foreground)',
-            }}>
+            className={['text-[0.8125rem] font-medium', isDisabled ? 'text-foreground-subtle' : 'text-foreground'].join(' ')}>
             {label}
           </BaseSelect.Label>
         )}
         <BaseSelect.Trigger
           aria-label={label ? undefined : placeholder}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '8px',
-            height: '36px',
-            padding: '0 10px 0 12px',
-            borderRadius: '8px',
-            border: '1px solid var(--color-border-strong)',
-            background: 'rgba(255,255,255,0.04)',
-            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)',
-            color: 'var(--color-foreground)',
-            fontSize: '0.875rem',
-            fontFamily: 'inherit',
-            cursor: isDisabled ? 'not-allowed' : 'pointer',
-            outline: 'none',
-            userSelect: 'none',
-            minWidth: '160px',
-            opacity: isDisabled ? 0.5 : 1,
-            ...triggerStyle,
-          }}
           className={mergeClassName(
-            'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed data-[popup-open]:border-accent focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+            'flex h-9 min-w-40 cursor-pointer select-none items-center justify-between gap-2 rounded-[8px] border border-border-strong bg-white/[0.04] py-0 pl-3 pr-2.5 text-sm text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] outline-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[popup-open]:border-accent focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
             triggerClassName,
-          )}>
+          )}
+          style={triggerStyle}
+          >
           <BaseSelect.Value
-            style={{ color: 'var(--color-foreground)' }}
-            className='data-[placeholder]:text-foreground-subtle'
+            className='text-foreground data-[placeholder]:text-foreground-subtle'
             placeholder={options.length === 0 ? 'No options' : placeholder}
           />
           <BaseSelect.Icon
-            style={{ color: 'var(--color-foreground-muted)', display: 'flex' }}>
+            className="flex text-foreground-muted">
             <ChevronUpDownIcon />
           </BaseSelect.Icon>
         </BaseSelect.Trigger>
@@ -125,26 +101,16 @@ export function Select({
         <BaseSelect.Portal>
           <BaseSelect.Positioner sideOffset={6}>
             <BaseSelect.Popup
+              className='rounded-[8px] border border-border-strong bg-background-elevated p-1 shadow-[0_8px_24px_rgba(0,0,0,0.4),0_2px_8px_rgba(0,0,0,0.3)] outline-none transition-[transform,opacity] duration-[120ms] data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0'
               style={{
                 minWidth: 'max(var(--anchor-width), 180px)',
-                borderRadius: '8px',
-                border: '1px solid var(--color-border-strong)',
-                background: 'var(--color-background-elevated)',
-                boxShadow:
-                  '0 8px 24px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3)',
-                padding: '4px',
-                outline: 'none',
                 transformOrigin: 'var(--transform-origin)',
-                transition: 'transform 120ms, opacity 120ms',
               }}
-              className='data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95'>
+              >
               <BaseSelect.List
+                className="m-0 list-none overflow-y-auto p-0"
                 style={{
                   maxHeight: 'var(--available-height)',
-                  overflowY: 'auto',
-                  padding: 0,
-                  margin: 0,
-                  listStyle: 'none',
                 }}>
                 {options.map(
                   ({
@@ -156,26 +122,10 @@ export function Select({
                       key={optValue}
                       value={optValue}
                       disabled={optDisabled}
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: '16px 1fr',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '7px 10px',
-                        borderRadius: '6px',
-                        fontSize: '0.875rem',
-                        color: 'var(--color-foreground-muted)',
-                        cursor: optDisabled ? 'not-allowed' : 'default',
-                        userSelect: 'none',
-                        outline: 'none',
-                        whiteSpace: 'nowrap',
-                      }}
-                      className='data-[highlighted]:bg-background-subtle data-[highlighted]:text-foreground data-[disabled]:opacity-40'>
+                      className='grid cursor-default select-none grid-cols-[16px_1fr] items-center gap-2 whitespace-nowrap rounded-sm px-2.5 py-[7px] text-sm text-foreground-muted outline-none data-[disabled]:cursor-not-allowed data-[disabled]:opacity-40 data-[highlighted]:bg-background-subtle data-[highlighted]:text-foreground'
+                      >
                       <BaseSelect.ItemIndicator
-                        style={{
-                          display: 'flex',
-                          color: 'var(--color-accent)',
-                        }}>
+                        className="flex text-accent">
                         <CheckIcon />
                       </BaseSelect.ItemIndicator>
                       <BaseSelect.ItemText>{optLabel}</BaseSelect.ItemText>

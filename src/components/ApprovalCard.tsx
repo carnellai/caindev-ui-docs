@@ -43,35 +43,17 @@ export function ApprovalCard({
 
   return (
     <div
-      className={className}
-      style={{
-        borderRadius: '10px',
-        border: '1px solid var(--color-border-strong)',
-        background: 'var(--color-background-elevated)',
-        overflow: 'hidden',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
-        ...style,
-      }}>
+      className={['overflow-hidden rounded-md border border-border-strong bg-background-elevated shadow-[0_4px_16px_rgba(0,0,0,0.2)]', className].filter(Boolean).join(' ')}
+      style={style}>
       {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '12px 16px',
-        borderBottom: '1px solid var(--color-border)',
-        background: 'var(--color-background)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ color: rc.color, display: 'flex' }}><ShieldIcon /></span>
-          <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-foreground)' }}>
+      <div className="flex items-center justify-between border-b border-border bg-background px-4 py-3">
+        <div className="flex items-center gap-2">
+          <span className="flex" style={{ color: rc.color }}><ShieldIcon /></span>
+          <span className="text-sm font-semibold text-foreground">
             {title}
           </span>
         </div>
-        <span style={{
-          fontSize: '0.6875rem',
-          fontWeight: 500,
-          padding: '2px 8px',
-          borderRadius: '4px',
+        <span className="rounded-[4px] px-2 py-0.5 text-[0.6875rem] font-medium" style={{
           color: rc.color,
           background: rc.bg,
         }}>
@@ -80,87 +62,42 @@ export function ApprovalCard({
       </div>
 
       {/* Body */}
-      <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div className="flex flex-col gap-3 p-4">
         {description && (
-          <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-foreground-muted)', lineHeight: 1.55 }}>
+          <p className="m-0 text-sm leading-[1.55] text-foreground-muted">
             {description}
           </p>
         )}
 
         {/* Proposed action */}
-        <div style={{
-          padding: '10px 12px',
-          borderRadius: '7px',
-          background: 'var(--color-background)',
-          border: '1px solid var(--color-border)',
-        }}>
-          <span style={{
-            fontSize: '0.6875rem',
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: 'var(--color-foreground-subtle)',
-            display: 'block',
-            marginBottom: '6px',
-          }}>
+        <div className="rounded-[7px] border border-border bg-background px-3 py-2.5">
+          <span className="mb-1.5 block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-foreground-subtle">
             Proposed action
           </span>
-          <code style={{
-            fontSize: '0.8125rem',
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--color-foreground)',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-          }}>
+          <code className="whitespace-pre-wrap break-words font-mono text-[0.8125rem] text-foreground">
             {action}
           </code>
         </div>
 
         {/* Reasoning */}
         {reasoning && (
-          <div style={{
-            padding: '10px 12px',
-            borderRadius: '7px',
-            background: 'var(--color-background-subtle)',
-            borderLeft: '2px solid var(--color-border-strong)',
-          }}>
-            <span style={{
-              fontSize: '0.6875rem',
-              fontWeight: 600,
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em',
-              color: 'var(--color-foreground-subtle)',
-              display: 'block',
-              marginBottom: '4px',
-            }}>
+          <div className="rounded-[7px] border-l-2 border-border-strong bg-background-subtle px-3 py-2.5">
+            <span className="mb-1 block text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-foreground-subtle">
               Agent reasoning
             </span>
-            <p style={{ margin: 0, fontSize: '0.8125rem', color: 'var(--color-foreground-muted)', lineHeight: 1.55, fontStyle: 'italic' }}>
+            <p className="m-0 text-[0.8125rem] italic leading-[1.55] text-foreground-muted">
               {reasoning}
             </p>
           </div>
         )}
 
         {/* Actions */}
-        <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+        <div className="mt-1 flex gap-2">
           <button
             type="button"
             onClick={onApprove}
             disabled={loading}
-            style={{
-              flex: 1,
-              padding: '8px 16px',
-              borderRadius: '7px',
-              border: 'none',
-              background: '#34d399',
-              color: '#052e16',
-              fontSize: '0.875rem',
-              fontWeight: 600,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontFamily: 'inherit',
-              opacity: loading ? 0.6 : 1,
-              transition: 'opacity 150ms',
-            }}
+            className="flex-1 cursor-pointer rounded-[7px] border-0 bg-emerald-400 px-4 py-2 text-sm font-semibold text-green-950 opacity-100 transition-opacity duration-150 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? 'Processing…' : 'Approve'}
           </button>
@@ -168,19 +105,7 @@ export function ApprovalCard({
             type="button"
             onClick={onReject}
             disabled={loading}
-            style={{
-              flex: 1,
-              padding: '8px 16px',
-              borderRadius: '7px',
-              border: '1px solid var(--color-border-strong)',
-              background: 'transparent',
-              color: 'var(--color-foreground-muted)',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontFamily: 'inherit',
-              opacity: loading ? 0.6 : 1,
-            }}
+            className="flex-1 cursor-pointer rounded-[7px] border border-border-strong bg-transparent px-4 py-2 text-sm font-medium text-foreground-muted disabled:cursor-not-allowed disabled:opacity-60"
           >
             Reject
           </button>

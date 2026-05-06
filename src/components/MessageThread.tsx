@@ -35,14 +35,9 @@ export function MessageThread({
 
   return (
     <div
-      className={className}
+      className={['flex flex-col gap-5 overflow-y-auto p-4', className].filter(Boolean).join(' ')}
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        overflowY: 'auto',
         maxHeight,
-        padding: '16px',
         scrollbarWidth: 'thin',
         scrollbarColor: 'var(--color-border) transparent',
         ...style,

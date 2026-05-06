@@ -21,58 +21,24 @@ export function DocsPage({
   props,
 }: DocsPageProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+    <div className='flex flex-col gap-12'>
       {/* Header */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <h1 style={{ margin: 0, color: 'var(--color-foreground)' }}>{title}</h1>
-        <p
-          style={{
-            margin: 0,
-            fontSize: '1rem',
-            lineHeight: 1.6,
-            color: 'var(--color-foreground-muted)',
-            maxWidth: '540px',
-          }}>
+      <div className='flex flex-col gap-3'>
+        <h1 className='m-0 text-foreground'>{title}</h1>
+        <p className='m-0 max-w-[540px] text-base leading-relaxed text-foreground-muted'>
           {description}
         </p>
       </div>
 
-      {/* Preview */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-        <div
-          style={{
-            padding: '48px 32px',
-            borderRadius: '12px 12px 0 0',
-            border: '1px solid var(--color-border)',
-            background: 'var(--color-background-elevated)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '160px',
-          }}>
+      {/* Preview + code */}
+      <div className='flex flex-col gap-0'>
+        <div className='flex min-h-[160px] items-center justify-center rounded-[12px_12px_0_0] border border-border bg-background-elevated px-8 py-12'>
           {preview}
         </div>
-        <pre
-          style={{
-            margin: 0,
-            padding: '20px 24px',
-            borderRadius: '0 0 12px 12px',
-            border: '1px solid var(--color-border)',
-            borderTop: 'none',
-            background: 'var(--color-background)',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.8125rem',
-            lineHeight: 1.65,
-            color: 'var(--color-foreground-muted)',
-            overflowX: 'auto',
-          }}>
+        <pre className='m-0 overflow-x-auto rounded-[0_0_12px_12px] border border-t-0 border-border bg-background px-6 py-5 font-mono text-[0.8125rem] leading-[1.65] text-foreground-muted'>
           <span
-            style={{
-              display: 'block',
-              marginBottom: '16px',
-              color: 'var(--color-foreground-subtle)',
-              whiteSpace: 'normal',
-            }}>
+            className='mb-4 block text-foreground-subtle'
+            style={{ whiteSpace: 'normal' }}>
             Examples use the intended future @caindev/ui import path. This repo
             currently renders local showcase components.
           </span>
@@ -82,31 +48,15 @@ export function DocsPage({
 
       {/* Props table */}
       {props && props.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <h3 style={{ margin: 0, color: 'var(--color-foreground)' }}>Props</h3>
-          <table
-            style={{
-              width: '100%',
-              borderCollapse: 'collapse',
-              fontSize: '0.875rem',
-            }}>
+        <div className='flex flex-col gap-4'>
+          <h3 className='m-0 text-foreground'>Props</h3>
+          <table className='w-full border-collapse text-sm'>
             <thead>
-              <tr
-                style={{
-                  borderBottom: '1px solid var(--color-border)',
-                  textAlign: 'left',
-                }}>
+              <tr className='border-b border-border text-left'>
                 {['Prop', 'Type', 'Default', 'Description'].map((h) => (
                   <th
                     key={h}
-                    style={{
-                      padding: '8px 12px',
-                      fontWeight: 500,
-                      color: 'var(--color-foreground-subtle)',
-                      fontSize: '0.75rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
-                    }}>
+                    className='px-3 py-2 text-[0.75rem] font-medium uppercase tracking-[0.06em] text-foreground-subtle'>
                     {h}
                   </th>
                 ))}
@@ -114,49 +64,23 @@ export function DocsPage({
             </thead>
             <tbody>
               {props.map((p) => (
-                <tr
-                  key={p.name}
-                  style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td
-                    style={{
-                      padding: '12px',
-                      color: 'var(--color-foreground)',
-                    }}>
-                    <code
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        color: 'var(--color-accent)',
-                      }}>
+                <tr key={p.name} className='border-b border-border'>
+                  <td className='p-3 text-foreground'>
+                    <code className='font-mono text-[0.8125rem] text-accent'>
                       {p.name}
                     </code>
                   </td>
-                  <td style={{ padding: '12px' }}>
-                    <code
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        color: 'var(--color-foreground-muted)',
-                      }}>
+                  <td className='p-3'>
+                    <code className='font-mono text-[0.8125rem] text-foreground-muted'>
                       {p.type}
                     </code>
                   </td>
-                  <td style={{ padding: '12px' }}>
-                    <code
-                      style={{
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: '0.8125rem',
-                        color: 'var(--color-foreground-subtle)',
-                      }}>
+                  <td className='p-3'>
+                    <code className='font-mono text-[0.8125rem] text-foreground-subtle'>
                       {p.default ?? '—'}
                     </code>
                   </td>
-                  <td
-                    style={{
-                      padding: '12px',
-                      color: 'var(--color-foreground-muted)',
-                      lineHeight: 1.5,
-                    }}>
+                  <td className='p-3 leading-relaxed text-foreground-muted'>
                     {p.description}
                   </td>
                 </tr>

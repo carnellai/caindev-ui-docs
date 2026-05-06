@@ -15,9 +15,9 @@ export type FormProps = {
 export function Form({ children, onSubmit, gap = 16, style, className }: FormProps) {
   return (
     <BaseForm
-      className={className}
+      className={['flex flex-col', className].filter(Boolean).join(' ')}
       onSubmit={onSubmit}
-      style={{ display: 'flex', flexDirection: 'column', gap, ...style }}
+      style={{ gap, ...style }}
     >
       {children}
     </BaseForm>
@@ -58,29 +58,22 @@ export function FormField({
       name={name}
       disabled={disabled}
       invalid={invalid || hasError || undefined}
-      className={className}
-      style={{ display: 'flex', flexDirection: 'column', gap: '6px', ...style }}>
-      <Field.Label style={{
-        fontSize: '0.8125rem',
-        fontWeight: 500,
-        color: 'var(--color-foreground)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4px',
-      }}>
+      className={['flex flex-col gap-1.5', className].filter(Boolean).join(' ')}
+      style={style}>
+      <Field.Label className="flex items-center gap-1 text-[0.8125rem] font-medium text-foreground">
         {label}
-        {required && <span aria-hidden="true" style={{ color: '#f87171' }}>*</span>}
+        {required && <span aria-hidden="true" className="text-red-400">*</span>}
       </Field.Label>
 
       {children}
 
       {hint && (
-        <Field.Description style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>
+        <Field.Description className="text-xs text-foreground-subtle">
           {hint}
         </Field.Description>
       )}
 
-      <Field.Error match={hasError || undefined} style={{ fontSize: '0.75rem', color: '#f87171' }}>
+      <Field.Error match={hasError || undefined} className="text-xs text-red-400">
         {error}
       </Field.Error>
     </Field.Root>

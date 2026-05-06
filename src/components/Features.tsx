@@ -143,43 +143,21 @@ export function Features() {
         </h2>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          border: '1px solid var(--color-border)',
-          borderRadius: '12px',
-          overflow: 'hidden',
-        }}>
+      <div className='grid grid-cols-3 overflow-hidden rounded-[12px] border border-border'>
         {features.map((f, i) => (
           <div
             key={f.label}
-            style={{
-              padding: '28px',
-              borderRight:
-                (i + 1) % 3 !== 0 ? '1px solid var(--color-border)' : 'none',
-              borderBottom: i < 3 ? '1px solid var(--color-border)' : 'none',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '12px',
-            }}>
-            <div style={{ color: 'var(--color-accent)' }}>{f.icon}</div>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <span
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: 'var(--color-foreground)',
-                }}>
+            className={[
+              'flex flex-col gap-3 p-7',
+              (i + 1) % 3 !== 0 ? 'border-r border-border' : undefined,
+              i < 3 ? 'border-b border-border' : undefined,
+            ].filter(Boolean).join(' ')}>
+            <div className='text-accent'>{f.icon}</div>
+            <div className='flex flex-col gap-1.5'>
+              <span className='text-sm font-medium text-foreground'>
                 {f.label}
               </span>
-              <span
-                style={{
-                  fontSize: '0.8125rem',
-                  lineHeight: '1.55',
-                  color: 'var(--color-foreground-muted)',
-                }}>
+              <span className='text-[0.8125rem] leading-[1.55] text-foreground-muted'>
                 {f.description}
               </span>
             </div>

@@ -1,10 +1,10 @@
 export type GridProps = {
   children: React.ReactNode
-  cols?: number | string  // number = repeat(n, 1fr), string = custom template
+  cols?: number | string // number = repeat(n, 1fr), string = custom template
   gap?: string | number
   rowGap?: string | number
   colGap?: string | number
-  minColWidth?: string    // for auto-fill grids
+  minColWidth?: string // for auto-fill grids
   style?: React.CSSProperties
   className?: string
 }
@@ -22,21 +22,31 @@ export function Grid({
   const template = minColWidth
     ? `repeat(auto-fill, minmax(${minColWidth}, 1fr))`
     : typeof cols === 'number'
-    ? `repeat(${cols}, 1fr)`
-    : cols
+      ? `repeat(${cols}, 1fr)`
+      : cols
 
   return (
     <div
-      className={className}
+      className={['grid', className].filter(Boolean).join(' ')}
       style={{
-        display: 'grid',
+        // Intentional inline styles: all values below are prop-driven at
+        // runtime. gridTemplateColumns is computed from cols/minColWidth and
+        // can be an arbitrary consumer string; gap values accept any unit.
+        // None of these can be mapped to static Tailwind classes.
         gridTemplateColumns: template,
         gap: typeof gap === 'number' ? `${gap}px` : gap,
-        rowGap: rowGap ? (typeof rowGap === 'number' ? `${rowGap}px` : rowGap) : undefined,
-        columnGap: colGap ? (typeof colGap === 'number' ? `${colGap}px` : colGap) : undefined,
+        rowGap: rowGap
+          ? typeof rowGap === 'number'
+            ? `${rowGap}px`
+            : rowGap
+          : undefined,
+        columnGap: colGap
+          ? typeof colGap === 'number'
+            ? `${colGap}px`
+            : colGap
+          : undefined,
         ...style,
-      }}
-    >
+      }}>
       {children}
     </div>
   )

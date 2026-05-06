@@ -8,10 +8,10 @@ export type SectionProps = {
   id?: string
 }
 
-const paddingMap = {
-  sm: '40px 0',
-  md: '64px 0',
-  lg: '96px 0',
+const paddingMap: Record<SectionSize, string> = {
+  sm: 'py-10', // 40px
+  md: 'py-16', // 64px
+  lg: 'py-24', // 96px
 }
 
 export function Section({
@@ -24,12 +24,8 @@ export function Section({
   return (
     <section
       id={id}
-      className={className}
-      style={{
-        padding: paddingMap[size],
-        ...style,
-      }}
-    >
+      className={[paddingMap[size], className].filter(Boolean).join(' ')}
+      style={style}>
       {children}
     </section>
   )

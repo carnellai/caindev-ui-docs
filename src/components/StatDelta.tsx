@@ -26,19 +26,19 @@ export function StatDelta({ label, current, previous, unit, format = 'number', h
   }
 
   return (
-    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '4px', ...style }}>
-      <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+    <div className={['flex flex-col gap-1', className].filter(Boolean).join(' ')} style={style}>
+      <span className="text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-foreground-subtle">
         {label}
       </span>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-        <span style={{ fontSize: '1.25rem', fontWeight: 600, fontFamily: 'var(--font-mono)', color: 'var(--color-foreground)', fontVariantNumeric: 'tabular-nums' }}>
-          {fmt(current)}{unit && <span style={{ fontSize: '0.75rem', fontWeight: 400, color: 'var(--color-foreground-subtle)', marginLeft: '2px' }}>{unit}</span>}
+      <div className="flex items-baseline gap-2">
+        <span className="font-mono text-xl font-semibold text-foreground tabular-nums">
+          {fmt(current)}{unit && <span className="ml-0.5 text-xs font-normal text-foreground-subtle">{unit}</span>}
         </span>
-        <span style={{ fontSize: '0.75rem', fontWeight: 500, color, fontFamily: 'var(--font-mono)' }}>
+        <span className="font-mono text-xs font-medium" style={{ color }}>
           {arrow} {Math.abs(deltaPercent).toFixed(1)}%
         </span>
       </div>
-      <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)', fontFamily: 'var(--font-mono)' }}>
+      <span className="font-mono text-[0.6875rem] text-foreground-subtle">
         vs {fmt(previous)}{unit ? ` ${unit}` : ''} prev
       </span>
     </div>

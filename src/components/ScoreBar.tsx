@@ -19,12 +19,12 @@ export function ScoreBar({ score, threshold, label, showValue = true, size = 'md
   const meterLabel = label ?? 'Score'
 
   return (
-    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '100%', ...style }}>
+    <div className={['flex w-full flex-col gap-1.5', className].filter(Boolean).join(' ')} style={style}>
       {(label || showValue) && (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {label && <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-muted)' }}>{label}</span>}
+        <div className="flex items-center justify-between">
+          {label && <span className="text-xs text-foreground-muted">{label}</span>}
           {showValue && (
-            <span style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', fontWeight: 600, color: barColor }}>
+            <span className="font-mono text-xs font-semibold" style={{ color: barColor }}>
               {(clampedScore * 100).toFixed(1)}%
             </span>
           )}
@@ -36,25 +36,16 @@ export function ScoreBar({ score, threshold, label, showValue = true, size = 'md
         aria-valuemax={1}
         aria-valuenow={clampedScore}
         aria-label={meterLabel}
-        style={{ position: 'relative', width: '100%', height, background: 'var(--color-background-subtle)', borderRadius: '999px', overflow: 'visible' }}>
-        <div style={{
-          position: 'absolute',
-          left: 0, top: 0, bottom: 0,
+        className="relative w-full overflow-visible rounded-full bg-background-subtle"
+        style={{ height }}>
+        <div className="absolute bottom-0 left-0 top-0 rounded-full transition-[width] duration-[400ms] ease-[ease]" style={{
           width: `${pct}%`,
           background: barColor,
-          borderRadius: '999px',
-          transition: 'width 400ms ease',
         }} />
         {threshold !== undefined && (
-          <div style={{
-            position: 'absolute',
-            top: '-3px',
+          <div className="absolute top-[-3px] w-0.5 -translate-x-1/2 rounded-[1px] bg-foreground-subtle" style={{
             left: `${threshold * 100}%`,
-            width: '2px',
             height: `calc(${height} + 6px)`,
-            background: 'var(--color-foreground-subtle)',
-            borderRadius: '1px',
-            transform: 'translateX(-50%)',
           }} />
         )}
       </div>

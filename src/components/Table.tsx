@@ -39,25 +39,19 @@ export function Table<T extends Record<string, unknown>>({
 
   return (
     <div
-      className={className}
-      style={{ width: '100%', overflowX: 'auto', borderRadius: '8px', border: '1px solid var(--color-border)', ...style }}>
+      className={['w-full overflow-x-auto rounded-[8px] border border-border', className].filter(Boolean).join(' ')}
+      style={style}>
       <table
-        className={tableClassName}
-        style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.875rem', ...tableStyle }}>
+        className={['w-full border-collapse text-sm', tableClassName].filter(Boolean).join(' ')}
+        style={tableStyle}>
         <thead>
-          <tr style={{ borderBottom: '1px solid var(--color-border)', background: 'var(--color-background)' }}>
+          <tr className="border-b border-border bg-background">
             {columns.map(col => (
               <th
                 key={col.key}
+                className="whitespace-nowrap px-3.5 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-foreground-subtle"
                 style={{
-                  padding: '10px 14px',
                   textAlign: col.align ?? 'left',
-                  fontSize: '0.6875rem',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  color: 'var(--color-foreground-subtle)',
-                  whiteSpace: 'nowrap',
                   width: col.width,
                 }}
               >
@@ -71,7 +65,7 @@ export function Table<T extends Record<string, unknown>>({
             <tr>
               <td
                 colSpan={columns.length}
-                style={{ padding: '32px', textAlign: 'center', color: 'var(--color-foreground-subtle)', fontSize: '0.875rem' }}
+                className="p-8 text-center text-sm text-foreground-subtle"
               >
                 {emptyMessage}
               </td>
@@ -84,25 +78,18 @@ export function Table<T extends Record<string, unknown>>({
                 aria-label={onRowClick ? `Open row ${String(row[keyField] ?? i + 1)}` : undefined}
                 onClick={() => onRowClick?.(row)}
                 onKeyDown={(event) => handleRowKeyDown(event, row)}
-                style={{
-                  borderBottom: i < rows.length - 1 ? '1px solid var(--color-border)' : 'none',
-                  background: 'var(--color-background-elevated)',
-                  cursor: onRowClick ? 'pointer' : 'default',
-                  transition: 'background 100ms, outline-color 100ms',
-                  outline: 'none',
-                }}
-                className={onRowClick ? 'focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]' : undefined}
-                onMouseEnter={e => { if (onRowClick) (e.currentTarget as HTMLElement).style.background = 'var(--color-background-subtle)' }}
-                onMouseLeave={e => { if (onRowClick) (e.currentTarget as HTMLElement).style.background = 'var(--color-background-elevated)' }}
+                className={[
+                  'bg-background-elevated outline-none transition-[background,outline-color] duration-100',
+                  onRowClick ? 'cursor-pointer hover:bg-background-subtle focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-[-2px]' : 'cursor-default',
+                  i < rows.length - 1 ? 'border-b border-border' : undefined,
+                ].filter(Boolean).join(' ') || undefined}
               >
                 {columns.map(col => (
                   <td
                     key={col.key}
+                    className="px-3.5 py-[11px] align-middle text-foreground-muted"
                     style={{
-                      padding: '11px 14px',
                       textAlign: col.align ?? 'left',
-                      color: 'var(--color-foreground-muted)',
-                      verticalAlign: 'middle',
                     }}
                   >
                     {col.render ? col.render(row) : String(row[col.key] ?? '')}

@@ -31,22 +31,11 @@ export function Tooltip({
           <BaseTooltip.Positioner side={side} sideOffset={8}>
             <BaseTooltip.Popup
               className={[
-                'data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[instant]:transition-none',
+                'max-w-[220px] rounded-sm border border-border-strong bg-background-elevated px-2.5 py-1.5 text-xs font-medium leading-[1.4] text-foreground shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-[transform,opacity] duration-100 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 data-[instant]:transition-none',
                 className,
               ].filter(Boolean).join(' ')}
               style={{
-                padding: '6px 10px',
-                borderRadius: '6px',
-                border: '1px solid var(--color-border-strong)',
-                background: 'var(--color-background-elevated)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                color: 'var(--color-foreground)',
                 transformOrigin: 'var(--transform-origin)',
-                transition: 'transform 100ms, opacity 100ms',
-                maxWidth: '220px',
-                lineHeight: 1.4,
                 ...style,
               }}
             >

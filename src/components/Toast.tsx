@@ -50,47 +50,21 @@ function ToastList() {
             toast={toast}
             role={role}
             aria-atomic="true"
-            style={{
-              position: 'absolute',
-              right: 0,
-              bottom: 0,
-              left: 'auto',
-              width: '100%',
-              borderRadius: '10px',
-              border: '1px solid var(--color-border-strong)',
-              background: 'var(--color-background-elevated)',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
-              padding: '12px 14px',
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '10px',
-              userSelect: 'none',
-              ...style,
-            }}
             className={[
-              'data-[starting-style]:translate-y-full data-[starting-style]:opacity-0 data-[ending-style]:translate-y-full data-[ending-style]:opacity-0 transition-all duration-200',
+              'absolute bottom-0 left-auto right-0 flex w-full select-none items-start gap-2.5 rounded-md border border-border-strong bg-background-elevated px-3.5 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-200 data-[starting-style]:translate-y-full data-[starting-style]:opacity-0 data-[ending-style]:translate-y-full data-[ending-style]:opacity-0',
               className,
             ].filter(Boolean).join(' ')}
+            style={style}
           >
-            <span aria-hidden="true" style={{ color: cfg.color, flexShrink: 0, marginTop: '1px' }}>{cfg.icon}</span>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-              <BaseToast.Title style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-foreground)', margin: 0 }} />
-              <BaseToast.Description style={{ fontSize: '0.8125rem', color: 'var(--color-foreground-muted)', margin: 0, lineHeight: 1.5 }} />
+            <span aria-hidden="true" className="mt-px shrink-0" style={{ color: cfg.color }}>{cfg.icon}</span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <BaseToast.Title className="m-0 text-sm font-semibold text-foreground" />
+              <BaseToast.Description className="m-0 text-[0.8125rem] leading-normal text-foreground-muted" />
             </div>
             <BaseToast.Close
               type="button"
               aria-label="Dismiss toast"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--color-foreground-subtle)',
-                padding: 0,
-                flexShrink: 0,
-                display: 'flex',
-                outline: 'none',
-              }}
-              className="hover:text-foreground focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 focus-visible:rounded-sm"
+              className="flex shrink-0 cursor-pointer border-0 bg-transparent p-0 text-foreground-subtle outline-none hover:text-foreground focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                 <path d="M3 3l8 8M11 3l-8 8"/>
@@ -110,15 +84,8 @@ export function ToastProvider({ children, className, style }: ToastProviderProps
       {children}
       <BaseToast.Portal>
         <BaseToast.Viewport
-          className={className}
-          style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            width: '320px',
-            zIndex: 9999,
-            ...style,
-          }}
+          className={['fixed bottom-6 right-6 z-[9999] w-80', className].filter(Boolean).join(' ')}
+          style={style}
         >
           <ToastList />
         </BaseToast.Viewport>

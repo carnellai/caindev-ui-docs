@@ -18,14 +18,10 @@ function RunningIcon() {
   return (
     <>
       <svg
-        className="agent-step-spinner"
+        className="agent-step-spinner animate-[agent-step-spin_1s_linear_infinite]"
         width="14"
         height="14"
         viewBox="0 0 14 14"
-        style={{
-          animation: 'agent-step-spin 1s linear infinite',
-          transformOrigin: 'center',
-        }}
       >
         <circle cx="7" cy="7" r="6" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="28" strokeDashoffset="10" />
       </svg>
@@ -86,66 +82,43 @@ const statusConfig: Record<StepStatus, { icon: React.ReactNode; color: string }>
 
 export function AgentStep({ steps, className, style }: AgentStepProps) {
   return (
-    <div className={className} style={{ display: 'flex', flexDirection: 'column', gap: '0', ...style }}>
+    <div className={['flex flex-col gap-0', className].filter(Boolean).join(' ')} style={style}>
       {steps.map((step, i) => {
         const cfg = statusConfig[step.status]
         const isLast = i === steps.length - 1
 
         return (
-          <div key={step.id} style={{ display: 'flex', gap: '12px' }}>
+          <div key={step.id} className="flex gap-3">
             {/* Icon + connector */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
-              <span style={{ color: cfg.color, display: 'flex', zIndex: 1 }}>
+            <div className="flex shrink-0 flex-col items-center">
+              <span className="z-[1] flex" style={{ color: cfg.color }}>
                 {cfg.icon}
               </span>
               {!isLast && (
-                <div style={{
-                  width: '1px',
-                  flex: 1,
-                  minHeight: '16px',
+                <div className="my-[3px] min-h-4 w-px flex-1 opacity-40" style={{
                   background: step.status === 'complete' ? '#34d399' : 'var(--color-border)',
-                  margin: '3px 0',
-                  opacity: 0.4,
                 }} />
               )}
             </div>
 
             {/* Content */}
-            <div style={{
-              paddingBottom: isLast ? 0 : '16px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2px',
-              minWidth: 0,
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
+            <div style={{ paddingBottom: isLast ? 0 : '16px' }} className="flex min-w-0 flex-col gap-0.5">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium leading-[14px]" style={{
                   color: step.status === 'pending' || step.status === 'skipped'
                     ? 'var(--color-foreground-muted)'
                     : 'var(--color-foreground)',
-                  lineHeight: '14px',
                 }}>
                   {step.label}
                 </span>
                 {step.duration !== undefined && step.status === 'complete' && (
-                  <span style={{
-                    fontSize: '0.6875rem',
-                    color: 'var(--color-foreground-subtle)',
-                    fontVariantNumeric: 'tabular-nums',
-                  }}>
+                  <span className="text-[0.6875rem] text-foreground-subtle tabular-nums">
                     {step.duration}ms
                   </span>
                 )}
               </div>
               {step.description && (
-                <p style={{
-                  margin: 0,
-                  fontSize: '0.8125rem',
-                  color: 'var(--color-foreground-subtle)',
-                  lineHeight: 1.5,
-                }}>
+                <p className="m-0 text-[0.8125rem] leading-normal text-foreground-subtle">
                   {step.description}
                 </p>
               )}

@@ -23,29 +23,13 @@ export function StreamingText({
 }: StreamingTextProps) {
   return (
     <span
-      className={className}
-      style={{
-        fontFamily: 'inherit',
-        lineHeight: 'inherit',
-        color: 'inherit',
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word',
-        ...style,
-      }}
+      className={['whitespace-pre-wrap break-words font-[inherit] leading-[inherit] text-inherit', className].filter(Boolean).join(' ')}
+      style={style}
     >
       {text}
       {streaming && (
         <span
-          className="streaming-text-caret"
-          style={{
-            display: 'inline-block',
-            width: '2px',
-            height: '1em',
-            background: 'var(--color-foreground)',
-            marginLeft: '1px',
-            verticalAlign: 'text-bottom',
-            animation: 'caret-blink 1s step-end infinite',
-          }}
+          className="streaming-text-caret ml-px inline-block h-[1em] w-0.5 animate-[caret-blink_1s_step-end_infinite] bg-foreground align-text-bottom"
           aria-hidden="true"
         />
       )}

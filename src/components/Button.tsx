@@ -9,36 +9,16 @@ export type ButtonProps = React.ComponentProps<typeof BaseButton> & {
   loading?: boolean
 }
 
-const sizeStyles: Record<ButtonSize, React.CSSProperties> = {
-  sm: { height: '30px', padding: '0 10px', fontSize: '0.75rem', gap: '6px' },
-  md: { height: '34px', padding: '0 14px', fontSize: '0.8125rem', gap: '7px' },
-  lg: { height: '38px', padding: '0 18px', fontSize: '0.875rem', gap: '8px' },
+const sizeClasses: Record<ButtonSize, string> = {
+  sm: 'h-[30px] gap-1.5 px-2.5 text-xs',
+  md: 'h-[34px] gap-[7px] px-3.5 text-[0.8125rem]',
+  lg: 'h-[38px] gap-2 px-[18px] text-sm',
 }
 
-function getVariantStyle(variant: ButtonVariant): React.CSSProperties {
-  switch (variant) {
-    case 'solid':
-      return {
-        background: 'var(--color-accent)',
-        color: 'var(--color-accent-foreground)',
-        border: '1px solid rgba(0,0,0,0.2)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18)',
-      }
-    case 'outline':
-      return {
-        background: 'rgba(255,255,255,0.05)',
-        color: 'var(--color-foreground)',
-        border: '1px solid var(--color-border-strong)',
-        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
-      }
-    case 'ghost':
-      return {
-        background: 'transparent',
-        color: 'var(--color-foreground-muted)',
-        border: 'none',
-        boxShadow: 'none',
-      }
-  }
+const variantClasses: Record<ButtonVariant, string> = {
+  solid: 'border border-black/20 bg-accent text-accent-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.18)]',
+  outline: 'border border-border-strong bg-white/5 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]',
+  ghost: 'border-0 bg-transparent text-foreground-muted shadow-none',
 }
 
 function mergeClassName(
@@ -69,24 +49,17 @@ export function Button({
       <BaseButton
         aria-busy={loading || undefined}
         disabled={isDisabled}
-        className={mergeClassName(`cd-button cd-button-${variant}`, className)}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontWeight: 500,
-          fontFamily: 'inherit',
-          letterSpacing: '-0.01em',
-          borderRadius: '8px',
-          cursor: isDisabled ? 'not-allowed' : 'pointer',
-          userSelect: 'none',
-          transition: 'background 120ms, border-color 120ms, color 120ms, opacity 120ms, box-shadow 120ms',
-          outline: 'none',
-          opacity: isDisabled ? 0.56 : 1,
-          ...sizeStyles[size],
-          ...getVariantStyle(variant),
-          ...(typeof style === 'object' ? style : {}),
-        }}
+        className={mergeClassName(
+          [
+            'cd-button inline-flex select-none items-center justify-center rounded-[8px] font-medium tracking-[-0.01em] outline-none transition-[background,border-color,color,opacity,box-shadow] duration-[120ms]',
+            `cd-button-${variant}`,
+            variantClasses[variant],
+            sizeClasses[size],
+            isDisabled ? 'cursor-not-allowed opacity-[0.56]' : 'cursor-pointer',
+          ].join(' '),
+          className,
+        )}
+        style={typeof style === 'object' ? style : undefined}
         {...props}
       >
         {loading && <span className="cd-button-spinner" aria-hidden="true" />}

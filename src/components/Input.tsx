@@ -44,15 +44,11 @@ export function Input({
   const accessibleLabel = ariaLabel ?? (!label && !ariaLabelledBy ? placeholder : undefined)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+    <div className="flex flex-col gap-1.5">
       {label && (
         <label
           htmlFor={inputId}
-          style={{
-            fontSize: '0.8125rem',
-            fontWeight: 500,
-            color: 'var(--color-foreground)',
-          }}
+          className="text-[0.8125rem] font-medium text-foreground"
         >
           {label}
         </label>
@@ -66,28 +62,12 @@ export function Input({
         aria-invalid={error ? true : ariaInvalid}
         aria-label={accessibleLabel}
         aria-labelledby={ariaLabelledBy}
-        style={{
-          width: '100%',
-          height: '36px',
-          padding: '0 12px',
-          borderRadius: '8px',
-          border: error
-            ? '1px solid var(--color-destructive)'
-            : '1px solid var(--color-border-strong)',
-          background: disabled ? 'rgba(255,255,255,0.025)' : 'rgba(255,255,255,0.04)',
-          color: disabled ? 'var(--color-foreground-subtle)' : 'var(--color-foreground)',
-          fontSize: '0.875rem',
-          fontFamily: 'inherit',
-          outline: 'none',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)',
-          transition: 'border-color 150ms',
-          boxSizing: 'border-box',
-          cursor: disabled ? 'not-allowed' : undefined,
-          opacity: disabled ? 0.65 : 1,
-          ...(typeof style === 'object' ? style : {}),
-        }}
+        style={typeof style === 'object' ? style : undefined}
         className={mergeClassName(
-          'focus:border-accent focus:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent placeholder:text-foreground-subtle disabled:cursor-not-allowed',
+          [
+            'box-border h-9 w-full rounded-[8px] bg-white/[0.04] px-3 text-sm text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] outline-none transition-[border-color] duration-150 placeholder:text-foreground-subtle focus:border-accent focus:ring-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:bg-white/[0.025] disabled:text-foreground-subtle disabled:opacity-[0.65]',
+            error ? 'border border-destructive' : 'border border-border-strong',
+          ].join(' '),
           className,
         )}
         {...props}
@@ -96,10 +76,7 @@ export function Input({
       {hint && !error && (
         <span
           id={hintId}
-          style={{
-            fontSize: '0.75rem',
-            color: 'var(--color-foreground-subtle)',
-          }}
+          className="text-xs text-foreground-subtle"
         >
           {hint}
         </span>
@@ -109,10 +86,7 @@ export function Input({
         <span
           id={errorId}
           role="alert"
-          style={{
-            fontSize: '0.75rem',
-            color: 'var(--color-destructive)',
-          }}
+          className="text-xs text-destructive"
         >
           {error}
         </span>

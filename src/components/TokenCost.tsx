@@ -17,46 +17,43 @@ export function TokenCost({ inputTokens, outputTokens, totalTokens, cost, model,
 
   return (
     <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: isRow ? 'row' : 'column',
-        alignItems: isRow ? 'center' : 'flex-start',
-        gap: isRow ? '12px' : '4px',
-        flexWrap: 'wrap',
-        ...style,
-      }}>
+      className={[
+        'flex flex-wrap',
+        isRow ? 'flex-row items-center gap-3' : 'flex-col items-start gap-1',
+        className,
+      ].filter(Boolean).join(' ')}
+      style={style}>
       {model && (
-        <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>{model}</span>
+        <span className="text-xs text-foreground-subtle">{model}</span>
       )}
       {inputTokens !== undefined && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>in</span>
-          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)', fontVariantNumeric: 'tabular-nums' }}>
+        <span className="flex items-center gap-1">
+          <span className="text-[0.6875rem] text-foreground-subtle">in</span>
+          <span className="font-mono text-[0.8125rem] text-foreground-muted tabular-nums">
             {inputTokens.toLocaleString()}
           </span>
         </span>
       )}
       {outputTokens !== undefined && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>out</span>
-          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)', fontVariantNumeric: 'tabular-nums' }}>
+        <span className="flex items-center gap-1">
+          <span className="text-[0.6875rem] text-foreground-subtle">out</span>
+          <span className="font-mono text-[0.8125rem] text-foreground-muted tabular-nums">
             {outputTokens.toLocaleString()}
           </span>
         </span>
       )}
       {total !== undefined && !inputTokens && !outputTokens && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>tokens</span>
-          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground-muted)', fontVariantNumeric: 'tabular-nums' }}>
+        <span className="flex items-center gap-1">
+          <span className="text-[0.6875rem] text-foreground-subtle">tokens</span>
+          <span className="font-mono text-[0.8125rem] text-foreground-muted tabular-nums">
             {total.toLocaleString()}
           </span>
         </span>
       )}
       {cost !== undefined && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>cost</span>
-          <span style={{ fontSize: '0.8125rem', fontFamily: 'var(--font-mono)', color: 'var(--color-foreground)', fontVariantNumeric: 'tabular-nums' }}>
+        <span className="flex items-center gap-1">
+          <span className="text-[0.6875rem] text-foreground-subtle">cost</span>
+          <span className="font-mono text-[0.8125rem] text-foreground tabular-nums">
             ${cost < 0.01 ? cost.toFixed(6) : cost.toFixed(4)}
           </span>
         </span>

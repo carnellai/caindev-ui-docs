@@ -18,34 +18,25 @@ export function MetricCard({ label, value, unit, trend, trendValue, trendPositiv
 
   return (
     <div
-      className={className}
-      style={{
-        padding: '14px 16px',
-        borderRadius: '8px',
-        border: '1px solid var(--color-border)',
-        background: 'var(--color-background-elevated)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '6px',
-        ...style,
-      }}>
-      <span style={{ fontSize: '0.6875rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-foreground-subtle)' }}>
+      className={['flex flex-col gap-1.5 rounded-[8px] border border-border bg-background-elevated px-4 py-3.5', className].filter(Boolean).join(' ')}
+      style={style}>
+      <span className="text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-foreground-subtle">
         {label}
       </span>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-        <span style={{ fontSize: '1.5rem', fontWeight: 600, fontFamily: 'var(--font-mono)', color: 'var(--color-foreground)', fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>
+      <div className="flex items-baseline gap-1">
+        <span className="font-mono text-2xl font-semibold leading-none text-foreground tabular-nums">
           {typeof value === 'number' ? value.toLocaleString() : value}
         </span>
-        {unit && <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>{unit}</span>}
+        {unit && <span className="text-xs text-foreground-subtle">{unit}</span>}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+      <div className="flex items-center gap-1.5">
         {trend && trendValue && (
-          <span style={{ fontSize: '0.6875rem', fontWeight: 500, color: trendColor }}>
+          <span className="text-[0.6875rem] font-medium" style={{ color: trendColor }}>
             {trend === 'up' ? '↑' : trend === 'down' ? '↓' : '→'} {trendValue}
           </span>
         )}
         {sublabel && (
-          <span style={{ fontSize: '0.6875rem', color: 'var(--color-foreground-subtle)' }}>{sublabel}</span>
+          <span className="text-[0.6875rem] text-foreground-subtle">{sublabel}</span>
         )}
       </div>
     </div>

@@ -27,36 +27,20 @@ export function Header() {
       ].join(' ')}>
       <div className='container-shell flex h-14 items-center justify-between'>
         {/* Logo */}
-        <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
+        <Link to='/' className='flex items-center'>
           <img src='/logo.svg' alt='caindev/ui' className='h-6' />
         </Link>
 
         {/* Nav */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <nav className='flex items-center gap-1'>
           {navItems.map((item) => {
             const active = pathname.startsWith(item.href) && item.href !== '#'
             return item.soon ? (
               <span
                 key={item.label}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem',
-                  color: 'var(--color-foreground-subtle)',
-                  cursor: 'not-allowed',
-                }}>
+                className='flex cursor-not-allowed items-center gap-1.5 rounded-sm px-3 py-1.5 text-sm text-foreground-subtle'>
                 {item.label}
-                <span
-                  style={{
-                    fontSize: '0.625rem',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.06em',
-                    color: 'var(--color-foreground-subtle)',
-                  }}>
+                <span className='text-[0.625rem] font-semibold uppercase tracking-[0.06em] text-foreground-subtle'>
                   soon
                 </span>
               </span>
@@ -64,19 +48,12 @@ export function Header() {
               <Link
                 key={item.label}
                 to={item.href}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem',
-                  color: active
-                    ? 'var(--color-foreground)'
-                    : 'var(--color-foreground-muted)',
-                  background: active
-                    ? 'var(--color-background-subtle)'
-                    : 'transparent',
-                  textDecoration: 'none',
-                  fontWeight: active ? 500 : 400,
-                }}>
+                className={[
+                  'rounded-sm px-3 py-1.5 text-sm no-underline',
+                  active
+                    ? 'bg-background-subtle font-medium text-foreground'
+                    : 'font-normal text-foreground-muted',
+                ].join(' ')}>
                 {item.label}
               </Link>
             )
@@ -84,21 +61,11 @@ export function Header() {
         </nav>
 
         {/* Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className='flex items-center gap-2'>
           <a
             href='https://github.com'
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              border: '1px solid var(--color-border)',
-              fontSize: '0.875rem',
-              color: 'var(--color-foreground-muted)',
-              textDecoration: 'none',
-            }}>
-            <GitHubIcon style={{ width: '14px', height: '14px' }} />
+            className='flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-foreground-muted no-underline'>
+            <GitHubIcon />
             GitHub
           </a>
         </div>
@@ -107,10 +74,10 @@ export function Header() {
   )
 }
 
-function GitHubIcon({ style }: { style?: React.CSSProperties }) {
+function GitHubIcon() {
   return (
     <svg
-      style={style}
+      className='h-3.5 w-3.5'
       viewBox='0 0 16 16'
       fill='currentColor'
       aria-hidden='true'>

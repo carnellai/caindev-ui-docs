@@ -32,31 +32,22 @@ export function EmptyState({ icon, title, description, action, variant = 'defaul
   const isError = variant === 'error'
   return (
     <div
-      className={className}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '48px 24px',
-        gap: '12px',
-        textAlign: 'center',
-        ...style,
-      }}>
-      <span style={{ color: isError ? '#f87171' : 'var(--color-foreground-subtle)', opacity: 0.6 }}>
+      className={['flex flex-col items-center justify-center gap-3 px-6 py-12 text-center', className].filter(Boolean).join(' ')}
+      style={style}>
+      <span className={[isError ? 'text-red-400' : 'text-foreground-subtle', 'opacity-60'].join(' ')}>
         {icon ?? (isError ? <ErrorIcon /> : <DefaultIcon />)}
       </span>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-foreground)' }}>
+      <div className="flex flex-col gap-1.5">
+        <span className="text-[0.9375rem] font-semibold text-foreground">
           {title}
         </span>
         {description && (
-          <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-foreground-muted)', maxWidth: '320px', lineHeight: 1.55 }}>
+          <p className="m-0 max-w-xs text-sm leading-[1.55] text-foreground-muted">
             {description}
           </p>
         )}
       </div>
-      {action && <div style={{ marginTop: '4px' }}>{action}</div>}
+      {action && <div className="mt-1">{action}</div>}
     </div>
   )
 }
