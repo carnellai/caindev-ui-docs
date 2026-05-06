@@ -63,6 +63,8 @@ export function Header() {
         <div className='flex items-center gap-2'>
           <a
             href='https://github.com/carnellai/caindev-ui'
+            target='_blank'
+            rel='noopener noreferrer'
             className='flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-foreground-muted no-underline'>
             <GitHubIcon />
             GitHub

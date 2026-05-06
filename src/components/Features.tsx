@@ -67,7 +67,7 @@ const features = [
     ),
     label: 'AI prototypes included',
     description:
-      'Streaming text, eval scores, tool calls, and token displays are available as showcase-quality patterns.',
+      'Streaming text, eval scores, tool calls, and token displays as first-class showcase patterns.',
   },
   {
     icon: (
@@ -128,7 +128,7 @@ const features = [
     ),
     label: 'TypeScript checked',
     description:
-      'The showcase is type-checked; exported package types will be finalized during extraction.',
+      'Strict types throughout. Named imports for all props, components, and utilities.',
   },
 ]
 
@@ -143,15 +143,22 @@ export function Features() {
         </h2>
       </div>
 
-      <div className='grid grid-cols-3 overflow-hidden rounded-[12px] border border-border'>
+      <div
+        className='overflow-hidden rounded-xl border border-border'
+        style={{
+          display: 'grid',
+          gridTemplateColumns:
+            'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
+        }}>
         {features.map((f, i) => (
           <div
             key={f.label}
-            className={[
-              'flex flex-col gap-3 p-7',
-              (i + 1) % 3 !== 0 ? 'border-r border-border' : undefined,
-              i < 3 ? 'border-b border-border' : undefined,
-            ].filter(Boolean).join(' ')}>
+            className='flex flex-col gap-3 border-border p-6'
+            style={{
+              borderRight:
+                (i + 1) % 3 !== 0 ? '1px solid var(--color-border)' : undefined,
+              borderBottom: i < 3 ? '1px solid var(--color-border)' : undefined,
+            }}>
             <div className='text-accent'>{f.icon}</div>
             <div className='flex flex-col gap-1.5'>
               <span className='text-sm font-medium text-foreground'>

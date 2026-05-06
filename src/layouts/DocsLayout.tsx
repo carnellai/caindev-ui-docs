@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router'
 import { useState, useEffect } from 'react'
-import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
 const guides = [
@@ -53,6 +52,7 @@ const foundationsData = [
   { label: 'Pagination', href: '/docs/pagination' },
   { label: 'Table', href: '/docs/table' },
 ]
+
 const chatGeneration = [
   { label: 'PromptInput', href: '/docs/prompt-input' },
   { label: 'MessageBubble', href: '/docs/message-bubble' },
@@ -80,12 +80,32 @@ const observability = [
 
 const allAiHrefs = [...chatGeneration, ...observability].map((i) => i.href)
 
+const SIDEBAR_W = 220
+const HEADER_H = 56
+const MOBILE_BP = 768
+
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BP : false,
+  )
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BP - 1}px)`)
+    const handler = (e: MediaQueryListEvent) => setMobile(e.matches)
+    mq.addEventListener('change', handler)
+    setMobile(mq.matches)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return mobile
+}
+
 function NavGroup({
   label,
   items,
+  onNavigate,
 }: {
   label: string
   items: { label: string; href: string }[]
+  onNavigate?: () => void
 }) {
   const { pathname } = useLocation()
   return (
@@ -99,6 +119,7 @@ function NavGroup({
           <Link
             key={item.href}
             to={item.href}
+            onClick={onNavigate}
             className={[
               'block whitespace-nowrap rounded-[5px] px-2 py-[5px] text-[0.8125rem] no-underline',
               active
@@ -139,7 +160,6 @@ function SectionToggle({
   )
 }
 
-// Scrolls to top on every route change
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
@@ -148,61 +168,251 @@ function ScrollToTop() {
   return null
 }
 
+function HamburgerIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width='18'
+      height='18'
+      viewBox='0 0 18 18'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='1.5'
+      strokeLinecap='round'>
+      {open ? (
+        <path d='M3 3l12 12M15 3L3 15' />
+      ) : (
+        <path d='M2 5h14M2 9h14M2 13h14' />
+      )}
+    </svg>
+  )
+}
+
+function GitHubIcon() {
+  return (
+    <svg
+      className='h-3.5 w-3.5'
+      viewBox='0 0 16 16'
+      fill='currentColor'
+      aria-hidden='true'>
+      <path d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z' />
+    </svg>
+  )
+}
+
+function SidebarContents({
+  section,
+  setSection,
+  onNavigate,
+}: {
+  section: 'base' | 'ai'
+  setSection: (v: 'base' | 'ai') => void
+  onNavigate?: () => void
+}) {
+  return (
+    <>
+      <div className='mb-6'>
+        <NavGroup label='Guides' items={guides} onNavigate={onNavigate} />
+      </div>
+      <SectionToggle active={section} onChange={setSection} />
+      {section === 'base' && (
+        <div className='flex flex-col gap-6'>
+          <NavGroup
+            label='Layout'
+            items={foundationsLayout}
+            onNavigate={onNavigate}
+          />
+          <NavGroup
+            label='Inputs'
+            items={foundationsInputs}
+            onNavigate={onNavigate}
+          />
+          <NavGroup
+            label='Overlay'
+            items={foundationsOverlay}
+            onNavigate={onNavigate}
+          />
+          <NavGroup
+            label='Feedback'
+            items={foundationsFeedback}
+            onNavigate={onNavigate}
+          />
+          <NavGroup
+            label='Data'
+            items={foundationsData}
+            onNavigate={onNavigate}
+          />
+        </div>
+      )}
+      {section === 'ai' && (
+        <div className='flex flex-col gap-6'>
+          <NavGroup
+            label='Chat & Generation'
+            items={chatGeneration}
+            onNavigate={onNavigate}
+          />
+          <NavGroup
+            label='Observability'
+            items={observability}
+            onNavigate={onNavigate}
+          />
+        </div>
+      )}
+    </>
+  )
+}
+
 export function DocsLayout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation()
   const isAiRoute = allAiHrefs.includes(pathname)
   const [section, setSection] = useState<'base' | 'ai'>(
     isAiRoute ? 'ai' : 'base',
   )
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const isMobile = useIsMobile()
+
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileOpen])
 
   return (
     <>
       <ScrollToTop />
-      <Header />
 
-      {/* Fixed sidebar — top/width/height/padding/scrollbarWidth kept inline:
-          pixel-exact values derived from Header height (56px) with no Tailwind token equivalent */}
-      <aside
-        className='fixed left-0 z-40 flex flex-col overflow-y-auto border-r border-border bg-background'
-        style={{
-          top: '56px',
-          width: '220px',
-          height: 'calc(100vh - 56px)',
-          padding: '24px 12px 48px 16px',
-          scrollbarWidth: 'none',
-        }}>
-        <div className='mb-6'>
-          <NavGroup label='Guides' items={guides} />
+      {/* Header */}
+      <header
+        className='sticky top-0 z-50 w-full border-b border-border bg-background'
+        style={{ height: HEADER_H }}>
+        <div className='container-shell flex h-full items-center justify-between'>
+          <Link to='/' className='flex items-center'>
+            <img src='/logo.svg' alt='caindev/ui' className='h-6' />
+          </Link>
+
+          {!isMobile && (
+            <nav className='flex items-center gap-1'>
+              <Link
+                to='/docs/button'
+                className={[
+                  'rounded-sm px-3 py-1.5 text-sm no-underline',
+                  pathname.startsWith('/docs')
+                    ? 'bg-background-subtle font-medium text-foreground'
+                    : 'font-normal text-foreground-muted',
+                ].join(' ')}>
+                Documentation
+              </Link>
+            </nav>
+          )}
+
+          <div className='flex items-center gap-2'>
+            {!isMobile && (
+              <a
+                href='https://github.com/carnellai/caindev-ui'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-foreground-muted no-underline'>
+                <GitHubIcon />
+                GitHub
+              </a>
+            )}
+            {isMobile && (
+              <button
+                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+                onClick={() => setMobileOpen((o) => !o)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 8,
+                  color: 'var(--color-foreground-muted)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}>
+                <HamburgerIcon open={mobileOpen} />
+              </button>
+            )}
+          </div>
         </div>
+      </header>
 
-        <SectionToggle active={section} onChange={setSection} />
-
-        {section === 'base' && (
-          <div className='flex flex-col gap-6'>
-            <NavGroup label='Layout' items={foundationsLayout} />
-            <NavGroup label='Inputs' items={foundationsInputs} />
-            <NavGroup label='Overlay' items={foundationsOverlay} />
-            <NavGroup label='Feedback' items={foundationsFeedback} />
-            <NavGroup label='Data' items={foundationsData} />
-          </div>
-        )}
-
-        {section === 'ai' && (
-          <div className='flex flex-col gap-6'>
-            <NavGroup label='Chat & Generation' items={chatGeneration} />
-            <NavGroup label='Observability' items={observability} />
-          </div>
-        )}
-      </aside>
-
-      {/* Content offset — marginLeft kept inline: matches sidebar width (220px), no Tailwind equivalent */}
-      <div style={{ marginLeft: '220px' }}>
-        <main
-          className='mx-auto'
+      {/* Mobile backdrop */}
+      {isMobile && mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
           style={{
-            minHeight: 'calc(100vh - 56px)',
-            padding: '40px 80px 80px 80px',
-            maxWidth: '1000px',
+            position: 'fixed',
+            inset: 0,
+            zIndex: 40,
+            background: 'rgba(0,0,0,0.6)',
+            backdropFilter: 'blur(4px)',
+          }}
+        />
+      )}
+
+      {/* Mobile sidebar */}
+      {isMobile && (
+        <div
+          style={{
+            position: 'fixed',
+            top: HEADER_H,
+            left: 0,
+            zIndex: 50,
+            width: 260,
+            height: `calc(100vh - ${HEADER_H}px)`,
+            padding: '24px 12px 48px 16px',
+            overflowY: 'auto',
+            scrollbarWidth: 'none',
+            borderRight: '1px solid var(--color-border)',
+            background: 'var(--color-background)',
+            display: 'flex',
+            flexDirection: 'column',
+            transform: mobileOpen ? 'translateX(0)' : 'translateX(-100%)',
+            transition: 'transform 280ms cubic-bezier(0.32,0.72,0,1)',
+          }}>
+          <SidebarContents
+            section={section}
+            setSection={setSection}
+            onNavigate={() => setMobileOpen(false)}
+          />
+        </div>
+      )}
+
+      {/* Desktop sidebar */}
+      {!isMobile && (
+        <div
+          style={{
+            position: 'fixed',
+            top: HEADER_H,
+            left: 0,
+            zIndex: 40,
+            width: SIDEBAR_W,
+            height: `calc(100vh - ${HEADER_H}px)`,
+            padding: '24px 12px 48px 16px',
+            overflowY: 'auto',
+            scrollbarWidth: 'none',
+            borderRight: '1px solid var(--color-border)',
+            background: 'var(--color-background)',
+            display: 'flex',
+            flexDirection: 'column',
+          }}>
+          <SidebarContents section={section} setSection={setSection} />
+        </div>
+      )}
+
+      {/* Content */}
+      <div style={{ marginLeft: isMobile ? 0 : SIDEBAR_W }}>
+        <main
+          style={{
+            minHeight: `calc(100vh - ${HEADER_H}px)`,
+            padding: isMobile ? '24px 16px 64px' : '40px 80px 80px',
+            maxWidth: 1000,
+            margin: '0 auto',
+            width: '100%',
           }}>
           {children}
         </main>

@@ -9,11 +9,17 @@ export function TrustBar() {
   return (
     <div className='border-y border-border'>
       <div className='container-shell'>
-        <div className='flex items-center justify-center gap-12 py-3.5'>
+        <div
+          className='py-4'
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px 32px',
+          }}>
           {stats.map((stat, i) => (
-            <div
-              key={i}
-              className='flex items-baseline gap-1.5'>
+            <div key={i} className='flex items-baseline gap-1.5'>
               <span className='text-sm font-semibold text-foreground'>
                 {stat.value}
               </span>

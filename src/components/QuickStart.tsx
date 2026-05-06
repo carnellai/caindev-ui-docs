@@ -12,11 +12,7 @@ const steps = [
   {
     step: '03',
     label: 'Package import',
-    code: `import { Button } from '@caindev/ui'
-
-export default function App() {
-  return <Button variant="solid">Get started</Button>
-}`,
+    code: `import { Button } from '@caindev/ui'\n\nexport default function App() {\n  return <Button variant="solid">Get started</Button>\n}`,
   },
 ]
 
@@ -24,51 +20,73 @@ export function QuickStart() {
   return (
     <section className='border-t border-border bg-background-elevated'>
       <div className='container-shell py-16'>
-        <div className='grid grid-cols-2 items-start gap-16'>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns:
+              'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+            gap: '3rem',
+            alignItems: 'start',
+          }}>
           {/* Left */}
           <div className='flex flex-col gap-5'>
             <span className='eyebrow'>Package setup</span>
             <h2 className='m-0 text-foreground'>
               Use the package{' '}
-              <span className='text-foreground-subtle'>
-                from your app.
-              </span>
+              <span className='text-foreground-subtle'>from your app.</span>
             </h2>
-            <p className='m-0 max-w-80 text-foreground-muted'>
-              This docs app consumes @caindev/ui through a local linked
-              dependency. Consumers use the same package entrypoints.
+            <p className='m-0 text-foreground-muted' style={{ maxWidth: 320 }}>
+              Install from npm and import the stylesheet once. No Tailwind
+              config required on your end.
             </p>
             <a
-              href='#'
-              className='inline-flex w-fit rounded-[8px] border border-border px-4 py-2 text-sm font-medium text-foreground-muted no-underline'>
+              href='/docs/getting-started'
+              className='inline-flex w-fit rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground-muted no-underline'>
               Read the docs →
             </a>
           </div>
 
-          {/* Right */}
-          <div className='flex flex-col gap-0'>
+          {/* Right — steps */}
+          <div className='flex flex-col'>
             {steps.map((s, i) => (
               <div key={s.step} className='flex gap-4'>
-                {/* Step indicator + line */}
-                <div className='flex flex-col items-center gap-0'>
-                  <div className='flex size-7 shrink-0 items-center justify-center rounded-full border border-border text-[11px] font-semibold text-foreground-subtle'>
+                {/* Indicator + line */}
+                <div className='flex flex-col items-center'>
+                  <div
+                    className='flex shrink-0 items-center justify-center rounded-full border border-border text-foreground-subtle'
+                    style={{
+                      width: 28,
+                      height: 28,
+                      fontSize: 11,
+                      fontWeight: 600,
+                    }}>
                     {s.step}
                   </div>
                   {i < steps.length - 1 && (
-                    <div className='min-h-6 w-px flex-1 bg-border' />
+                    <div
+                      className='w-px flex-1 bg-border'
+                      style={{ minHeight: 16 }}
+                    />
                   )}
                 </div>
 
                 {/* Content */}
                 <div
-                  className={[
-                    'flex flex-col gap-2.5',
-                    i < steps.length - 1 ? 'pb-6' : 'pb-0',
-                  ].join(' ')}>
-                  <span className='text-sm font-medium leading-7 text-foreground'>
+                  className='flex min-w-0 flex-1 flex-col gap-2.5'
+                  style={{ paddingBottom: i < steps.length - 1 ? 24 : 0 }}>
+                  <span
+                    className='text-sm font-medium text-foreground'
+                    style={{ lineHeight: '28px' }}>
                     {s.label}
                   </span>
-                  <pre className='m-0 overflow-x-auto rounded-[8px] border border-border bg-background px-4 py-3 font-mono text-[0.8125rem] leading-[1.6] text-foreground-muted'>
+                  <pre
+                    className='m-0 overflow-x-auto rounded-md border border-border bg-background text-foreground-muted'
+                    style={{
+                      padding: '10px 16px',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'clamp(0.6875rem, 2vw, 0.8125rem)',
+                      lineHeight: 1.6,
+                    }}>
                     <code>{s.code}</code>
                   </pre>
                 </div>

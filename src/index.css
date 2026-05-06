@@ -45,12 +45,14 @@
   * {
     @apply border-border;
     outline-color: oklch(from #52525b l c h / 50%);
+    box-sizing: border-box;
   }
 
   html {
     font-size: 16px;
     scroll-behavior: smooth;
     color-scheme: dark;
+    overflow-x: hidden;
   }
 
   body {
@@ -59,10 +61,13 @@
     font-size: var(--text-base);
     line-height: 1.5;
     position: relative;
+    overflow-x: hidden;
+    min-width: 320px;
   }
 
   #root {
     isolation: isolate;
+    overflow-x: hidden;
   }
 
   h1,
@@ -111,7 +116,13 @@
 
 @layer components {
   .container-shell {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Safe padding that always works — no responsive Tailwind classes */
+    padding-left: clamp(16px, 4vw, 32px);
+    padding-right: clamp(16px, 4vw, 32px);
   }
 
   .eyebrow {
@@ -133,11 +144,9 @@
     0% {
       opacity: 0.5;
     }
-
     50% {
       opacity: 1;
     }
-
     100% {
       opacity: 0.5;
     }

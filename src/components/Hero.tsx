@@ -1,6 +1,14 @@
+import {
+  Button,
+  Switch,
+  EvalBadge,
+  RunStatusBadge,
+  TokenCost,
+} from '@caindev/ui'
+
 export function Hero() {
   return (
-    <section className='container-shell pt-24 pb-12 lg:pt-32 lg:pb-16'>
+    <section className='container-shell pb-12 pt-24 lg:pb-16 lg:pt-32'>
       <div className='grid grid-cols-1 items-center gap-16 lg:grid-cols-2'>
         {/* Left — text */}
         <div className='flex flex-col gap-6'>
@@ -20,24 +28,31 @@ export function Hero() {
             scores, and tool calls.
           </p>
 
-          <div className='flex items-center gap-3 pt-2'>
+          <div className='flex flex-wrap items-center gap-3 pt-2'>
             <a
               href='#components'
-              className='rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover'>
+              className='rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground no-underline transition-colors hover:bg-accent-hover'>
               Browse components
             </a>
             <a
-              href='#'
-              className='rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground-muted transition-colors hover:border-border-strong hover:text-foreground'>
+              href='https://github.com/carnellai/caindev-ui'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground-muted no-underline transition-colors hover:border-border-strong hover:text-foreground'>
               View on GitHub
             </a>
           </div>
         </div>
 
-        {/* Right — floating card preview */}
+        {/* Right — live component preview */}
         <div className='flex items-center justify-center lg:justify-end'>
           <div
-            className='w-full max-w-sm rounded-xl border border-border-strong bg-background-elevated p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4),0_2px_8px_rgba(0,0,0,0.3)]'>
+            className='w-full max-w-sm rounded-xl border border-border-strong bg-background-elevated'
+            style={{
+              padding: '20px',
+              boxShadow:
+                '0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3)',
+            }}>
             <PreviewCard />
           </div>
         </div>
@@ -48,8 +63,8 @@ export function Hero() {
 
 function PreviewCard() {
   return (
-    <div className='flex flex-col gap-5'>
-      {/* Header row */}
+    <div className='flex flex-col' style={{ gap: 14 }}>
+      {/* Header */}
       <div className='flex items-center justify-between'>
         <div className='flex flex-col gap-0.5'>
           <span className='text-sm font-medium text-foreground'>
@@ -59,91 +74,72 @@ function PreviewCard() {
             run_a3f9bc · 2m ago
           </span>
         </div>
-        <StatusBadge status='passed' />
+        <RunStatusBadge status='completed' size='sm' />
       </div>
 
-      {/* Divider */}
       <div className='h-px bg-border' />
 
-      {/* Stat row */}
-      <div className='grid grid-cols-3 gap-3'>
-        <Stat label='Score' value='94%' />
-        <Stat label='Latency' value='1.2s' />
-        <Stat label='Tokens' value='2.4k' />
+      {/* Inline stats row — much tighter than MetricCard */}
+      <div className='flex items-center gap-5'>
+        {[
+          { label: 'Score', value: '94%' },
+          { label: 'Latency', value: '1.2s' },
+          { label: 'Tokens', value: '2.4k' },
+        ].map((s) => (
+          <div key={s.label} className='flex flex-col gap-0.5'>
+            <span className='text-[0.625rem] font-semibold uppercase tracking-widest text-foreground-subtle'>
+              {s.label}
+            </span>
+            <span className='font-mono text-sm font-medium text-foreground'>
+              {s.value}
+            </span>
+          </div>
+        ))}
       </div>
 
-      {/* Divider */}
       <div className='h-px bg-border' />
 
-      {/* Toggle rows */}
-      <div className='flex flex-col gap-3'>
-        <ToggleRow label='Streaming' defaultOn />
-        <ToggleRow label='Tool calls' defaultOn={false} />
-        <ToggleRow label='Eval scoring' defaultOn />
+      {/* Eval badges */}
+      <div className='flex flex-col' style={{ gap: 7 }}>
+        {[
+          { label: 'Correctness', verdict: 'pass' as const, score: 0.94 },
+          { label: 'Relevance', verdict: 'review' as const, score: 0.61 },
+          { label: 'Faithfulness', verdict: 'pass' as const, score: 0.88 },
+        ].map((row) => (
+          <div key={row.label} className='flex items-center justify-between'>
+            <span className='text-sm text-foreground-muted'>{row.label}</span>
+            <EvalBadge verdict={row.verdict} score={row.score} size='sm' />
+          </div>
+        ))}
       </div>
 
-      {/* Divider */}
+      <div className='h-px bg-border' />
+
+      {/* Token cost */}
+      <TokenCost
+        model='claude-3-5-sonnet'
+        inputTokens={2048}
+        outputTokens={312}
+        cost={0.0082}
+        layout='row'
+      />
+
+      <div className='h-px bg-border' />
+
+      {/* Toggles inline */}
+      <div className='flex items-center gap-5'>
+        <Switch label='Streaming' defaultChecked />
+        <Switch label='Tool calls' />
+      </div>
+
       <div className='h-px bg-border' />
 
       {/* Actions */}
       <div className='flex items-center gap-2'>
-        <button className='flex-1 rounded-md bg-accent py-1.5 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover'>
+        <Button variant='solid' style={{ flex: 1 }}>
           Re-run
-        </button>
-        <button className='rounded-md border border-border px-3 py-1.5 text-sm text-foreground-muted transition-colors hover:border-border-strong hover:text-foreground'>
-          Export
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className='flex flex-col gap-1 rounded-lg bg-background-subtle px-3 py-2.5'>
-      <span className='text-[10px] font-medium uppercase tracking-widest text-foreground-subtle'>
-        {label}
-      </span>
-      <span className='font-mono text-base font-medium text-foreground'>
-        {value}
-      </span>
-    </div>
-  )
-}
-
-function StatusBadge({ status }: { status: 'passed' | 'failed' | 'running' }) {
-  const styles = {
-    passed: 'bg-emerald-950 text-emerald-400',
-    failed: 'bg-red-950 text-red-400',
-    running: 'bg-violet-950 text-violet-400',
-  }
-  return (
-    <span
-      className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${styles[status]}`}>
-      {status}
-    </span>
-  )
-}
-
-function ToggleRow({
-  label,
-  defaultOn,
-}: {
-  label: string
-  defaultOn: boolean
-}) {
-  return (
-    <div className='flex items-center justify-between'>
-      <span className='text-sm text-foreground-muted'>{label}</span>
-      <div
-        className={`relative h-5 w-9 rounded-full transition-colors ${
-          defaultOn ? 'bg-accent' : 'bg-background-subtle'
-        }`}>
-        <div
-          className={`absolute top-0.5 size-4 rounded-full bg-white shadow transition-transform ${
-            defaultOn ? 'translate-x-4' : 'translate-x-0.5'
-          }`}
-        />
+        </Button>
+        <Button variant='outline'>Export</Button>
       </div>
     </div>
   )
