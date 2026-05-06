@@ -1,16 +1,18 @@
 import { Link } from 'react-router'
-import { Button } from './Button'
-import { Switch } from './Switch'
-import { Checkbox } from './Checkbox'
-import { Input } from './Input'
-import { EvalBadge } from './EvalBadge'
-import { RunStatusBadge } from './RunStatusBadge'
-import { ScoreBar } from './ScoreBar'
-import { TokenCost } from './TokenCost'
-import { StreamingText, useSimulatedStream } from './StreamingText'
-import { ToolCallCard } from './ToolCallCard'
-import { AgentStep } from './AgentStep'
-import { MetricCard } from './MetricCard'
+import {
+  Button,
+  Switch,
+  Checkbox,
+  Input,
+  EvalBadge,
+  RunStatusBadge,
+  ScoreBar,
+  TokenCost,
+  StreamingText,
+  ToolCallCard,
+  AgentStep,
+  MetricCard,
+} from '@caindev/ui'
 
 // ─── Preview components ───────────────────────────────────────────────────────
 
@@ -65,7 +67,9 @@ function StreamingPreview() {
 }
 
 function MutedPreview({ children }: { children: React.ReactNode }) {
-  return <div className='text-[0.8125rem] text-foreground-muted'>{children}</div>
+  return (
+    <div className='text-[0.8125rem] text-foreground-muted'>{children}</div>
+  )
 }
 
 function ToolCallPreview() {
@@ -207,40 +211,28 @@ const foundations: ComponentEntry[] = [
     name: 'Select',
     description: 'Single value from a list',
     href: '/docs/select',
-    preview: (
-      <MutedPreview>
-        Keyboard-navigable dropdown
-      </MutedPreview>
-    ),
+    preview: <MutedPreview>Keyboard-navigable dropdown</MutedPreview>,
   },
   {
     name: 'Tabs',
     description: 'Switch between related panels',
     href: '/docs/tabs',
     preview: (
-      <MutedPreview>
-        Animated indicator, arrow key navigation
-      </MutedPreview>
+      <MutedPreview>Animated indicator, arrow key navigation</MutedPreview>
     ),
   },
   {
     name: 'Tooltip',
     description: 'Contextual hints on hover',
     href: '/docs/tooltip',
-    preview: (
-      <MutedPreview>
-        Delay groups, all four sides
-      </MutedPreview>
-    ),
+    preview: <MutedPreview>Delay groups, all four sides</MutedPreview>,
   },
   {
     name: 'Accordion',
     description: 'Collapsible content panels',
     href: '/docs/accordion',
     preview: (
-      <MutedPreview>
-        Animated height, single or multiple open
-      </MutedPreview>
+      <MutedPreview>Animated height, single or multiple open</MutedPreview>
     ),
   },
   {
@@ -248,9 +240,7 @@ const foundations: ComponentEntry[] = [
     description: 'Dropdown action list',
     href: '/docs/menu',
     preview: (
-      <MutedPreview>
-        Keyboard nav, groups, destructive items
-      </MutedPreview>
+      <MutedPreview>Keyboard nav, groups, destructive items</MutedPreview>
     ),
   },
   {
@@ -258,9 +248,7 @@ const foundations: ComponentEntry[] = [
     description: 'Range value selection',
     href: '/docs/slider',
     preview: (
-      <MutedPreview>
-        Single and range mode, accessible labels
-      </MutedPreview>
+      <MutedPreview>Single and range mode, accessible labels</MutedPreview>
     ),
   },
 ]
@@ -289,29 +277,21 @@ const chatComponents: ComponentEntry[] = [
     description: 'Auto-resizing AI chat input',
     href: '/docs/prompt-input',
     preview: (
-      <MutedPreview>
-        Enter to send, stop button while loading
-      </MutedPreview>
+      <MutedPreview>Enter to send, stop button while loading</MutedPreview>
     ),
   },
   {
     name: 'MessageBubble',
     description: 'User / assistant roles',
     href: '/docs/message-bubble',
-    preview: (
-      <MutedPreview>
-        Role-aware layout, streaming support
-      </MutedPreview>
-    ),
+    preview: <MutedPreview>Role-aware layout, streaming support</MutedPreview>,
   },
   {
     name: 'MessageThread',
     description: 'Auto-scrolling conversation',
     href: '/docs/message-thread',
     preview: (
-      <MutedPreview>
-        Scrolls to latest message during streaming
-      </MutedPreview>
+      <MutedPreview>Scrolls to latest message during streaming</MutedPreview>
     ),
   },
   {
@@ -329,9 +309,7 @@ const chatComponents: ComponentEntry[] = [
     description: 'Syntax display with copy',
     href: '/docs/code-block',
     preview: (
-      <MutedPreview>
-        Filename, language badge, line numbers
-      </MutedPreview>
+      <MutedPreview>Filename, language badge, line numbers</MutedPreview>
     ),
   },
   {
@@ -349,9 +327,7 @@ const chatComponents: ComponentEntry[] = [
     description: 'Type-aware JSON renderer',
     href: '/docs/structured-output',
     preview: (
-      <MutedPreview>
-        Strings, numbers, booleans, nested objects
-      </MutedPreview>
+      <MutedPreview>Strings, numbers, booleans, nested objects</MutedPreview>
     ),
   },
 ]
@@ -362,9 +338,7 @@ const obsComponents: ComponentEntry[] = [
     description: 'Hierarchical span tree',
     href: '/docs/trace-tree',
     preview: (
-      <MutedPreview>
-        LLM, TOOL, RETRIEVAL, AGENT, GUARDRAIL kinds
-      </MutedPreview>
+      <MutedPreview>LLM, TOOL, RETRIEVAL, AGENT, GUARDRAIL kinds</MutedPreview>
     ),
   },
   {
@@ -402,9 +376,7 @@ const obsComponents: ComponentEntry[] = [
     description: 'Metric vs baseline comparison',
     href: '/docs/stat-delta',
     preview: (
-      <MutedPreview>
-        Direction-aware delta with format options
-      </MutedPreview>
+      <MutedPreview>Direction-aware delta with format options</MutedPreview>
     ),
   },
   {
@@ -423,9 +395,7 @@ const obsComponents: ComponentEntry[] = [
     description: 'Empty and error placeholders',
     href: '/docs/empty-state',
     preview: (
-      <MutedPreview>
-        Default and error variants with action slot
-      </MutedPreview>
+      <MutedPreview>Default and error variants with action slot</MutedPreview>
     ),
   },
 ]
@@ -444,12 +414,8 @@ function ComponentCard({ name, description, href, preview }: ComponentEntry) {
 
       {/* Label */}
       <div className='flex flex-col gap-[3px] px-3.5 py-3'>
-        <span className='text-sm font-medium text-foreground'>
-          {name}
-        </span>
-        <span className='text-xs text-foreground-muted'>
-          {description}
-        </span>
+        <span className='text-sm font-medium text-foreground'>{name}</span>
+        <span className='text-xs text-foreground-muted'>{description}</span>
       </div>
     </Link>
   )
