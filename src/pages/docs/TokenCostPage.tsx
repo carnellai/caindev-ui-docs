@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { TokenCost } from '../../components/TokenCost'
+import { TokenCost } from '@caindev/ui'
 
 export function TokenCostPage() {
   return (

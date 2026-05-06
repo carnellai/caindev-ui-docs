@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { ToolCallCard } from '../../components/ToolCallCard'
+import { ToolCallCard } from '@caindev/ui'
 
 export function ToolCallCardPage() {
   return (

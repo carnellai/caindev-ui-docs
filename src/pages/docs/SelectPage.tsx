@@ -1,7 +1,7 @@
 // SelectPage.tsx
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Select } from '../../components/Select'
+import { Select } from '@caindev/ui'
 
 export function SelectPage() {
   return (

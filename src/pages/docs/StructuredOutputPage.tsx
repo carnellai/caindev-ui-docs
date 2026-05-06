@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { StructuredOutput } from '../../components/StructuredOutput'
+import { StructuredOutput } from '@caindev/ui'
 
 export function StructuredOutputPage() {
   return (

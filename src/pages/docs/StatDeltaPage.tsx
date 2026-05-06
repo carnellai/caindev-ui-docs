@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { StatDelta } from '../../components/StatDelta'
+import { StatDelta } from '@caindev/ui'
 
 export function StatDeltaPage() {
   return (

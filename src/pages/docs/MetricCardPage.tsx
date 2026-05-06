@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { MetricCard } from '../../components/MetricCard'
+import { MetricCard } from '@caindev/ui'
 
 export function MetricCardPage() {
   return (

@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { EvalBadge } from '../../components/EvalBadge'
+import { EvalBadge } from '@caindev/ui'
 
 export function EvalBadgePage() {
   return (

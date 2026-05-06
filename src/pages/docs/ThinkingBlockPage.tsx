@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { ThinkingBlock } from '../../components/ThinkingBlock'
-import { useSimulatedStream } from '../../components/StreamingText'
+import { ThinkingBlock, useSimulatedStream } from '@caindev/ui'
 
 function StreamingThinking() {
   const { text, streaming } = useSimulatedStream(

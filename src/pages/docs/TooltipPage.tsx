@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Tooltip } from '../../components/Tooltip'
-import { Button } from '../../components/Button'
+import { Button, Tooltip } from '@caindev/ui'
 
 export function TooltipPage() {
   return (

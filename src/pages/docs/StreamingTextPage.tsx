@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { StreamingText, useSimulatedStream } from '../../components/StreamingText'
+import { StreamingText, useSimulatedStream } from '@caindev/ui'
 
 const DEMO_TEXT = `The transformer architecture introduced in "Attention is All You Need" fundamentally changed how we process sequential data. By replacing recurrence with self-attention, it enables parallel computation across all positions in a sequence — making training dramatically faster and enabling much longer context windows than previous approaches.`
 

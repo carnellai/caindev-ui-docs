@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { CodeBlock } from '../../components/CodeBlock'
+import { CodeBlock } from '@caindev/ui'
 
 export function CodeBlockPage() {
   return (

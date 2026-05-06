@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { EmptyState } from '../../components/EmptyState'
-import { Button } from '../../components/Button'
+import { Button, EmptyState } from '@caindev/ui'
 
 export function EmptyStatePage() {
   return (

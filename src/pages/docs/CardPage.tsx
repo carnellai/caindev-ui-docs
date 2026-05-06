@@ -1,8 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Card } from '../../components/Card'
-import { Badge } from '../../components/Badge'
-import { Button } from '../../components/Button'
+import { Badge, Button, Card } from '@caindev/ui'
 
 export function CardPage() {
   return (

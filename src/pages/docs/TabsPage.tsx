@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Tabs } from '../../components/Tabs'
+import { Tabs } from '@caindev/ui'
 
 export function TabsPage() {
   return (

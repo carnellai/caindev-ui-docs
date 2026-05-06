@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { MessageBubble } from '../../components/MessageBubble'
-import { useSimulatedStream } from '../../components/StreamingText'
+import { MessageBubble, useSimulatedStream } from '@caindev/ui'
 
 function StreamingAssistant() {
   const { text, streaming } = useSimulatedStream(

@@ -1,9 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Table } from '../../components/Table'
-import { Badge } from '../../components/Badge'
-import { EvalBadge } from '../../components/EvalBadge'
-import { RunStatusBadge } from '../../components/RunStatusBadge'
+import { Badge, EvalBadge, RunStatusBadge, Table } from '@caindev/ui'
 
 type Run = {
   id: string

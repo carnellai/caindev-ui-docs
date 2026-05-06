@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Slider } from '../../components/Slider'
+import { Slider } from '@caindev/ui'
 
 export function SliderPage() {
   return (

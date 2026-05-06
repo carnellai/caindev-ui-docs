@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Separator } from '../../components/Separator'
+import { Separator } from '@caindev/ui'
 
 export function SeparatorPage() {
   return (

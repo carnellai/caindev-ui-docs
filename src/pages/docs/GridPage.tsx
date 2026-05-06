@@ -1,8 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Grid } from '../../components/Grid'
-import { Card } from '../../components/Card'
-import { MetricCard } from '../../components/MetricCard'
+import { Card, Grid, MetricCard } from '@caindev/ui'
 
 export function GridPage() {
   return (

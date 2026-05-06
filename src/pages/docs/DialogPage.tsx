@@ -1,8 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Dialog, DialogClose } from '../../components/Dialog'
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
+import { Button, Dialog, DialogClose, Input } from '@caindev/ui'
 
 export function DialogPage() {
   return (

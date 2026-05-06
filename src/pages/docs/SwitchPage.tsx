@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Switch } from '../../components/Switch'
+import { Switch } from '@caindev/ui'
 
 export function SwitchPage() {
   return (

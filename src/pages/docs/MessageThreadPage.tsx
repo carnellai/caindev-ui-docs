@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { MessageThread } from '../../components/MessageThread'
+import { MessageThread } from '@caindev/ui'
 
 const messages = [
   { id: '1', role: 'user' as const, content: 'What is the difference between RAG and fine-tuning?', timestamp: '2:30 PM' },

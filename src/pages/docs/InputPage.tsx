@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Input } from '../../components/Input'
+import { Input } from '@caindev/ui'
 
 export function InputPage() {
   return (

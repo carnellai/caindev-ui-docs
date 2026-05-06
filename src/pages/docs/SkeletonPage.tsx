@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Skeleton, SkeletonText, SkeletonCard } from '../../components/Skeleton'
+import { Skeleton, SkeletonCard, SkeletonText } from '@caindev/ui'
 
 export function SkeletonPage() {
   return (

@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { ToastProvider, useToast } from '../../components/Toast'
-import { Button } from '../../components/Button'
+import { Button, ToastProvider, useToast } from '@caindev/ui'
 
 function ToastDemo() {
   const { toast, success, error, warning } = useToast()

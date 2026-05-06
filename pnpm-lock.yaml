@@ -11,6 +11,9 @@ importers:
       '@base-ui/react':
         specifier: ^1.4.1
         version: 1.4.1(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      '@caindev/ui':
+        specifier: link:../caindev-ui
+        version: link:../caindev-ui
       react:
         specifier: ^19.2.5
         version: 19.2.5

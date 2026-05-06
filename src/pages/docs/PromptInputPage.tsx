@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { PromptInput } from '../../components/PromptInput'
+import { PromptInput } from '@caindev/ui'
 
 function InteractiveDemo() {
   const [messages, setMessages] = useState<string[]>([])

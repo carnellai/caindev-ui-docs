@@ -1,9 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Form, FormField, FormInput } from '../../components/Form'
-import { Button } from '../../components/Button'
-import { Switch } from '../../components/Switch'
-import { Alert } from '../../components/Alert'
+import { Alert, Button, Form, FormField, FormInput, Switch } from '@caindev/ui'
 import { useState } from 'react'
 
 function FormDemo() {

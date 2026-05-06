@@ -1,8 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Stack, HStack, VStack } from '../../components/Stack'
-import { Badge } from '../../components/Badge'
-import { Button } from '../../components/Button'
+import { Badge, Button, HStack, Stack, VStack } from '@caindev/ui'
 
 export function StackPage() {
   return (

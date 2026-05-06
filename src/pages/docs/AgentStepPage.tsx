@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { AgentStep } from '../../components/AgentStep'
+import { AgentStep } from '@caindev/ui'
 
 export function AgentStepPage() {
   return (

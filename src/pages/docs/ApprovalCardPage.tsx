@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { ApprovalCard } from '../../components/ApprovalCard'
+import { ApprovalCard } from '@caindev/ui'
 
 function InteractiveDemo() {
   const [result, setResult] = useState<string | null>(null)

@@ -1,7 +1,7 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { TraceTree } from '../../components/TraceTree'
-import type { SpanNode } from '../../components/TraceTree'
+import { TraceTree } from '@caindev/ui'
+import type { SpanNode } from '@caindev/ui'
 
 const ragTrace: SpanNode[] = [
   {

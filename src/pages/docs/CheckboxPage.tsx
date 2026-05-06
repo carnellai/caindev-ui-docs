@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Checkbox } from '../../components/Checkbox'
+import { Checkbox } from '@caindev/ui'
 
 export function CheckboxPage() {
   return (

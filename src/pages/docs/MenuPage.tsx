@@ -1,7 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Menu } from '../../components/Menu'
-import { Button } from '../../components/Button'
+import { Button, Menu } from '@caindev/ui'
 
 export function MenuPage() {
   return (

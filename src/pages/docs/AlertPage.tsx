@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Alert } from '../../components/Alert'
+import { Alert } from '@caindev/ui'
 
 function DismissableDemo() {
   const [shown, setShown] = useState(true)

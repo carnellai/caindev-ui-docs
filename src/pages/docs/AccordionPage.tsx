@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Accordion } from '../../components/Accordion'
+import { Accordion } from '@caindev/ui'
 
 export function AccordionPage() {
   return (
