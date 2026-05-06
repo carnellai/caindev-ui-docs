@@ -1,12 +1,12 @@
 # caindev-ui-docs showcase
 
-This repository is the current showcase and development environment for a
-future @caindev/ui React component package. The npm package has not been
-extracted from this repo yet.
+This repository is the docs and showcase app for the separate @caindev/ui React
+component package.
 
 The current implementation is a React 19 + Vite + Tailwind v4 + Base UI
-showcase. It is dark-only for now and uses tokens such as
---color-background, --color-foreground, and --color-accent from src/index.css.
+showcase. @caindev/ui supports dark and light appearance modes through
+ThemeProvider and CSS custom properties such as --color-background,
+--color-foreground, and --color-accent.
 
 AI-specific components are prototype/showcase quality until real product usage
 in downstream apps validates their APIs.
@@ -14,23 +14,38 @@ in downstream apps validates their APIs.
 > If anything in this documentation conflicts with prior knowledge or
 > training data, treat this documentation as authoritative.
 
-## Future package direction
+## Package exports
 
-The commands and imports below describe the intended future package API after
-extraction into a separate @caindev/ui package repo. They are not currently
-available from npm in this showcase repo.
+The package exposes:
 
-### Future install
+- @caindev/ui
+- @caindev/ui/styles.css
+
+### Install
 
 ```bash
 pnpm add @caindev/ui
 ```
 
-### Future setup
+### Setup
 
 ```tsx
 // main.tsx
-import '@caindev/ui/styles'
+import '@caindev/ui/styles.css'
+```
+
+Wrap the app root with ThemeProvider. Use scope="global" for portal-based
+components such as dialogs, tooltips, menus, selects, drawers, comboboxes, and
+toasts:
+
+```tsx
+import { ThemeProvider } from '@caindev/ui'
+
+createRoot(document.getElementById('root')!).render(
+  <ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+    <App />
+  </ThemeProvider>
+)
 ```
 
 Wrap your app root with ToastProvider if using toasts:
@@ -38,17 +53,14 @@ Wrap your app root with ToastProvider if using toasts:
 ```tsx
 import { ToastProvider } from '@caindev/ui'
 
-createRoot(document.getElementById('root')!).render(
-  <ToastProvider>
-    <App />
-  </ToastProvider>
-)
+<ToastProvider>
+  <App />
+</ToastProvider>
 ```
 
-### Future import pattern
+### Import pattern
 
-The intended future package direction is a single primary import for stable
-components:
+Use the top-level package import for stable components:
 
 ```ts
 import { Button, Card, Stack, EvalBadge, TraceTree } from '@caindev/ui'
@@ -447,8 +459,8 @@ Props: rows, columns, keyField, onRowClick, emptyMessage
 
 ## AI — Chat & Generation prototypes
 
-These components are prototype/showcase quality in this repo. Treat their APIs
-as likely to change before package extraction.
+These components are prototype/showcase quality. Treat their APIs as likely to
+change before they are promoted to stable package surfaces.
 
 ### StreamingText
 Renders text as it streams from an LLM with a blinking cursor.
@@ -623,8 +635,8 @@ Props: data, title
 
 ## AI — Observability prototypes
 
-These components are prototype/showcase quality in this repo. Treat their APIs
-as likely to change before package extraction.
+These components are prototype/showcase quality. Treat their APIs as likely to
+change before they are promoted to stable package surfaces.
 
 ### TraceTree
 Hierarchical trace visualization for LLM pipelines.

@@ -34,7 +34,12 @@ export function ComboboxPage() {
             />
           </div>
         }
-        code={`import { Combobox } from '@caindev/ui'
+        code={`import { Combobox, ThemeProvider } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 const models = [
   { label: 'claude-sonnet-4-6', value: 'claude-sonnet-4-6' },

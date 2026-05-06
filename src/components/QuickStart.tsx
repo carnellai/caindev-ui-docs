@@ -1,17 +1,17 @@
 const steps = [
   {
     step: '01',
-    label: 'Future install',
+    label: 'Install',
     code: 'pnpm add @caindev/ui',
   },
   {
     step: '02',
-    label: 'Future style import',
-    code: `import '@caindev/ui/styles'`,
+    label: 'Stylesheet import',
+    code: `import '@caindev/ui/styles.css'`,
   },
   {
     step: '03',
-    label: 'Future package import',
+    label: 'Package import',
     code: `import { Button } from '@caindev/ui'
 
 export default function App() {
@@ -27,16 +27,16 @@ export function QuickStart() {
         <div className='grid grid-cols-2 items-start gap-16'>
           {/* Left */}
           <div className='flex flex-col gap-5'>
-            <span className='eyebrow'>Future package direction</span>
+            <span className='eyebrow'>Package setup</span>
             <h2 className='m-0 text-foreground'>
-              Planned package usage{' '}
+              Use the package{' '}
               <span className='text-foreground-subtle'>
-                after extraction.
+                from your app.
               </span>
             </h2>
             <p className='m-0 max-w-80 text-foreground-muted'>
-              The current repo is the showcase and development environment.
-              These commands describe the intended package flow after extraction.
+              This docs app consumes @caindev/ui through a local linked
+              dependency. Consumers use the same package entrypoints.
             </p>
             <a
               href='#'

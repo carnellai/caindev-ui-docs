@@ -31,7 +31,12 @@ export function SelectPage() {
             />
           </div>
         }
-        code={`import { Select } from '@caindev/ui'
+        code={`import { Select, ThemeProvider } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 <Select
   label="Model"

@@ -9,6 +9,7 @@ import {
   ScoreBar,
   TokenCost,
   StreamingText,
+  useSimulatedStream,
   ToolCallCard,
   AgentStep,
   MetricCard,

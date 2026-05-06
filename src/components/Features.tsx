@@ -112,7 +112,7 @@ const features = [
     ),
     label: 'Composable direction',
     description:
-      'Components are intentionally small and can be wrapped while the future package API is refined.',
+      'Components are intentionally small and can be wrapped as package APIs evolve.',
   },
   {
     icon: (

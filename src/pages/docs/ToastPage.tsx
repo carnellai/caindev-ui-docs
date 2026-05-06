@@ -31,13 +31,15 @@ export function ToastPage() {
           description="Floating notification system built on Base UI's Toast primitive. Wrap your app with ToastProvider once, then call useToast() from any component to trigger notifications."
           preview={<ToastDemo />}
           code={`// 1. Wrap your app root once
-import { ToastProvider } from '@caindev/ui'
+import { ThemeProvider, ToastProvider } from '@caindev/ui'
 
 function App() {
   return (
-    <ToastProvider>
-      {children}
-    </ToastProvider>
+    <ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+      <ToastProvider>
+        {children}
+      </ToastProvider>
+    </ThemeProvider>
   )
 }
 

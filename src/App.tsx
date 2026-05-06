@@ -47,12 +47,22 @@ import { NumberFieldPage } from './pages/docs/NumberFieldPage'
 import { ComboboxPage } from './pages/docs/ComboboxPage'
 import { PaginationPage } from './pages/docs/PaginationPage'
 import { CommandPalettePage } from './pages/docs/CommandPalettePage'
+import { GettingStartedPage } from './pages/docs/GettingStartedPage'
+import { ThemingPage } from './pages/docs/ThemingPage'
+import { TypographyPage } from './pages/docs/TypographyPage'
+import { DesignTokensPage } from './pages/docs/DesignTokensPage'
+import { BlocksPage } from './pages/docs/BlocksPage'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/docs/getting-started' element={<GettingStartedPage />} />
+        <Route path='/docs/theming' element={<ThemingPage />} />
+        <Route path='/docs/typography' element={<TypographyPage />} />
+        <Route path='/docs/design-tokens' element={<DesignTokensPage />} />
+        <Route path='/docs/blocks' element={<BlocksPage />} />
         <Route path='/docs/button' element={<ButtonPage />} />
         <Route path='/docs/switch' element={<SwitchPage />} />
         <Route path='/docs/checkbox' element={<CheckboxPage />} />

@@ -3,6 +3,14 @@ import { useState, useEffect } from 'react'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
+const guides = [
+  { label: 'Getting Started', href: '/docs/getting-started' },
+  { label: 'Theming', href: '/docs/theming' },
+  { label: 'Typography', href: '/docs/typography' },
+  { label: 'Design Tokens', href: '/docs/design-tokens' },
+  { label: 'Blocks', href: '/docs/blocks' },
+]
+
 const foundationsLayout = [
   { label: 'Card', href: '/docs/card' },
   { label: 'Separator', href: '/docs/separator' },
@@ -163,6 +171,10 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
           padding: '24px 12px 48px 16px',
           scrollbarWidth: 'none',
         }}>
+        <div className='mb-6'>
+          <NavGroup label='Guides' items={guides} />
+        </div>
+
         <SectionToggle active={section} onChange={setSection} />
 
         {section === 'base' && (

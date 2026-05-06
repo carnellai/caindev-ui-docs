@@ -47,8 +47,13 @@ export function DialogPage() {
             </Dialog>
           </div>
         }
-        code={`import { Dialog, DialogClose } from '@caindev/ui'
+        code={`import { Dialog, DialogClose, ThemeProvider } from '@caindev/ui'
 import { Button } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 // Simple
 <Dialog

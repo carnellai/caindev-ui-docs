@@ -39,8 +39,8 @@ export function DocsPage({
           <span
             className='mb-4 block text-foreground-subtle'
             style={{ whiteSpace: 'normal' }}>
-            Examples use the intended future @caindev/ui import path. This repo
-            currently renders local showcase components.
+            Examples use @caindev/ui package imports. This docs app renders the
+            linked package dependency.
           </span>
           <code>{code}</code>
         </pre>

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button, CommandPalette, useCommandPalette } from '@caindev/ui'
@@ -82,7 +81,12 @@ export function CommandPalettePage() {
         title="CommandPalette"
         description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Built on Base UI's Dialog primitive with fuzzy filtering, keyboard navigation, and grouped results."
         preview={<CommandPaletteDemo />}
-        code={`import { CommandPalette, useCommandPalette } from '@caindev/ui'
+        code={`import { CommandPalette, ThemeProvider, useCommandPalette } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 const { open, setOpen } = useCommandPalette() // wires up ⌘K globally
 

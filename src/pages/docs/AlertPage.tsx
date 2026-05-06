@@ -7,7 +7,7 @@ function DismissableDemo() {
   const [shown, setShown] = useState(true)
   return shown ? (
     <Alert variant="info" title="Update available" onDismiss={() => setShown(false)}>
-      New showcase docs are available. Review the component examples before extraction.
+      Updated package docs are available. Review the component examples.
     </Alert>
   ) : (
     <button
@@ -28,7 +28,7 @@ export function AlertPage() {
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%' }}>
             <Alert variant="info" title="Did you know?">
-              These docs currently render local showcase components before package extraction.
+              These docs render the linked @caindev/ui package dependency.
             </Alert>
             <Alert variant="success" title="Deployment complete">
               Version 1.4.1 is now live. 247 components deployed successfully.
@@ -45,7 +45,7 @@ export function AlertPage() {
         code={`import { Alert } from '@caindev/ui'
 
 <Alert variant="info" title="Did you know?">
-  These docs currently render local showcase components.
+  These docs render the linked @caindev/ui package dependency.
 </Alert>
 
 <Alert variant="success" title="Deployed">
@@ -64,7 +64,7 @@ export function AlertPage() {
   title="Update available"
   onDismiss={() => setVisible(false)}
 >
-  Review the component examples before extraction.
+  Review the component examples.
 </Alert>`}
         props={[
           { name: 'variant', type: '"info" | "success" | "warning" | "error"', default: '"info"', description: 'Color and icon variant.' },

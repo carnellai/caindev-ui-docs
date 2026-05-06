@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router'
 
 const navItems = [
   { label: 'Documentation', href: '/docs/button' },
-  { label: 'Changelog', href: '/changelog' },
   { label: 'Themes', href: '#', soon: true },
 ]
 
@@ -63,7 +62,7 @@ export function Header() {
         {/* Actions */}
         <div className='flex items-center gap-2'>
           <a
-            href='https://github.com'
+            href='https://github.com/carnellai/caindev-ui'
             className='flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-foreground-muted no-underline'>
             <GitHubIcon />
             GitHub

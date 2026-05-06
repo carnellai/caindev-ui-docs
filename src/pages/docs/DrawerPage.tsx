@@ -1,6 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
-import { Button, Drawer, DrawerClose } from '@caindev/ui'
+import { Button, Drawer } from '@caindev/ui'
 
 export function DrawerPage() {
   return (
@@ -29,8 +29,13 @@ export function DrawerPage() {
             />
           </div>
         }
-        code={`import { Drawer, DrawerClose } from '@caindev/ui'
+        code={`import { Drawer, DrawerClose, ThemeProvider } from '@caindev/ui'
 import { Button } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 // Bottom sheet (default)
 <Drawer

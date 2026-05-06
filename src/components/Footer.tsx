@@ -3,7 +3,6 @@ const links = [
     group: 'Docs',
     items: [
       { label: 'Documentation', href: '/docs/button' },
-      { label: 'Changelog', href: '/changelog' },
       { label: 'Themes', href: '#' },
     ],
   },
@@ -20,7 +19,7 @@ const links = [
     items: [
       { label: 'Carnell Systems', href: '#' },
       { label: 'Arcora', href: '#' },
-      { label: 'GitHub', href: 'https://github.com' },
+      { label: 'GitHub', href: 'https://github.com/carnellai/caindev-ui' },
     ],
   },
 ]
@@ -45,9 +44,7 @@ export function Footer() {
           {/* Links */}
           <div className='flex gap-14'>
             {links.map((group) => (
-              <div
-                key={group.group}
-                className='flex flex-col gap-3.5'>
+              <div key={group.group} className='flex flex-col gap-3.5'>
                 <span className='text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-foreground-subtle'>
                   {group.group}
                 </span>

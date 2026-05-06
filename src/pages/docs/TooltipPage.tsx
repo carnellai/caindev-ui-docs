@@ -21,8 +21,13 @@ export function TooltipPage() {
             </Tooltip>
           </div>
         }
-        code={`import { Tooltip } from '@caindev/ui'
+        code={`import { Tooltip, ThemeProvider } from '@caindev/ui'
 import { Button } from '@caindev/ui'
+
+// Theme setup for portaled content
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+  <App />
+</ThemeProvider>
 
 <Tooltip content="Save your changes" side="top">
   <Button variant="outline">Save</Button>
