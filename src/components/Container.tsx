@@ -1,32 +1,38 @@
-export type SectionSize = 'sm' | 'md' | 'lg'
+export type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full'
 
-export type SectionProps = {
+export type ContainerProps = {
   children: React.ReactNode
-  size?: SectionSize
+  size?: ContainerSize
+  center?: boolean
   style?: React.CSSProperties
   className?: string
-  id?: string
 }
 
-const paddingMap: Record<SectionSize, string> = {
-  sm: 'py-10', // 40px
-  md: 'py-16', // 64px
-  lg: 'py-24', // 96px
+const sizeClasses: Record<ContainerSize, string> = {
+  sm: 'max-w-[640px]',
+  md: 'max-w-[768px]',
+  lg: 'max-w-[1024px]',
+  xl: 'max-w-[1280px]',
+  full: 'max-w-none',
 }
 
-export function Section({
+export function Container({
   children,
-  size = 'md',
+  size = 'xl',
+  center = true,
   style,
   className,
-  id,
-}: SectionProps) {
+}: ContainerProps) {
   return (
-    <section
-      id={id}
-      className={[paddingMap[size], className].filter(Boolean).join(' ')}
+    <div
+      className={[
+        'w-full',
+        sizeClasses[size],
+        center ? 'mx-auto' : undefined,
+        className,
+      ].filter(Boolean).join(' ')}
       style={style}>
       {children}
-    </section>
+    </div>
   )
 }

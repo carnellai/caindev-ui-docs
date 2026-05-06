@@ -413,9 +413,8 @@ const obsComponents: ComponentEntry[] = [
     href: '/docs/skeleton',
     preview: (
       <div className='flex flex-col gap-1.5'>
-        <div className='h-3 animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] rounded-[4px] bg-background-subtle' />
-        <div className='h-3 w-3/4 animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] rounded-[4px] bg-background-subtle' />
-        <style>{`@keyframes skeleton-shimmer{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}`}</style>
+        <div className='cd-component-grid-skeleton-pulse h-3 rounded-[4px] bg-background-subtle' />
+        <div className='cd-component-grid-skeleton-pulse h-3 w-3/4 rounded-[4px] bg-background-subtle' />
       </div>
     ),
   },

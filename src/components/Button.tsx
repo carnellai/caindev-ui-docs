@@ -45,58 +45,24 @@ export function Button({
   const isDisabled = disabled || loading
 
   return (
-    <>
-      <BaseButton
-        aria-busy={loading || undefined}
-        disabled={isDisabled}
-        className={mergeClassName(
-          [
-            'cd-button inline-flex select-none items-center justify-center rounded-[8px] font-medium tracking-[-0.01em] outline-none transition-[background,border-color,color,opacity,box-shadow] duration-[120ms]',
-            `cd-button-${variant}`,
-            variantClasses[variant],
-            sizeClasses[size],
-            isDisabled ? 'cursor-not-allowed opacity-[0.56]' : 'cursor-pointer',
-          ].join(' '),
-          className,
-        )}
-        style={typeof style === 'object' ? style : undefined}
-        {...props}
-      >
-        {loading && <span className="cd-button-spinner" aria-hidden="true" />}
-        {children}
-      </BaseButton>
-      <style>{`
-        .cd-button:not([data-disabled]):not(:disabled):focus-visible {
-          box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-accent);
-        }
-        .cd-button-solid:not([data-disabled]):not(:disabled):hover {
-          background: #8b5cf6 !important;
-        }
-        .cd-button-outline:not([data-disabled]):not(:disabled):hover {
-          background: rgba(255,255,255,0.09) !important;
-          border-color: rgba(255,255,255,0.18) !important;
-        }
-        .cd-button-ghost:not([data-disabled]):not(:disabled):hover {
-          background: rgba(255,255,255,0.06) !important;
-          color: var(--color-foreground) !important;
-        }
-        .cd-button-spinner {
-          width: 0.9em;
-          height: 0.9em;
-          border-radius: 999px;
-          border: 1.5px solid currentColor;
-          border-right-color: transparent;
-          animation: cd-button-spin 700ms linear infinite;
-        }
-        @keyframes cd-button-spin {
-          to { transform: rotate(360deg); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .cd-button-spinner {
-            animation: none;
-          }
-        }
-      `}</style>
-    </>
+    <BaseButton
+      aria-busy={loading || undefined}
+      disabled={isDisabled}
+      className={mergeClassName(
+        [
+          'cd-button inline-flex select-none items-center justify-center rounded-[8px] font-medium tracking-[-0.01em] outline-none transition-[background,border-color,color,opacity,box-shadow] duration-[120ms]',
+          `cd-button-${variant}`,
+          variantClasses[variant],
+          sizeClasses[size],
+          isDisabled ? 'cursor-not-allowed opacity-[0.56]' : 'cursor-pointer',
+        ].join(' '),
+        className,
+      )}
+      style={typeof style === 'object' ? style : undefined}
+      {...props}
+    >
+      {loading && <span className="cd-button-spinner" aria-hidden="true" />}
+      {children}
+    </BaseButton>
   )
 }

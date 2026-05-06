@@ -30,7 +30,7 @@ function WrenchIcon() {
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg className="tool-call-chevron transition-transform duration-150" width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)' }}>
+    <svg className="cd-tool-call-chevron transition-transform duration-150" width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)' }}>
       <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   )
@@ -40,23 +40,8 @@ function RunningDots() {
   return (
     <span className="inline-flex gap-0.5">
       {[0,1,2].map(i => (
-        <span key={i} className="tool-call-dot inline-block h-[3px] w-[3px] rounded-full" style={{
-          background: '#a78bfa',
-          animation: `tc-dot 1s ease-in-out ${i * 0.15}s infinite`,
-        }} />
+        <span key={i} className="cd-tool-call-dot inline-block h-[3px] w-[3px] rounded-full" />
       ))}
-      <style>{`
-        @keyframes tc-dot { 0%,80%,100%{opacity:.3;transform:scaleY(.7)}40%{opacity:1;transform:scaleY(1)} }
-        @media (prefers-reduced-motion: reduce) {
-          .tool-call-dot {
-            animation: none !important;
-          }
-          .tool-call-chevron {
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.001ms !important;
-          }
-        }
-      `}</style>
     </span>
   )
 }

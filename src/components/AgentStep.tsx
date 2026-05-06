@@ -16,26 +16,14 @@ export type AgentStepProps = {
 
 function RunningIcon() {
   return (
-    <>
-      <svg
-        className="agent-step-spinner animate-[agent-step-spin_1s_linear_infinite]"
-        width="14"
-        height="14"
-        viewBox="0 0 14 14"
-      >
-        <circle cx="7" cy="7" r="6" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="28" strokeDashoffset="10" />
-      </svg>
-      <style>{`
-        @keyframes agent-step-spin {
-          to { transform: rotate(360deg); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .agent-step-spinner {
-            animation: none !important;
-          }
-        }
-      `}</style>
-    </>
+    <svg
+      className="cd-agent-step-spinner"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+    >
+      <circle cx="7" cy="7" r="6" fill="none" stroke="#a78bfa" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="28" strokeDashoffset="10" />
+    </svg>
   )
 }
 

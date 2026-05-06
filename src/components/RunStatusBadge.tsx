@@ -32,18 +32,9 @@ export function RunStatusBadge({ status, size = 'md', style, className }: RunSta
         color: cfg.color,
         ...style,
       }}>
-      <span className={['run-status-dot shrink-0 rounded-full', isSmall ? 'h-[5px] w-[5px]' : 'h-1.5 w-1.5'].join(' ')} style={{
+      <span className={['cd-run-status-dot shrink-0 rounded-full', isSmall ? 'h-[5px] w-[5px]' : 'h-1.5 w-1.5', cfg.pulse ? 'cd-run-status-dot-pulse' : ''].filter(Boolean).join(' ')} style={{
         background: cfg.color,
-        animation: cfg.pulse ? 'status-pulse 1.5s ease-in-out infinite' : 'none',
       }} />
-      <style>{`
-        @keyframes status-pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
-        @media (prefers-reduced-motion: reduce) {
-          .run-status-dot {
-            animation: none !important;
-          }
-        }
-      `}</style>
       {cfg.label}
     </span>
   )

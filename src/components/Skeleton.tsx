@@ -9,15 +9,7 @@ export type SkeletonProps = {
 export function Skeleton({ width = '100%', height = '16px', borderRadius = '4px', style, className }: SkeletonProps) {
   return (
     <div className={['relative overflow-hidden bg-background-subtle', className].filter(Boolean).join(' ')} style={{ width, height, borderRadius, ...style }}>
-      <div className="skeleton-shimmer absolute inset-0 animate-[skeleton-shimmer_1.5s_ease-in-out_infinite] bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.04)_50%,transparent_100%)]" />
-      <style>{`
-        @keyframes skeleton-shimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
-        @media (prefers-reduced-motion: reduce) {
-          .skeleton-shimmer {
-            animation: none !important;
-          }
-        }
-      `}</style>
+      <div className="cd-skeleton-shimmer absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.04)_50%,transparent_100%)]" />
     </div>
   )
 }

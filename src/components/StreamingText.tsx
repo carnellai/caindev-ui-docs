@@ -29,21 +29,10 @@ export function StreamingText({
       {text}
       {streaming && (
         <span
-          className="streaming-text-caret ml-px inline-block h-[1em] w-0.5 animate-[caret-blink_1s_step-end_infinite] bg-foreground align-text-bottom"
+          className="cd-streaming-text-caret ml-px inline-block h-[1em] w-0.5 bg-foreground align-text-bottom"
           aria-hidden="true"
         />
       )}
-      <style>{`
-        @keyframes caret-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .streaming-text-caret {
-            animation: none !important;
-          }
-        }
-      `}</style>
     </span>
   )
 }

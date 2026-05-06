@@ -1,5 +1,6 @@
 import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
+import { Container } from '../../components/Container'
 
 export function ContainerPage() {
   return (
@@ -46,20 +47,15 @@ export function ContainerPage() {
                     position: 'relative',
                     overflow: 'hidden',
                   }}>
-                  <div
+                  <Container
+                    size={size}
+                    center={false}
                     style={{
                       position: 'absolute',
                       left: 0,
                       top: 0,
                       bottom: 0,
-                      width:
-                        size === 'sm'
-                          ? '50%'
-                          : size === 'md'
-                            ? '60%'
-                            : size === 'lg'
-                              ? '80%'
-                              : '100%',
+                      maxWidth: max,
                       background: 'var(--color-accent-muted)',
                       borderRight: '2px solid var(--color-accent)',
                       display: 'flex',
@@ -75,7 +71,7 @@ export function ContainerPage() {
                       }}>
                       {max}
                     </span>
-                  </div>
+                  </Container>
                 </div>
               </div>
             ))}

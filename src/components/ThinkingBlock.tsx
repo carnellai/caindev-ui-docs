@@ -13,7 +13,7 @@ export type ThinkingBlockProps = {
 function ChevronIcon({ open }: { open: boolean }) {
   return (
     <svg
-      className="thinking-block-chevron shrink-0 transition-transform duration-150 ease-[ease]"
+      className="cd-thinking-block-chevron shrink-0 transition-transform duration-150 ease-[ease]"
       width="12"
       height="12"
       viewBox="0 0 12 12"
@@ -33,27 +33,9 @@ function PulsingDot() {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="thinking-block-dot h-1 w-1 rounded-full bg-foreground-subtle"
-          style={{
-            animation: `thinking-dot 1.2s ease-in-out ${i * 0.2}s infinite`,
-          }}
+          className="cd-thinking-block-dot h-1 w-1 rounded-full bg-foreground-subtle"
         />
       ))}
-      <style>{`
-        @keyframes thinking-dot {
-          0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-          40% { opacity: 1; transform: scale(1); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .thinking-block-dot {
-            animation: none !important;
-          }
-          .thinking-block-chevron {
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.001ms !important;
-          }
-        }
-      `}</style>
     </span>
   )
 }
