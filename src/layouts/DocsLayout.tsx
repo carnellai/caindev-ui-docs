@@ -15,8 +15,10 @@ const foundationsLayout = [
 const foundationsInputs = [
   { label: 'Button', href: '/docs/button' },
   { label: 'Checkbox', href: '/docs/checkbox' },
+  { label: 'Combobox', href: '/docs/combobox' },
   { label: 'Form', href: '/docs/form' },
   { label: 'Input', href: '/docs/input' },
+  { label: 'NumberField', href: '/docs/number-field' },
   { label: 'Select', href: '/docs/select' },
   { label: 'Slider', href: '/docs/slider' },
   { label: 'Switch', href: '/docs/switch' },
@@ -24,7 +26,9 @@ const foundationsInputs = [
 
 const foundationsOverlay = [
   { label: 'Accordion', href: '/docs/accordion' },
+  { label: 'CommandPalette', href: '/docs/command-palette' },
   { label: 'Dialog', href: '/docs/dialog' },
+  { label: 'Drawer', href: '/docs/drawer' },
   { label: 'Menu', href: '/docs/menu' },
   { label: 'Tabs', href: '/docs/tabs' },
   { label: 'Tooltip', href: '/docs/tooltip' },
@@ -33,11 +37,14 @@ const foundationsOverlay = [
 const foundationsFeedback = [
   { label: 'Alert', href: '/docs/alert' },
   { label: 'Badge', href: '/docs/badge' },
+  { label: 'Progress', href: '/docs/progress' },
   { label: 'Toast', href: '/docs/toast' },
 ]
 
-const foundationsData = [{ label: 'Table', href: '/docs/table' }]
-
+const foundationsData = [
+  { label: 'Pagination', href: '/docs/pagination' },
+  { label: 'Table', href: '/docs/table' },
+]
 const chatGeneration = [
   { label: 'PromptInput', href: '/docs/prompt-input' },
   { label: 'MessageBubble', href: '/docs/message-bubble' },

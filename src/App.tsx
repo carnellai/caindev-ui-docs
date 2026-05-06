@@ -41,6 +41,12 @@ import { StackPage } from './pages/docs/StackPage'
 import { GridPage } from './pages/docs/GridPage'
 import { ContainerPage } from './pages/docs/ContainerPage'
 import { SectionPage } from './pages/docs/SectionPage'
+import { ProgressPage } from './pages/docs/ProgressPage'
+import { DrawerPage } from './pages/docs/DrawerPage'
+import { NumberFieldPage } from './pages/docs/NumberFieldPage'
+import { ComboboxPage } from './pages/docs/ComboboxPage'
+import { PaginationPage } from './pages/docs/PaginationPage'
+import { CommandPalettePage } from './pages/docs/CommandPalettePage'
 
 export default function App() {
   return (
@@ -91,6 +97,12 @@ export default function App() {
         <Route path='/docs/grid' element={<GridPage />} />
         <Route path='/docs/container' element={<ContainerPage />} />
         <Route path='/docs/section' element={<SectionPage />} />
+        <Route path='/docs/progress' element={<ProgressPage />} />
+        <Route path='/docs/drawer' element={<DrawerPage />} />
+        <Route path='/docs/number-field' element={<NumberFieldPage />} />
+        <Route path='/docs/combobox' element={<ComboboxPage />} />
+        <Route path='/docs/pagination' element={<PaginationPage />} />
+        <Route path='/docs/command-palette' element={<CommandPalettePage />} />
       </Routes>
     </BrowserRouter>
   )
