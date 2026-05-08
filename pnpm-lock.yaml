@@ -12,8 +12,8 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@caindev/ui':
-        specifier: ^0.3.0
-        version: 0.3.0(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+        specifier: file:caindev-ui-0.3.0.tgz
+        version: file:caindev-ui-0.3.0.tgz(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react:
         specifier: ^19.2.5
         version: 19.2.5
@@ -179,8 +179,10 @@ packages:
       '@types/react':
         optional: true
 
-  '@caindev/ui@0.3.0':
-    resolution: {integrity: sha512-qIBmJyaF47wPqZEdj+9NXKQdwrRpDx4KXQFJmZDIi8j+nY7gBaGMpxdYe3EvaZ8sujnymvywXOplDEz92bVJBA==}
+  '@caindev/ui@file:caindev-ui-0.3.0.tgz':
+    resolution: {integrity: sha512-Y0Z26aFMFwu8groDu+RRkiRImX0D0ag8WR1bmvkcvlvLw7TkjzmRe5PUSBxDtZPAxfscK4QGqKCywbfm66fM0Q==, tarball: file:caindev-ui-0.3.0.tgz}
+    version: 0.3.0
+    engines: {node: '>=18'}
     peerDependencies:
       react: '>=19.0.0'
       react-dom: '>=19.0.0'
@@ -1305,7 +1307,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.14
 
-  '@caindev/ui@0.3.0(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
+  '@caindev/ui@file:caindev-ui-0.3.0.tgz(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)':
     dependencies:
       '@base-ui/react': 1.4.1(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react: 19.2.5

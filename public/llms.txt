@@ -310,7 +310,7 @@ import { Dialog, DialogClose } from '@caindev/ui'
 />
 ```
 
-Props: trigger, title, description, children, actions
+Props: trigger (optional), title, description, children, actions, open, onOpenChange
 
 ### Tabs
 Switch between related panels.
@@ -393,7 +393,7 @@ import { Alert } from '@caindev/ui'
 </Alert>
 ```
 
-Props: tone ("info" | "success" | "warning" | "error"), variant (compatibility alias), title, children, onDismiss
+Props: tone ("neutral" | "info" | "success" | "warning" | "error"), title, children, onDismiss
 
 ### Toast
 Floating notification system.
@@ -493,7 +493,7 @@ import { PromptInput } from '@caindev/ui'
 />
 ```
 
-Props: value, onValueChange, onSubmit, loading, onStop, placeholder, disabled, maxRows, actions
+Props: value, onValueChange, onSubmit, loading, onStop, placeholder, disabled, maxRows, ref, actions
 
 ### MessageBubble
 Single message with role-aware layout.
@@ -812,4 +812,4 @@ import { EmptyState } from '@caindev/ui'
 />
 ```
 
-Props: title, description, icon, action, tone ("default" | "error"), variant (compatibility alias)
+Props: title, description, icon, action, tone ("neutral" | "info" | "success" | "warning" | "error")

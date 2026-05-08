@@ -17,7 +17,7 @@ function FormDemo() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '360px', width: '100%' }}>
       {submitted && (
-        <Alert variant="success" title="Submitted" onDismiss={() => setSubmitted(null)}>
+        <Alert tone="success" title="Submitted" onDismiss={() => setSubmitted(null)}>
           {JSON.stringify(submitted)}
         </Alert>
       )}

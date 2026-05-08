@@ -77,13 +77,21 @@ export function DialogPage() {
   }
 >
   <Input label="Name" placeholder="Your name" />
-</Dialog>`}
+</Dialog>
+
+// Controlled (no trigger)
+<Dialog
+  open={open}
+  onOpenChange={setOpen}
+  title="Controlled dialog"
+  description="Rendered without a trigger prop."
+/>`}
         props={[
           {
             name: 'trigger',
             type: 'React.ReactElement',
             default: '—',
-            description: 'Element that opens the dialog when clicked.',
+            description: 'Optional element that opens the dialog when clicked.',
           },
           {
             name: 'title',

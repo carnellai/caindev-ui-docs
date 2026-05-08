@@ -79,7 +79,7 @@ export function CommandPalettePage() {
     <DocsLayout>
       <DocsPage
         title="CommandPalette"
-        description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Supports controlled and uncontrolled open state via open/defaultOpen/onOpenChange."
+        description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Supports controlled and uncontrolled open state via open/defaultOpen/onOpenChange, with improved keyboard and ARIA accessibility."
         preview={<CommandPaletteDemo />}
         code={`import { CommandPalette, ThemeProvider, useCommandPalette } from '@caindev/ui'
 

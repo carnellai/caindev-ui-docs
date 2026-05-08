@@ -19,7 +19,7 @@ export function EmptyStatePage() {
             </div>
             <div style={{ border: '1px solid var(--color-border)', borderRadius: '8px', marginTop: '12px' }}>
               <EmptyState
-                variant="error"
+                tone="error"
                 title="Failed to load traces"
                 description="There was an error connecting to the backend. Check your API key and try again."
                 action={<Button variant="outline" size="sm">Retry</Button>}
@@ -56,8 +56,7 @@ import { Button } from '@caindev/ui'
           { name: 'description', type: 'string', default: '—', description: 'Supporting description text.' },
           { name: 'icon', type: 'React.ReactNode', default: 'Built-in', description: 'Custom icon. Defaults to a generic empty box or error circle.' },
           { name: 'action', type: 'React.ReactNode', default: '—', description: 'Action element — typically a Button.' },
-          { name: 'tone', type: '"default" | "error"', default: '"default"', description: 'Preferred semantic severity prop.' },
-          { name: 'variant', type: '"default" | "error"', default: '—', description: 'Compatibility alias for tone.' },
+          { name: 'tone', type: '"default" | "error"', default: '"default"', description: 'Canonical semantic color prop.' },
         ]}
       />
     </DocsLayout>

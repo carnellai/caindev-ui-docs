@@ -17,7 +17,7 @@ export function ComboboxPage() {
     <DocsLayout>
       <DocsPage
         title="Combobox"
-        description="A searchable input combined with a dropdown list. Built on Base UI's Combobox primitive with keyboard navigation and filtering."
+        description="A searchable input combined with a dropdown list. Built on Base UI's Combobox primitive with keyboard navigation, filtering, and improved ARIA combobox semantics."
         preview={
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '24px', flexWrap: 'wrap' }}>
             <Combobox

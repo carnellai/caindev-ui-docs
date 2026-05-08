@@ -65,7 +65,7 @@ function SaveButton() {
 
 toast('Heads up', { description: 'Background sync running.', tone: 'info' })`}
           props={[
-            { name: 'toast(title, options?)', type: 'function', default: '—', description: 'Show a default toast. Options: description, tone (preferred), variant (compatibility).' },
+            { name: 'toast(title, options?)', type: 'function', default: '—', description: 'Show a default toast. Options include description and tone.' },
             { name: 'success(title, description?)', type: 'function', default: '—', description: 'Show a success toast.' },
             { name: 'error(title, description?)', type: 'function', default: '—', description: 'Show an error toast.' },
             { name: 'warning(title, description?)', type: 'function', default: '—', description: 'Show a warning toast.' },

@@ -12,7 +12,7 @@ export function AgentStepPage() {
           <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
             <AgentStep
               steps={[
-                { id: '1', label: 'Retrieve context', description: 'Searching vector store for relevant docs', status: 'complete', duration: 342 },
+                { id: '1', label: 'Retrieve context', description: 'Searching vector store for relevant docs', status: 'completed', duration: 342 },
                 { id: '2', label: 'Generate response', description: 'Calling claude-3-5-sonnet-20241022', status: 'running' },
                 { id: '3', label: 'Validate output', description: 'Running schema validation', status: 'pending' },
                 { id: '4', label: 'Store result', description: 'Writing to database', status: 'pending' },
@@ -20,8 +20,8 @@ export function AgentStepPage() {
             />
             <AgentStep
               steps={[
-                { id: '1', label: 'Parse invoice', status: 'complete', duration: 120 },
-                { id: '2', label: 'Extract fields', status: 'complete', duration: 88 },
+                { id: '1', label: 'Parse invoice', status: 'completed', duration: 120 },
+                { id: '2', label: 'Extract fields', status: 'completed', duration: 88 },
                 { id: '3', label: 'Reconcile', status: 'failed' },
                 { id: '4', label: 'Route for review', status: 'skipped' },
               ]}
@@ -53,6 +53,7 @@ export function AgentStepPage() {
 />`}
         props={[
           { name: 'steps', type: 'Step[]', default: '—', description: 'Array of step definitions.' },
+          { name: 'Step', type: '{ id: string; label: string; status: "pending" | "running" | "completed" | "failed" | "skipped"; description?: string; duration?: number }', default: '—', description: 'Shape for each step object in steps.' },
           { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}

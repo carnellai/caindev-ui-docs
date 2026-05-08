@@ -23,19 +23,19 @@ export function ProgressPage() {
             <Progress
               label='Eval run'
               value={100}
-              variant='success'
+              tone='success'
               showValue
             />
             <Progress
               label='Token budget'
               value={91}
-              variant='warning'
+              tone='warning'
               showValue
             />
             <Progress
               label='Failed tasks'
               value={34}
-              variant='error'
+              tone='error'
               showValue
             />
           </div>
@@ -98,13 +98,7 @@ export function ProgressPage() {
             name: 'tone',
             type: '"default" | "success" | "warning" | "error"',
             default: '"default"',
-            description: 'Preferred semantic color prop for the indicator.',
-          },
-          {
-            name: 'variant',
-            type: '"default" | "success" | "warning" | "error"',
-            default: '—',
-            description: 'Compatibility alias for tone.',
+            description: 'Canonical semantic color prop for the indicator.',
           },
         ]}
       />

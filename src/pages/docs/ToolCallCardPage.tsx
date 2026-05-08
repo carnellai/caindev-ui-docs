@@ -12,7 +12,7 @@ export function ToolCallCardPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', maxWidth: '520px' }}>
             <ToolCallCard
               name="search_web"
-              status="success"
+              status="completed"
               duration={843}
               input={{ query: 'latest transformer architecture papers 2025', max_results: 5 }}
               output={{ results: [{ title: 'FlashAttention-3', url: 'arxiv.org/...' }, { title: 'Mamba-2', url: 'arxiv.org/...' }] }}
@@ -25,7 +25,7 @@ export function ToolCallCardPage() {
             />
             <ToolCallCard
               name="execute_sql"
-              status="error"
+              status="failed"
               duration={12}
               input={{ query: 'SELECT * FROM users WHERE id = 42' }}
               output={{ error: 'relation "users" does not exist' }}
@@ -63,7 +63,7 @@ export function ToolCallCardPage() {
 />`}
         props={[
           { name: 'name', type: 'string', default: '—', description: 'The tool function name. Rendered in monospace.' },
-          { name: 'status', type: '"pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"', default: '—', description: 'Current execution status. "success" and "error" remain compatibility aliases.' },
+          { name: 'status', type: '"pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"', default: '—', description: 'Current execution status.' },
           { name: 'input', type: 'Record<string, unknown>', default: '—', description: 'Tool input arguments rendered as formatted JSON.' },
           { name: 'output', type: 'unknown', default: '—', description: 'Tool output rendered as formatted JSON.' },
           { name: 'duration', type: 'number', default: '—', description: 'Execution time in milliseconds.' },

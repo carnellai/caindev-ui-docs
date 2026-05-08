@@ -80,6 +80,13 @@ const [input, setInput] = useState('')
   actions={
     <button type="button">Option</button>
   }
+/>
+
+// External textarea ref
+const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+<PromptInput
+  ref={textareaRef}
+  onSubmit={handleSubmit}
 />`}
         props={[
           { name: 'value', type: 'string', default: '—', description: 'Controlled value. Omit for uncontrolled.' },
@@ -90,6 +97,7 @@ const [input, setInput] = useState('')
           { name: 'placeholder', type: 'string', default: '"Message…"', description: 'Placeholder text.' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input entirely.' },
           { name: 'maxRows', type: 'number', default: '8', description: 'Maximum rows before the textarea scrolls internally.' },
+          { name: 'ref', type: 'React.Ref<HTMLTextAreaElement>', default: '—', description: 'External ref to the underlying textarea element.' },
           { name: 'actions', type: 'React.ReactNode', default: '—', description: 'Elements rendered in the bottom-left of the input.' },
           { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },

@@ -61,13 +61,21 @@ export function DrawerPage() {
   }
 >
   <p>Drawer content goes here.</p>
-</Drawer>`}
+</Drawer>
+
+// Controlled (no trigger)
+<Drawer
+  open={open}
+  onOpenChange={setOpen}
+  title="Controlled drawer"
+  side="right"
+/>`}
         props={[
           {
             name: 'trigger',
             type: 'React.ReactElement',
             default: '—',
-            description: 'Element that opens the drawer when clicked.',
+            description: 'Optional element that opens the drawer when clicked.',
           },
           {
             name: 'title',

@@ -77,7 +77,7 @@ function ToolCallPreview() {
   return (
     <ToolCallCard
       name='search_web'
-      status='success'
+      status='completed'
       duration={312}
       input={{ query: 'latest AI research' }}
       output={{ results: [{ title: 'Attention Is All You Need' }] }}
@@ -92,7 +92,7 @@ function AgentStepPreview() {
         {
           id: '1',
           label: 'Retrieve context',
-          status: 'complete',
+          status: 'completed',
           duration: 180,
         },
         { id: '2', label: 'Generate response', status: 'running' },
