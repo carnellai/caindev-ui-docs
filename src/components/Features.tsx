@@ -18,7 +18,7 @@ const features = [
     ),
     label: 'Styled foundations',
     description:
-      'Dark-first primitives using the current caindev/ui tokens and Tailwind v4.',
+      'Dark-first primitives with a consistent token system. Ships compiled CSS — no extra configuration needed.',
   },
   {
     icon: (
@@ -49,9 +49,9 @@ const features = [
         />
       </svg>
     ),
-    label: 'Tailwind v4 native',
+    label: 'Pre-compiled stylesheet',
     description:
-      'CSS-first config, theme tokens, and data-attribute variants. No workarounds required.',
+      'One import — no Tailwind config or scanning required in your project.',
   },
   {
     icon: (

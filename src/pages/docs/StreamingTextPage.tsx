@@ -25,9 +25,9 @@ export function StreamingTextPage() {
     <DocsLayout>
       <DocsPage
         title="StreamingText"
-        description="Experimental prototype renderer for text as it streams from an LLM with an animated blinking cursor. For real token streams, pass the growing text string as it arrives, not a complete string to animate."
+        description="Renders text with an animated blinking cursor as it streams from an LLM. For real token streams, pass the growing accumulated string directly — do not pass a complete string to animate character-by-character."
         preview={<StreamingDemo />}
-        code={`import { StreamingText, useSimulatedStream } from '@caindev/ui'
+        code={`import { StreamingText } from '@caindev/ui'
 
 // With a real stream — pass growing text from useChat/useCompletion
 function Response({ text, isStreaming }) {
@@ -38,7 +38,9 @@ function Response({ text, isStreaming }) {
   )
 }
 
-// Simulated stream for demos and testing
+// useSimulatedStream — demo/testing helper only, not for production streams
+import { StreamingText, useSimulatedStream } from '@caindev/ui'
+
 function Demo() {
   const { text, streaming } = useSimulatedStream(
     'The answer is 42.',
@@ -47,10 +49,11 @@ function Demo() {
   return <StreamingText text={text} streaming={streaming} />
 }`}
         props={[
-          { name: 'text', type: 'string', default: '—', description: 'The text content to display. Pass the full accumulated string, not individual chunks.' },
+          { name: 'text', type: 'string', default: '—', description: 'The full accumulated text to display. Pass the growing string, not individual chunks.' },
           { name: 'streaming', type: 'boolean', default: 'false', description: 'When true, shows the blinking cursor at the end of the text.' },
           { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the span wrapper.' },
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles applied to the span wrapper.' },
+          { name: 'useSimulatedStream(text, intervalMs)', type: 'hook — demo/testing helper', default: '—', description: 'Simulates a streaming response by revealing text word-by-word. Not intended for production use with real LLM streams.' },
         ]}
       />
     </DocsLayout>

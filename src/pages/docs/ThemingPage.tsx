@@ -129,14 +129,26 @@ export function ThemingPage() {
 
         <GuideSection title='Scope'>
           <p className='m-0'>
-            Use <code>scope=&quot;subtree&quot;</code> when theme attributes
-            should stay on the provider wrapper. Use{' '}
-            <code>scope=&quot;global&quot;</code> for app-level theming and
-            portal-based components because their DOM can mount outside the
-            provider subtree.
+            <code>scope=&quot;global&quot;</code> applies data attributes to{' '}
+            <code>document.documentElement</code> and{' '}
+            <strong className='text-foreground'>renders no DOM wrapper element</strong>.
+            Use it at the app root so portaled content (dialogs, tooltips,
+            drawers, menus) inherits theme tokens regardless of where the portal
+            mounts.
           </p>
-          <GuideCode>{`<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
+          <GuideCode>{`// Recommended for app roots — no wrapper div rendered
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
   <App />
+</ThemeProvider>`}</GuideCode>
+          <p className='m-0'>
+            <code>scope=&quot;subtree&quot;</code> writes data attributes to a
+            wrapper <code>&lt;div&gt;</code> around its children. Use it for
+            nested theme overrides — for example, an in-page light-mode preview
+            inside a dark layout, or an isolated component sandbox.
+          </p>
+          <GuideCode>{`// Isolated section with a different theme
+<ThemeProvider scope="subtree" appearance="light" accent="emerald">
+  <PreviewPanel />
 </ThemeProvider>`}</GuideCode>
         </GuideSection>
 

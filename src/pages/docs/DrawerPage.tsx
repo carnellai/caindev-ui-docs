@@ -29,8 +29,7 @@ export function DrawerPage() {
             />
           </div>
         }
-        code={`import { Drawer, DrawerClose, ThemeProvider } from '@caindev/ui'
-import { Button } from '@caindev/ui'
+        code={`import { Button, Drawer, DrawerClose, ThemeProvider } from '@caindev/ui'
 
 // Theme setup for portaled content
 <ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">

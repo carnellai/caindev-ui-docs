@@ -30,8 +30,7 @@ export function MenuPage() {
             />
           </div>
         }
-        code={`import { Menu, ThemeProvider } from '@caindev/ui'
-import { Button } from '@caindev/ui'
+        code={`import { Button, Menu, ThemeProvider } from '@caindev/ui'
 
 // Theme setup for portaled content
 <ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">

@@ -85,14 +85,14 @@ const HEADER_H = 56
 const MOBILE_BP = 768
 
 function useIsMobile() {
-  const [mobile, setMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BP : false,
-  )
+  const [mobile, setMobile] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia(`(max-width: ${MOBILE_BP - 1}px)`).matches
+  })
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${MOBILE_BP - 1}px)`)
     const handler = (e: MediaQueryListEvent) => setMobile(e.matches)
     mq.addEventListener('change', handler)
-    setMobile(mq.matches)
     return () => mq.removeEventListener('change', handler)
   }, [])
   return mobile
@@ -269,10 +269,11 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
   )
   const [mobileOpen, setMobileOpen] = useState(false)
   const isMobile = useIsMobile()
-
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [pathname])
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname)
+    if (mobileOpen) setMobileOpen(false)
+  }
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''

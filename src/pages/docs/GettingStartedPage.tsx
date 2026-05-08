@@ -26,9 +26,13 @@ export function GettingStartedPage() {
         }>
         <GuideSection title='Installation'>
           <p className='m-0'>
-            When consuming a published registry build, install it with pnpm:
+            Install the package from npm:
           </p>
-          <GuideCode>{`pnpm add @caindev/ui`}</GuideCode>
+          <GuideCode>{`# pnpm
+pnpm add @caindev/ui
+
+# npm
+npm install @caindev/ui`}</GuideCode>
         </GuideSection>
 
         <GuideSection title='Importing the stylesheet'>
@@ -60,21 +64,23 @@ createRoot(document.getElementById('root')!).render(
         <GuideSection title='ThemeProvider'>
           <p className='m-0'>
             Wrap your application with <code>ThemeProvider</code> to apply theme
-            attributes. Use <code>scope=&quot;global&quot;</code> if your app
-            renders portals such as dialogs, tooltips, or drawers; it applies
+            attributes. The recommended setup uses{' '}
+            <code>scope=&quot;global&quot;</code> at the app root — it applies
             theme attributes to <code>document.documentElement</code> so
-            portaled content inherits them correctly.
+            portaled content (dialogs, tooltips, drawers) inherits them
+            correctly.{' '}
+            <code>scope=&quot;global&quot;</code> renders no DOM wrapper element.
           </p>
           <GuideCode>{`import { ThemeProvider } from '@caindev/ui'
 
-// Scoped to a subtree - no document mutation
-<ThemeProvider appearance="dark" accent="violet" radius="md">
+// Recommended: global scope at app root — no wrapper element rendered
+<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
   <App />
 </ThemeProvider>
 
-// Global - applies data-* attributes to <html>
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
+// Subtree scope — wraps children in a div, useful for isolated sections
+<ThemeProvider appearance="light" accent="emerald" radius="sm">
+  <MarketingSection />
 </ThemeProvider>`}</GuideCode>
           <p className='m-0'>
             Defaults: <code>scope=&quot;subtree&quot;</code>,{' '}
