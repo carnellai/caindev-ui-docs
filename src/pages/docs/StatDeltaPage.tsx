@@ -7,7 +7,7 @@ export function StatDeltaPage() {
     <DocsLayout>
       <DocsPage
         title="StatDelta"
-        description="A metric with a comparison value and directional indicator showing change from a baseline. Common in A/B eval comparisons, version diffs, and experiment results."
+        description="A metric with a comparison value and directional indicator showing change from a baseline. Duration formatting avoids duplicate unit suffixes. Common in A/B eval comparisons, version diffs, and experiment results."
         preview={
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px 40px' }}>
             <StatDelta

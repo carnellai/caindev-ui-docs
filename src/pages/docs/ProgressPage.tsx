@@ -7,7 +7,7 @@ export function ProgressPage() {
     <DocsLayout>
       <DocsPage
         title='Progress'
-        description="Displays the status of a task that takes a long time. Built on Base UI's Progress primitive with support for determinate, indeterminate, and status variants."
+        description="Displays the status of a task that takes a long time. Built on Base UI's Progress primitive with support for determinate, indeterminate, and semantic tone states."
         preview={
           <div
             style={{
@@ -48,10 +48,10 @@ export function ProgressPage() {
 // Indeterminate
 <Progress label="Processing" value={null} />
 
-// Variants
-<Progress label="Eval run" value={100} variant="success" showValue />
-<Progress label="Token budget" value={91} variant="warning" showValue />
-<Progress label="Failed tasks" value={34} variant="error" showValue />
+// Semantic tone (preferred)
+<Progress label="Eval run" value={100} tone="success" showValue />
+<Progress label="Token budget" value={91} tone="warning" showValue />
+<Progress label="Failed tasks" value={34} tone="error" showValue />
 
 // Sizes
 <Progress value={50} size="sm" />
@@ -95,10 +95,16 @@ export function ProgressPage() {
             description: 'Height of the progress track.',
           },
           {
-            name: 'variant',
+            name: 'tone',
             type: '"default" | "success" | "warning" | "error"',
             default: '"default"',
-            description: 'Color variant of the indicator.',
+            description: 'Preferred semantic color prop for the indicator.',
+          },
+          {
+            name: 'variant',
+            type: '"default" | "success" | "warning" | "error"',
+            default: '—',
+            description: 'Compatibility alias for tone.',
           },
         ]}
       />

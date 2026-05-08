@@ -2,7 +2,7 @@ const links = [
   {
     group: 'Docs',
     items: [
-      { label: 'Documentation', href: '/docs/button', external: false },
+      { label: 'Documentation', href: '/docs/getting-started', external: false },
       { label: 'Themes', href: '#', external: false },
     ],
   },

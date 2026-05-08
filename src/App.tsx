@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import { Home } from './pages/Home'
 import { ButtonPage } from './pages/docs/ButtonPage'
 import { SwitchPage } from './pages/docs/SwitchPage'
@@ -58,6 +58,10 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route
+          path='/docs'
+          element={<Navigate to='/docs/getting-started' replace />}
+        />
         <Route path='/docs/getting-started' element={<GettingStartedPage />} />
         <Route path='/docs/theming' element={<ThemingPage />} />
         <Route path='/docs/typography' element={<TypographyPage />} />

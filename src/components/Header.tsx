@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router'
 
 const navItems = [
-  { label: 'Documentation', href: '/docs/button' },
+  { label: 'Documentation', href: '/docs/getting-started' },
   { label: 'Themes', href: '#', soon: true },
 ]
 

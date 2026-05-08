@@ -298,7 +298,7 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
           {!isMobile && (
             <nav className='flex items-center gap-1'>
               <Link
-                to='/docs/button'
+                to='/docs/getting-started'
                 className={[
                   'rounded-sm px-3 py-1.5 text-sm no-underline',
                   pathname.startsWith('/docs')

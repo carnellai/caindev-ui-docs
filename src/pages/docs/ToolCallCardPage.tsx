@@ -7,7 +7,7 @@ export function ToolCallCardPage() {
     <DocsLayout>
       <DocsPage
         title="ToolCallCard"
-        description="Experimental prototype expandable display for a single tool invocation. Shows the tool name, status, and optionally the input arguments and output. Supports pending, running, success, and error states."
+        description="Experimental prototype expandable display for a single tool invocation. Shows the tool name, status, and optionally the input arguments and output. Supports pending, running, completed, and failed states."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', maxWidth: '520px' }}>
             <ToolCallCard
@@ -48,22 +48,22 @@ export function ToolCallCardPage() {
 // Completed with output
 <ToolCallCard
   name="search_web"
-  status="success"
+  status="completed"
   duration={843}
   input={{ query: 'transformer papers 2025' }}
   output={{ results: [...] }}
 />
 
-// Error state
+// Failed state
 <ToolCallCard
   name="execute_sql"
-  status="error"
+  status="failed"
   input={{ query: 'SELECT ...' }}
   output={{ error: 'Table not found' }}
 />`}
         props={[
           { name: 'name', type: 'string', default: '—', description: 'The tool function name. Rendered in monospace.' },
-          { name: 'status', type: '"pending" | "running" | "success" | "error"', default: '—', description: 'Current execution status.' },
+          { name: 'status', type: '"pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"', default: '—', description: 'Current execution status. "success" and "error" remain compatibility aliases.' },
           { name: 'input', type: 'Record<string, unknown>', default: '—', description: 'Tool input arguments rendered as formatted JSON.' },
           { name: 'output', type: 'unknown', default: '—', description: 'Tool output rendered as formatted JSON.' },
           { name: 'duration', type: 'number', default: '—', description: 'Execution time in milliseconds.' },

@@ -7,7 +7,7 @@ export function AgentStepPage() {
     <DocsLayout>
       <DocsPage
         title="AgentStep"
-        description="Experimental prototype vertical step list showing the progress of a multi-step agent plan. Each step has a status with an icon: pending, running, complete, failed, or skipped."
+        description="Experimental prototype vertical step list showing the progress of a multi-step agent plan. Each step has a status with an icon: pending, running, completed, failed, or skipped."
         preview={
           <div style={{ display: 'flex', gap: '48px', flexWrap: 'wrap' }}>
             <AgentStep
@@ -36,7 +36,7 @@ export function AgentStepPage() {
       id: '1',
       label: 'Retrieve context',
       description: 'Searching vector store',
-      status: 'complete',
+      status: 'completed',
       duration: 342,
     },
     {

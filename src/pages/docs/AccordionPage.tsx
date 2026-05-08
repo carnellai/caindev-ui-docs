@@ -7,7 +7,7 @@ export function AccordionPage() {
     <DocsLayout>
       <DocsPage
         title="Accordion"
-        description="Collapsible content panels with animated height transitions. Built on Base UI's Accordion primitive with single or multiple open panels."
+        description="Collapsible content panels with animated height transitions and refined spacing/alignment. Built on Base UI's Accordion primitive with single or multiple open panels."
         preview={
           <div style={{ width: '100%', maxWidth: '480px' }}>
             <Accordion

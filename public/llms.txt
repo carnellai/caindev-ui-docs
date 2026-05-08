@@ -385,15 +385,15 @@ Inline feedback message.
 ```tsx
 import { Alert } from '@caindev/ui'
 
-<Alert variant="success" title="Saved">Your changes are live.</Alert>
-<Alert variant="error" title="Failed">Could not connect.</Alert>
-<Alert variant="warning">Rate limit approaching.</Alert>
-<Alert variant="info" title="Tip" onDismiss={() => setVisible(false)}>
+<Alert tone="success" title="Saved">Your changes are live.</Alert>
+<Alert tone="error" title="Failed">Could not connect.</Alert>
+<Alert tone="warning">Rate limit approaching.</Alert>
+<Alert tone="info" title="Tip" onDismiss={() => setVisible(false)}>
   You can use the render prop to swap elements.
 </Alert>
 ```
 
-Props: variant ("info" | "success" | "warning" | "error"), title, children, onDismiss
+Props: tone ("info" | "success" | "warning" | "error"), variant (compatibility alias), title, children, onDismiss
 
 ### Toast
 Floating notification system.
@@ -410,7 +410,7 @@ const { toast, success, error, warning } = useToast()
 success('Saved', 'Your changes are live.')
 error('Failed', 'Could not connect.')
 warning('Rate limit', 'Quota almost reached.')
-toast('Message', { description: 'Details here.', variant: 'default' })
+toast('Message', { description: 'Details here.', tone: 'info' })
 ```
 
 ### Badge
@@ -551,14 +551,14 @@ import { ToolCallCard } from '@caindev/ui'
 
 <ToolCallCard
   name="search_web"
-  status="success"
+  status="completed"
   duration={312}
   input={{ query: 'latest AI research' }}
   output={{ results: [...] }}
 />
 ```
 
-Props: name, status ("pending" | "running" | "success" | "error"), input, output, duration, defaultOpen
+Props: name, status ("pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"), input, output, duration, defaultOpen
 
 ### CodeBlock
 Syntax display with copy button.
@@ -603,14 +603,14 @@ import { AgentStep } from '@caindev/ui'
 
 <AgentStep
   steps={[
-    { id: '1', label: 'Retrieve context', status: 'complete', duration: 180 },
+    { id: '1', label: 'Retrieve context', status: 'completed', duration: 180 },
     { id: '2', label: 'Generate response', status: 'running' },
     { id: '3', label: 'Validate output', status: 'pending' },
   ]}
 />
 ```
 
-Step status: "pending" | "running" | "complete" | "failed" | "skipped"
+Step status: "pending" | "running" | "completed" | "failed" | "skipped"
 
 ### StructuredOutput
 Type-aware renderer for JSON/structured objects.
@@ -650,14 +650,14 @@ const spans: SpanNode[] = [
     id: 'agent-1',
     name: 'rag_pipeline',
     kind: 'agent',
-    status: 'success',
+    status: 'completed',
     duration: 2841,
     children: [
       {
         id: 'retrieval-1',
         name: 'vector_search',
         kind: 'retrieval',
-        status: 'success',
+        status: 'completed',
         duration: 312,
         query: 'attention mechanisms',
         resultCount: 8,
@@ -666,7 +666,7 @@ const spans: SpanNode[] = [
         id: 'llm-1',
         name: 'generate',
         kind: 'llm',
-        status: 'success',
+        status: 'completed',
         duration: 2199,
         model: 'claude-3-5-sonnet-20241022',
         inputTokens: 3847,
@@ -686,7 +686,7 @@ const spans: SpanNode[] = [
 ```
 
 SpanNode kinds: "llm" | "tool" | "retrieval" | "agent" | "span" | "embedding" | "guardrail"
-SpanNode status: "running" | "success" | "error" | "pending"
+SpanNode status: "pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"
 
 ### EvalBadge
 Evaluation verdict display.
@@ -713,7 +713,7 @@ import { RunStatusBadge } from '@caindev/ui'
 <RunStatusBadge status="failed" size="sm" />
 ```
 
-Props: status ("running" | "completed" | "failed" | "error" | "queued" | "cancelled"), size
+Props: status ("pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"), size
 
 ### ScoreBar
 Horizontal score bar with pass/fail threshold marker.
@@ -805,11 +805,11 @@ import { EmptyState } from '@caindev/ui'
 />
 
 <EmptyState
-  variant="error"
+  tone="error"
   title="Failed to load"
   description="Check your connection and try again."
   action={<Button variant="outline">Retry</Button>}
 />
 ```
 
-Props: title, description, icon, action, variant ("default" | "error")
+Props: title, description, icon, action, tone ("default" | "error"), variant (compatibility alias)

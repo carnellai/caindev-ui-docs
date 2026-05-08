@@ -14,7 +14,6 @@ export function RunStatusBadgePage() {
               <RunStatusBadge status="running" />
               <RunStatusBadge status="completed" />
               <RunStatusBadge status="failed" />
-              <RunStatusBadge status="error" />
               <RunStatusBadge status="queued" />
               <RunStatusBadge status="cancelled" />
             </div>
@@ -31,14 +30,13 @@ export function RunStatusBadgePage() {
 <RunStatusBadge status="running" />
 <RunStatusBadge status="completed" />
 <RunStatusBadge status="failed" />
-<RunStatusBadge status="error" />
 <RunStatusBadge status="queued" />
 <RunStatusBadge status="cancelled" />
 
 // Small
 <RunStatusBadge status="running" size="sm" />`}
         props={[
-          { name: 'status', type: '"running" | "completed" | "failed" | "error" | "queued" | "cancelled"', default: '—', description: 'Current run status.' },
+          { name: 'status', type: '"pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"', default: '—', description: 'Current run status. Compatibility aliases like "error" and "success" map to canonical runtime values.' },
           { name: 'size', type: '"sm" | "md"', default: '"md"', description: 'Size of the badge.' },
         ]}
       />

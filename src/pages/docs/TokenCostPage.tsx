@@ -7,7 +7,7 @@ export function TokenCostPage() {
     <DocsLayout>
       <DocsPage
         title="TokenCost"
-        description="Monospace display of token usage and cost. Shows input/output token counts and dollar cost inline. Used in span headers, run summaries, and metric rows."
+        description="Monospace display of token usage and cost. Metrics are grouped and wrap cleanly for dense layouts. Used in span headers, run summaries, and metric rows."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <TokenCost

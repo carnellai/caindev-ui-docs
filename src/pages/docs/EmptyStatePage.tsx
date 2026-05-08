@@ -7,7 +7,7 @@ export function EmptyStatePage() {
     <DocsLayout>
       <DocsPage
         title="EmptyState"
-        description="Placeholder shown when a list, table, or view has no data. Supports a title, description, custom icon, and an action button. Includes an error variant."
+        description="Placeholder shown when a list, table, or view has no data. Supports a title, description, custom icon, and an action button. Prefer tone for semantic severity."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', width: '100%' }}>
             <div style={{ border: '1px solid var(--color-border)', borderRadius: '8px' }}>
@@ -37,9 +37,9 @@ import { Button } from '@caindev/ui'
   action={<Button variant="outline">Run evaluation</Button>}
 />
 
-// Error variant
+// Error tone (preferred)
 <EmptyState
-  variant="error"
+  tone="error"
   title="Failed to load"
   description="Check your connection and try again."
   action={<Button variant="outline">Retry</Button>}
@@ -56,7 +56,8 @@ import { Button } from '@caindev/ui'
           { name: 'description', type: 'string', default: '—', description: 'Supporting description text.' },
           { name: 'icon', type: 'React.ReactNode', default: 'Built-in', description: 'Custom icon. Defaults to a generic empty box or error circle.' },
           { name: 'action', type: 'React.ReactNode', default: '—', description: 'Action element — typically a Button.' },
-          { name: 'variant', type: '"default" | "error"', default: '"default"', description: 'Error variant shows a red icon.' },
+          { name: 'tone', type: '"default" | "error"', default: '"default"', description: 'Preferred semantic severity prop.' },
+          { name: 'variant', type: '"default" | "error"', default: '—', description: 'Compatibility alias for tone.' },
         ]}
       />
     </DocsLayout>

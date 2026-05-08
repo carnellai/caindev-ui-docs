@@ -79,7 +79,7 @@ export function CommandPalettePage() {
     <DocsLayout>
       <DocsPage
         title="CommandPalette"
-        description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Built on Base UI's Dialog primitive with fuzzy filtering, keyboard navigation, and grouped results."
+        description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Supports controlled and uncontrolled open state via open/defaultOpen/onOpenChange."
         preview={<CommandPaletteDemo />}
         code={`import { CommandPalette, ThemeProvider, useCommandPalette } from '@caindev/ui'
 
@@ -114,6 +114,12 @@ const items = [
   placeholder="Search commands..."
 />
 
+// Uncontrolled
+<CommandPalette
+  defaultOpen={false}
+  items={items}
+/>
+
 // With a trigger button instead of ⌘K
 <CommandPalette
   items={items}
@@ -131,6 +137,12 @@ const items = [
             type: 'boolean',
             default: '—',
             description: 'Controlled open state.',
+          },
+          {
+            name: 'defaultOpen',
+            type: 'boolean',
+            default: 'false',
+            description: 'Initial open state for uncontrolled usage.',
           },
           {
             name: 'onOpenChange',

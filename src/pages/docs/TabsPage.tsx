@@ -7,7 +7,7 @@ export function TabsPage() {
     <DocsLayout>
       <DocsPage
         title="Tabs"
-        description="Switch between related panels. Built on Base UI's Tabs primitive with keyboard navigation, animated indicator, and accessible panel association."
+        description="Switch between related panels. Built on Base UI's Tabs primitive with keyboard navigation, a refined active indicator, and accessible panel association."
         preview={
           <div style={{ width: '100%', maxWidth: '480px' }}>
             <Tabs
