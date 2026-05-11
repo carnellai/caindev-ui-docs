@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { PromptInput } from '@caindev/ui'
 
@@ -49,10 +48,9 @@ function InteractiveDemo() {
 
 export function PromptInputPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="PromptInput"
-        description="Experimental prototype auto-resizing textarea for AI chat interfaces. Submits on Enter, supports Shift+Enter for newlines, flips to a stop button while loading, and exposes an actions slot for simple local controls."
+        description="Auto-resizing textarea for AI chat interfaces. Submits on Enter, supports Shift+Enter for newlines, flips to a stop button while loading, and exposes an actions slot for simple local controls."
         preview={<InteractiveDemo />}
         code={`import { PromptInput } from '@caindev/ui'
 
@@ -103,6 +101,5 @@ const textareaRef = useRef<HTMLTextAreaElement | null>(null)
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

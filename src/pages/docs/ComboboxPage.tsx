@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Combobox } from '@caindev/ui'
 
@@ -14,7 +13,6 @@ const models = [
 
 export function ComboboxPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Combobox"
         description="A searchable input combined with a dropdown list. Built on Base UI's Combobox primitive with keyboard navigation, filtering, and improved ARIA combobox semantics."
@@ -34,12 +32,7 @@ export function ComboboxPage() {
             />
           </div>
         }
-        code={`import { Combobox, ThemeProvider } from '@caindev/ui'
-
-// Theme setup for portaled content
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
+        code={`import { Combobox } from '@caindev/ui'
 
 const models = [
   { label: 'claude-sonnet-4-6', value: 'claude-sonnet-4-6' },
@@ -115,6 +108,5 @@ const [model, setModel] = useState<string | null>(null)
           },
         ]}
       />
-    </DocsLayout>
   )
 }

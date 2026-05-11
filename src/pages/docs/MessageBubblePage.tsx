@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { MessageBubble, useSimulatedStream } from '@caindev/ui'
 
@@ -19,10 +18,9 @@ function StreamingAssistant() {
 
 export function MessageBubblePage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="MessageBubble"
-        description="Experimental prototype single-message presentation for AI conversations. Handles user, assistant, and system roles with distinct visual treatments. Supports streaming content, timestamps, and custom action slots."
+        description="Single-message presentation for AI conversations. Handles user, assistant, and system roles with distinct visual treatments. Supports streaming content, timestamps, and custom action slots."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%', maxWidth: '540px' }}>
             <MessageBubble
@@ -76,6 +74,5 @@ export function MessageBubblePage() {
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

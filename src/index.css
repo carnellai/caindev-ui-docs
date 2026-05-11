@@ -115,6 +115,20 @@
 }
 
 @layer components {
+  /* Dark-mode nav/footer: `/logo.svg`. Light appearance: `/logo-light.svg`. */
+  .cd-brand-logo--light {
+    display: none;
+  }
+  .cd-brand-logo--dark {
+    display: block;
+  }
+  [data-appearance='light'] .cd-brand-logo--dark {
+    display: none;
+  }
+  [data-appearance='light'] .cd-brand-logo--light {
+    display: block;
+  }
+
   .container-shell {
     width: 100%;
     max-width: 1280px;

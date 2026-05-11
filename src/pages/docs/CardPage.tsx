@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Badge, Button, Card } from '@caindev/ui'
 
 export function CardPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Card'
         description='A surface container with optional header and footer slots. The foundation of most page layouts — use it for panels, settings sections, data displays, and content grouping.'
@@ -130,6 +128,5 @@ export function CardPage() {
           },
         ]}
       />
-    </DocsLayout>
   )
 }

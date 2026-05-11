@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router'
+import { BrandLogo } from './BrandLogo'
 
 const navItems = [
   { label: 'Documentation', href: '/docs/getting-started' },
@@ -27,7 +28,7 @@ export function Header() {
       <div className='container-shell flex h-14 items-center justify-between'>
         {/* Logo */}
         <Link to='/' className='flex items-center'>
-          <img src='/logo.svg' alt='caindev/ui' className='h-6' />
+          <BrandLogo />
         </Link>
 
         {/* Nav */}

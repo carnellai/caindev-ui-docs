@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Accordion } from '@caindev/ui'
 
 export function AccordionPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Accordion"
         description="Collapsible content panels with animated height transitions and refined spacing/alignment. Built on Base UI's Accordion primitive with single or multiple open panels."
@@ -72,6 +70,5 @@ const [openItems, setOpenItems] = useState<string[]>(['item-1'])
           { name: 'onValueChange', type: '(value: string[]) => void', default: '—', description: 'Callback when open item values change.' },
         ]}
       />
-    </DocsLayout>
   )
 }

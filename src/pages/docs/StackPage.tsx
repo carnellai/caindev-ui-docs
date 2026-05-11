@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Badge, Button, HStack, Stack, VStack } from '@caindev/ui'
 
 export function StackPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Stack"
         description="Flex-based layout primitive for vertical and horizontal spacing. The most commonly needed layout component — replaces manual flexbox CSS for the vast majority of UI compositions."
@@ -14,9 +12,9 @@ export function StackPage() {
               <span style={{ fontSize: '0.75rem', color: 'var(--color-foreground-subtle)' }}>VStack (vertical)</span>
               <div style={{ padding: '12px 16px', borderRadius: '8px', background: 'var(--color-background-subtle)', border: '1px solid var(--color-border)' }}>
                 <VStack gap="8px">
-                  <Badge variant="default">Item one</Badge>
-                  <Badge variant="info">Item two</Badge>
-                  <Badge variant="success">Item three</Badge>
+                  <Badge tone="neutral">Item one</Badge>
+                  <Badge tone="info">Item two</Badge>
+                  <Badge tone="success">Item three</Badge>
                 </VStack>
               </div>
             </VStack>
@@ -60,7 +58,21 @@ export function StackPage() {
           { name: 'justify', type: 'CSSProperties["justifyContent"]', default: '—', description: 'Justify content (main axis).' },
           { name: 'wrap', type: 'boolean', default: 'false', description: 'Allow children to wrap.' },
         ]}
+        apiSections={[
+          {
+            title: 'HStack and VStack',
+            description:
+              'Convenience components with direction fixed to horizontal or vertical.',
+            props: [
+              { name: 'gap', type: 'string | number', default: '"16px"', description: 'Gap between children.' },
+              { name: 'align', type: 'CSSProperties["alignItems"]', default: '—', description: 'Align items on the cross axis.' },
+              { name: 'justify', type: 'CSSProperties["justifyContent"]', default: '—', description: 'Justify content on the main axis.' },
+              { name: 'wrap', type: 'boolean', default: 'false', description: 'Allow children to wrap.' },
+              { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the stack wrapper.' },
+              { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the wrapper.' },
+            ],
+          },
+        ]}
       />
-    </DocsLayout>
   )
 }

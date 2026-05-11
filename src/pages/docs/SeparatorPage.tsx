@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Separator } from '@caindev/ui'
 
 export function SeparatorPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Separator"
         description="A semantic divider for separating content. Supports horizontal and vertical orientations, and an optional centered text label. Built on Base UI's Separator for screen reader accessibility."
@@ -42,6 +40,5 @@ export function SeparatorPage() {
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Additional inline styles.' },
         ]}
       />
-    </DocsLayout>
   )
 }

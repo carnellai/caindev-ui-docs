@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Pagination } from '@caindev/ui'
 
@@ -8,7 +7,6 @@ export function PaginationPage() {
   const [page2, setPage2] = useState(5)
 
   return (
-    <DocsLayout>
       <DocsPage
         title="Pagination"
         description="Navigate between pages of data with prev/next buttons and numbered page controls."
@@ -63,6 +61,5 @@ const [page, setPage] = useState(1)
           },
         ]}
       />
-    </DocsLayout>
   )
 }

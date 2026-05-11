@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { MessageThread } from '@caindev/ui'
 
@@ -11,16 +10,15 @@ const messages = [
 
 export function MessageThreadPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="MessageThread"
-        description="Experimental prototype scrollable container for a sequence of messages. Handles auto-scrolling to the latest message when new content arrives during streaming."
+        description="Scrollable container for a sequence of messages. Handles auto-scrolling to the latest message when new content arrives during streaming and supports custom message rendering."
         preview={
           <div style={{ width: '100%', border: '1px solid var(--color-border)', borderRadius: '10px', overflow: 'hidden' }}>
             <MessageThread messages={messages} maxHeight="320px" autoScroll={false} />
           </div>
         }
-        code={`import { MessageThread } from '@caindev/ui'
+        code={`import { MessageBubble, MessageThread } from '@caindev/ui'
 
 const messages = [
   { id: '1', role: 'user', content: 'Hello!' },
@@ -37,15 +35,18 @@ const messages = [
   messages={messages}
   autoScroll={true}
   maxHeight="480px"
+  renderMessage={(message, index) => (
+    <MessageBubble key={message.id} {...message} />
+  )}
 />`}
         props={[
           { name: 'messages', type: 'Message[]', default: '—', description: 'Array of message objects with id, role, content, and optional streaming/timestamp.' },
           { name: 'autoScroll', type: 'boolean', default: 'true', description: 'Automatically scroll to the bottom when messages change.' },
           { name: 'maxHeight', type: 'string | number', default: '"480px"', description: 'Maximum height before the thread scrolls.' },
+          { name: 'renderMessage', type: '(message: MessageThreadMessage, index: number) => React.ReactNode', default: '—', description: 'Custom renderer for each message. Replaces the default MessageBubble.' },
           { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the root wrapper.' },
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Additional styles for the container.' },
         ]}
       />
-    </DocsLayout>
   )
 }

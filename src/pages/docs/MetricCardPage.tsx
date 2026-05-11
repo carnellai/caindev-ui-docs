@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { MetricCard } from '@caindev/ui'
 
 export function MetricCardPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="MetricCard"
         description="Displays a single metric with a label, value, optional unit, and optional trend indicator. Used in run summaries, eval dashboards, and pipeline monitors."
@@ -69,6 +67,5 @@ export function MetricCardPage() {
           { name: 'sublabel', type: 'string', default: '—', description: 'Secondary label shown below the trend.' },
         ]}
       />
-    </DocsLayout>
   )
 }

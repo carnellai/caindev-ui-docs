@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button, Menu } from '@caindev/ui'
 
 export function MenuPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Menu"
         description="A dropdown list of actions. Built on Base UI's Menu primitive with full keyboard navigation, disabled items, and grouped separators."
@@ -30,12 +28,7 @@ export function MenuPage() {
             />
           </div>
         }
-        code={`import { Button, Menu, ThemeProvider } from '@caindev/ui'
-
-// Theme setup for portaled content
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
+        code={`import { Button, Menu } from '@caindev/ui'
 
 <Menu
   trigger={<Button variant="outline">Options</Button>}
@@ -60,6 +53,5 @@ export function MenuPage() {
           { name: 'onOpenChange', type: '(open: boolean) => void', default: '—', description: 'Callback when the menu opens or closes.' },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,126 +1,78 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button, Drawer } from '@caindev/ui'
 
 export function DrawerPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Drawer"
-        description="A panel that slides in from the edge of the screen with swipe-to-dismiss gestures. Built on Base UI's Drawer primitive."
+        description="A panel that slides in from the edge of the screen with swipe-to-dismiss gestures. Built on Base UI Drawer with a compound component API. Mirrors the Dialog API with an additional side prop on Drawer.Content."
         preview={
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <Drawer
-              trigger={<Button variant="outline">Bottom sheet</Button>}
-              title="Run configuration"
-              description="Configure parameters for this eval run."
-              side="bottom"
-            />
-            <Drawer
-              trigger={<Button variant="outline">Right panel</Button>}
-              title="Trace details"
-              description="Inspect the full span trace for this run."
-              side="right"
-            />
-            <Drawer
-              trigger={<Button variant="outline">Left panel</Button>}
-              title="Navigation"
-              side="left"
-            />
+            <Drawer>
+              <Drawer.Trigger asChild><Button variant="outline">Right panel</Button></Drawer.Trigger>
+              <Drawer.Content side="right">
+                <Drawer.Title>Trace details</Drawer.Title>
+                <Drawer.Description>Inspect the full span trace for this run.</Drawer.Description>
+                <Drawer.Footer>
+                  <Drawer.Close asChild><Button variant="ghost">Close</Button></Drawer.Close>
+                </Drawer.Footer>
+              </Drawer.Content>
+            </Drawer>
+            <Drawer>
+              <Drawer.Trigger asChild><Button variant="outline">Bottom sheet</Button></Drawer.Trigger>
+              <Drawer.Content side="bottom">
+                <Drawer.Title>Run configuration</Drawer.Title>
+                <Drawer.Description>Configure parameters for this eval run.</Drawer.Description>
+                <Drawer.Footer>
+                  <Drawer.Close asChild><Button variant="ghost">Cancel</Button></Drawer.Close>
+                  <Button variant="solid">Apply</Button>
+                </Drawer.Footer>
+              </Drawer.Content>
+            </Drawer>
           </div>
         }
-        code={`import { Button, Drawer, DrawerClose, ThemeProvider } from '@caindev/ui'
+        code={`import { Button, Drawer } from '@caindev/ui'
 
-// Theme setup for portaled content
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
-
-// Bottom sheet (default)
-<Drawer
-  trigger={<Button variant="outline">Open</Button>}
-  title="Run configuration"
-  description="Configure parameters for this eval run."
-  side="bottom"
-/>
-
-// Right panel with custom actions
-<Drawer
-  trigger={<Button variant="outline">Details</Button>}
-  title="Trace details"
-  side="right"
-  actions={
-    <div style={{ display: 'flex', gap: '8px' }}>
-      <DrawerClose render={<Button type="button" variant="ghost" />}>
-        Cancel
-      </DrawerClose>
-      <DrawerClose render={<Button type="button" variant="solid" />}>
-        Save
-      </DrawerClose>
-    </div>
-  }
->
-  <p>Drawer content goes here.</p>
+// Right panel
+<Drawer>
+  <Drawer.Trigger asChild>
+    <Button variant="outline">Open</Button>
+  </Drawer.Trigger>
+  <Drawer.Content side="right">
+    <Drawer.Title>Settings</Drawer.Title>
+    <Drawer.Description>Configure your preferences.</Drawer.Description>
+    <Drawer.Footer>
+      <Drawer.Close asChild>
+        <Button variant="ghost">Close</Button>
+      </Drawer.Close>
+    </Drawer.Footer>
+  </Drawer.Content>
 </Drawer>
 
-// Controlled (no trigger)
-<Drawer
-  open={open}
-  onOpenChange={setOpen}
-  title="Controlled drawer"
-  side="right"
-/>`}
+// Controlled bottom sheet
+<Drawer open={open} onOpenChange={setOpen}>
+  <Drawer.Content side="bottom">
+    <Drawer.Title>Run configuration</Drawer.Title>
+    <Drawer.Footer>
+      <Drawer.Close asChild>
+        <Button variant="ghost">Cancel</Button>
+      </Drawer.Close>
+      <Button variant="solid">Apply</Button>
+    </Drawer.Footer>
+  </Drawer.Content>
+</Drawer>`}
         props={[
-          {
-            name: 'trigger',
-            type: 'React.ReactElement',
-            default: '—',
-            description: 'Optional element that opens the drawer when clicked.',
-          },
-          {
-            name: 'title',
-            type: 'string',
-            default: '—',
-            description: 'Drawer title. Required for accessibility.',
-          },
-          {
-            name: 'description',
-            type: 'string',
-            default: '—',
-            description: 'Optional description rendered below the title.',
-          },
-          {
-            name: 'side',
-            type: '"bottom" | "right" | "left"',
-            default: '"bottom"',
-            description: 'Which edge the drawer slides in from.',
-          },
-          {
-            name: 'children',
-            type: 'React.ReactNode',
-            default: '—',
-            description: 'Content rendered in the drawer body.',
-          },
-          {
-            name: 'actions',
-            type: 'React.ReactNode',
-            default: 'Close button',
-            description: 'Custom action buttons. Defaults to a single Close button.',
-          },
-          {
-            name: 'open',
-            type: 'boolean',
-            default: '—',
-            description: 'Controlled open state.',
-          },
-          {
-            name: 'onOpenChange',
-            type: '(open: boolean) => void',
-            default: '—',
-            description: 'Callback when the drawer opens or closes.',
-          },
+          { name: 'open', type: 'boolean', default: '—', description: 'Controlled open state.' },
+          { name: 'onOpenChange', type: '(open: boolean) => void', default: '—', description: 'Callback when the drawer opens or closes.' },
+          { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Initial open state for uncontrolled usage.' },
+          { name: 'swipeDirection', type: '"left" | "right" | "up" | "down"', default: '—', description: 'Direction that dismisses the drawer via swipe.' },
+          { name: 'Drawer.Content side', type: '"left" | "right" | "top" | "bottom"', default: '"right"', description: 'Which edge the drawer slides in from.' },
+          { name: 'Drawer.Trigger asChild', type: 'boolean', default: 'false', description: 'Renders the child element as the trigger.' },
+          { name: 'Drawer.Title', type: 'ReactNode', default: '—', description: 'Drawer heading. Required for accessibility.' },
+          { name: 'Drawer.Description', type: 'ReactNode', default: '—', description: 'Optional description rendered below the title.' },
+          { name: 'Drawer.Footer', type: 'ReactNode', default: '—', description: 'Styled flex row for action buttons. Optional.' },
+          { name: 'Drawer.Close asChild', type: 'boolean', default: 'false', description: 'Renders the child element as the close trigger.' },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { TraceTree } from '@caindev/ui'
 import type { SpanNode } from '@caindev/ui'
@@ -111,10 +110,9 @@ const agentTrace: SpanNode[] = [
 
 export function TraceTreePage() {
   return (
-    <DocsLayout>
       <DocsPage
-        title="TraceTree + SpanCard"
-        description="Experimental prototype hierarchical trace visualization for LLM pipelines. SpanCard renders a single span with kind-aware styling. TraceTree composes them into a nested, expandable tree with a trace header."
+        title="TraceTree"
+        description="Hierarchical trace visualization for LLM pipelines. TraceTree renders nested spans with kind-aware styling, expandable metadata, and a trace header."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
             <TraceTree
@@ -133,7 +131,7 @@ export function TraceTreePage() {
             />
           </div>
         }
-        code={`import { TraceTree, SpanCard } from '@caindev/ui'
+        code={`import { TraceTree } from '@caindev/ui'
 import type { SpanNode } from '@caindev/ui'
 
 const spans: SpanNode[] = [
@@ -170,29 +168,15 @@ const spans: SpanNode[] = [
   },
 ]
 
-// Full trace tree
 <TraceTree
   traceName="RAG pipeline"
   traceId="trace_a3f9bc"
   totalDuration={2841}
   spans={spans}
-/>
-
-// Single span
-<SpanCard
-  span={{
-    id: '1',
-    name: 'vector_search',
-    kind: 'retrieval',
-    status: 'completed',
-    duration: 312,
-    query: 'attention mechanisms',
-    resultCount: 8,
-  }}
 />`}
         props={[
           { name: 'spans', type: 'SpanNode[]', default: '—', description: 'Root-level spans. Nest children inside each SpanNode for hierarchy.' },
-          { name: 'SpanNode', type: '{ id: string; name: string; kind: "llm" | "tool" | "retrieval" | "agent" | "span" | "embedding" | "guardrail"; status: "pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"; duration?: number; children?: SpanNode[]; ...metadata }', default: '—', description: 'Object shape for each span. Additional metadata keys are rendered when present.' },
+          { name: 'SpanNode', type: '{ id: string; name: string; kind: SpanKind; status: OperationStatus; duration?: number; children?: SpanNode[]; ...metadata }', default: '—', description: 'Object shape for each span. Additional metadata keys are rendered when present.' },
           { name: 'traceName', type: 'string', default: '"Trace"', description: 'Human-readable trace name shown in the header.' },
           { name: 'traceId', type: 'string', default: '—', description: 'Trace ID shown in monospace in the header.' },
           { name: 'totalDuration', type: 'number', default: '—', description: 'Total trace duration in ms.' },
@@ -201,6 +185,5 @@ const spans: SpanNode[] = [
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

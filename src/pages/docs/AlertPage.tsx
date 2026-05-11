@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Alert } from '@caindev/ui'
 
@@ -21,7 +20,6 @@ function DismissableDemo() {
 
 export function AlertPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Alert"
         description="Inline feedback messages for success, error, warning, and informational states. Prefer tone for semantic severity. Different from Toast — Alert is embedded in the page layout, Toast floats over content."
@@ -67,12 +65,11 @@ export function AlertPage() {
   Review the component examples.
 </Alert>`}
         props={[
-          { name: 'tone', type: '"info" | "success" | "warning" | "error"', default: '"info"', description: 'Canonical semantic color prop.' },
+          { name: 'tone', type: '"info" | "success" | "warning" | "error"', default: '"neutral"', description: 'Canonical semantic color prop.' },
           { name: 'title', type: 'string', default: '—', description: 'Bold title line.' },
           { name: 'children', type: 'React.ReactNode', default: '—', description: 'Alert body content.' },
           { name: 'onDismiss', type: '() => void', default: '—', description: 'Shows a close button when provided.' },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Switch } from '@caindev/ui'
 
 export function SwitchPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Switch"
         description="Indicates whether a setting is on or off. Built on Base UI's Switch primitive with full keyboard support, accessible labeling, and form integration."
@@ -70,6 +68,5 @@ const [on, setOn] = useState(false)
           },
         ]}
       />
-    </DocsLayout>
   )
 }

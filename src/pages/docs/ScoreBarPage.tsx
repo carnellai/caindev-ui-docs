@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { ScoreBar } from '@caindev/ui'
 
 export function ScoreBarPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="ScoreBar"
         description="A horizontal progress bar for displaying evaluation scores. Supports a threshold marker that changes the bar color green/red based on pass/fail. Used in eval cards, run summaries, and metric breakdowns."
@@ -40,6 +38,5 @@ export function ScoreBarPage() {
           { name: 'size', type: '"sm" | "md"', default: '"md"', description: 'Bar height.' },
         ]}
       />
-    </DocsLayout>
   )
 }

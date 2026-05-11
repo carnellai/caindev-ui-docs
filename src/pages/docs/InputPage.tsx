@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Input } from '@caindev/ui'
 
 export function InputPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Input"
         description="A text input that integrates with Base UI's Field system for labeling, validation, and accessible error states."
@@ -33,6 +31,12 @@ export function InputPage() {
   label="Username"
   placeholder="johndoe"
   error="Username is already taken."
+/>
+
+// Style the wrapper separately from the input
+<Input
+  label="Search"
+  wrapperClassName="max-w-sm"
 />
 
 // Controlled with normal input props
@@ -85,8 +89,21 @@ const [value, setValue] = useState('')
             default: 'false',
             description: 'Disables the input.',
           },
+          {
+            name: 'wrapperClassName',
+            type: 'string',
+            default: '—',
+            description:
+              'CSS class applied to the outer label/control/hint wrapper.',
+          },
+          {
+            name: 'className',
+            type: 'string | ((state) => string)',
+            default: '—',
+            description:
+              'CSS class applied to the inner input control, not the wrapper.',
+          },
         ]}
       />
-    </DocsLayout>
   )
 }

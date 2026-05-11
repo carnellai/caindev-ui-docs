@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button, CommandPalette, useCommandPalette } from '@caindev/ui'
 
@@ -76,19 +75,16 @@ function CommandPaletteDemo() {
 
 export function CommandPalettePage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="CommandPalette"
         description="A keyboard-driven command palette for fast navigation and actions. Opens with ⌘K by default. Supports controlled and uncontrolled open state via open/defaultOpen/onOpenChange, with improved keyboard and ARIA accessibility."
         preview={<CommandPaletteDemo />}
-        code={`import { CommandPalette, ThemeProvider, useCommandPalette } from '@caindev/ui'
+        code={`import { CommandPalette, useCommandPalette } from '@caindev/ui'
 
-// Theme setup for portaled content
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
+const { open, setOpen } = useCommandPalette() // wires up Cmd/Ctrl+K globally
 
-const { open, setOpen } = useCommandPalette() // wires up ⌘K globally
+// Disable the global shortcut conditionally
+const palette = useCommandPalette({ enabled: !isEditing })
 
 const items = [
   {
@@ -169,7 +165,18 @@ const items = [
             description: 'Text shown when no items match the query.',
           },
         ]}
+        apiSections={[
+          {
+            title: 'useCommandPalette',
+            description:
+              'Hook for controlling palette state and registering the Cmd/Ctrl+K global shortcut.',
+            props: [
+              { name: 'enabled', type: 'boolean', default: 'true', description: 'Whether the global keyboard shortcut is active.' },
+              { name: 'open', type: 'boolean', default: 'false', description: 'Current open state returned from the hook.' },
+              { name: 'setOpen', type: 'React.Dispatch<React.SetStateAction<boolean>>', default: '—', description: 'State setter returned from the hook.' },
+            ],
+          },
+        ]}
       />
-    </DocsLayout>
   )
 }

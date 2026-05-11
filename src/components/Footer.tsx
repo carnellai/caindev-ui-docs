@@ -1,3 +1,5 @@
+import { BrandLogo } from './BrandLogo'
+
 const links = [
   {
     group: 'Docs',
@@ -47,11 +49,9 @@ export function Footer() {
           }}>
           {/* Brand */}
           <div className='flex flex-col gap-3.5'>
-            <img
-              src='/logo.svg'
-              alt='caindev/ui'
-              style={{ height: 18, alignSelf: 'flex-start' }}
-            />
+            <span style={{ alignSelf: 'flex-start' }}>
+              <BrandLogo className='h-[18px] w-auto' />
+            </span>
             <p
               className='m-0 text-[0.8125rem] leading-[1.6] text-foreground-muted'
               style={{ maxWidth: 260 }}>

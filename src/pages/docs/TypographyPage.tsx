@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import {
   GuideCode,
   GuideNote,
@@ -8,7 +7,6 @@ import {
 
 export function TypographyPage() {
   return (
-    <DocsLayout>
       <GuidePage
         title='Typography'
         description='@caindev/ui uses three typefaces, each with a specific role. They are loaded by the consumer; the package does not bundle font files or inject @font-face rules.'>
@@ -101,13 +99,12 @@ import '@fontsource/jetbrains-mono/500.css'`}</GuideCode>
           <GuideNote>
             <p className='m-0'>
               <strong className='text-foreground'>Note:</strong> Override
-              these at <code>:root</code> or within the same scope that{' '}
-              <code>ThemeProvider</code> targets. Overrides inside a narrower
-              selector take precedence for that subtree only.
+              these at <code>:root</code> or within any subtree that carries
+              your theme attributes. Overrides inside a narrower selector take
+              precedence for that subtree only.
             </p>
           </GuideNote>
         </GuideSection>
       </GuidePage>
-    </DocsLayout>
   )
 }

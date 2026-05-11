@@ -9,10 +9,59 @@ type Prop = {
 
 type DocsPageProps = {
   title: string
-  description: string
+  description: ReactNode
   preview: ReactNode
   code: string
   props?: Prop[]
+  apiSections?: {
+    title: string
+    description?: string
+    props: Prop[]
+  }[]
+}
+
+function PropTable({ props }: { props: Prop[] }) {
+  return (
+    <div className='overflow-x-auto rounded-md border border-border'>
+      <table className='w-full border-collapse text-sm' style={{ minWidth: 520 }}>
+        <thead>
+          <tr className='border-b border-border bg-background text-left'>
+            {['Prop', 'Type', 'Default', 'Description'].map((h) => (
+              <th
+                key={h}
+                className='px-3 py-2 text-[0.75rem] font-medium uppercase tracking-[0.06em] text-foreground-subtle'>
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {props.map((p) => (
+            <tr key={p.name} className='border-b border-border last:border-0'>
+              <td className='p-3 align-top'>
+                <code className='font-mono text-[0.8125rem] text-accent'>
+                  {p.name}
+                </code>
+              </td>
+              <td className='p-3 align-top'>
+                <code className='font-mono text-[0.8125rem] text-foreground-muted'>
+                  {p.type}
+                </code>
+              </td>
+              <td className='p-3 align-top'>
+                <code className='font-mono text-[0.8125rem] text-foreground-subtle'>
+                  {p.default ?? '—'}
+                </code>
+              </td>
+              <td className='p-3 align-top leading-relaxed text-foreground-muted'>
+                {p.description}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 export function DocsPage({
@@ -21,17 +70,18 @@ export function DocsPage({
   preview,
   code,
   props,
+  apiSections,
 }: DocsPageProps) {
   return (
     <div className='flex flex-col gap-10'>
       {/* Header */}
       <div className='flex flex-col gap-3'>
         <h1 className='m-0 text-foreground'>{title}</h1>
-        <p
+        <div
           className='m-0 text-base leading-relaxed text-foreground-muted'
           style={{ maxWidth: 540 }}>
           {description}
-        </p>
+        </div>
       </div>
 
       {/* Preview + code */}
@@ -67,51 +117,23 @@ export function DocsPage({
       {props && props.length > 0 && (
         <div className='flex flex-col gap-4'>
           <h3 className='m-0 text-foreground'>Props</h3>
-          <div className='overflow-x-auto rounded-md border border-border'>
-            <table
-              className='w-full border-collapse text-sm'
-              style={{ minWidth: 520 }}>
-              <thead>
-                <tr className='border-b border-border bg-background text-left'>
-                  {['Prop', 'Type', 'Default', 'Description'].map((h) => (
-                    <th
-                      key={h}
-                      className='px-3 py-2 text-[0.75rem] font-medium uppercase tracking-[0.06em] text-foreground-subtle'>
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {props.map((p) => (
-                  <tr
-                    key={p.name}
-                    className='border-b border-border last:border-0'>
-                    <td className='p-3 align-top'>
-                      <code className='font-mono text-[0.8125rem] text-accent'>
-                        {p.name}
-                      </code>
-                    </td>
-                    <td className='p-3 align-top'>
-                      <code className='font-mono text-[0.8125rem] text-foreground-muted'>
-                        {p.type}
-                      </code>
-                    </td>
-                    <td className='p-3 align-top'>
-                      <code className='font-mono text-[0.8125rem] text-foreground-subtle'>
-                        {p.default ?? '—'}
-                      </code>
-                    </td>
-                    <td className='p-3 align-top leading-relaxed text-foreground-muted'>
-                      {p.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <PropTable props={props} />
         </div>
       )}
+
+      {apiSections?.map((section) => (
+        <div key={section.title} className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-2'>
+            <h3 className='m-0 text-foreground'>{section.title}</h3>
+            {section.description && (
+              <p className='m-0 text-sm leading-relaxed text-foreground-muted'>
+                {section.description}
+              </p>
+            )}
+          </div>
+          <PropTable props={section.props} />
+        </div>
+      ))}
     </div>
   )
 }

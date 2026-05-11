@@ -1,0 +1,6 @@
+<svg width="134" height="18" viewBox="0 0 134 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 15 L7 5 L12 15" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8 15 L13 8 L18 15" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/>
+  <text x="23" y="13" font-family="'Inter', system-ui, sans-serif" font-size="14" font-weight="500" fill="#0a0a0a" letter-spacing="-0.3">caindev</text>
+  <text x="90" y="13" font-family="'Inter', system-ui, sans-serif" font-size="14" font-weight="500" fill="#7c3aed" letter-spacing="-0.3">/ui</text>
+</svg>

@@ -1,19 +1,16 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Slider } from '@caindev/ui'
 
 export function SliderPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Slider"
         description="Select one numeric value, or a range when value/defaultValue is an array. Built on Base UI's Slider primitive with keyboard support and accessible labeling."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '100%', maxWidth: '360px' }}>
-            <Slider label="Temperature" defaultValue={72} ariaLabel="Temperature" />
-            <Slider label="Max tokens" defaultValue={2048} min={256} max={8192} step={256} ariaLabel="Max tokens" />
-            <Slider label="Range" defaultValue={[20, 80]} ariaLabel="Range" />
-            <Slider label="Disabled" defaultValue={40} disabled ariaLabel="Disabled slider" />
+            <Slider label="Temperature" defaultValue={72} aria-label="Temperature" />
+            <Slider label="Max tokens" defaultValue={2048} min={256} max={8192} step={256} aria-label="Max tokens" />
+            <Slider label="Disabled" defaultValue={40} disabled aria-label="Disabled slider" />
           </div>
         }
         code={`import { Slider } from '@caindev/ui'
@@ -52,9 +49,8 @@ const [value, setValue] = useState(50)
           { name: 'value', type: 'number | number[]', default: '—', description: 'Controlled value. Keep the shape as number for one thumb or number[] for range.' },
           { name: 'onValueChange', type: '(value: number | number[]) => void', default: '—', description: 'Callback when value changes. Receives the same shape as the slider value.' },
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the slider.' },
-          { name: 'ariaLabel', type: 'string', default: '—', description: 'Accessible label for the thumb(s).' },
+          { name: 'aria-label', type: 'string', default: '—', description: 'Accessible label for the thumb(s).' },
         ]}
       />
-    </DocsLayout>
   )
 }

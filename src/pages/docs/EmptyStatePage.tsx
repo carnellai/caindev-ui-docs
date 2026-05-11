@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button, EmptyState } from '@caindev/ui'
 
 export function EmptyStatePage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="EmptyState"
         description="Placeholder shown when a list, table, or view has no data. Supports a title, description, custom icon, and an action button. Prefer tone for semantic severity."
@@ -56,9 +54,8 @@ import { Button } from '@caindev/ui'
           { name: 'description', type: 'string', default: '—', description: 'Supporting description text.' },
           { name: 'icon', type: 'React.ReactNode', default: 'Built-in', description: 'Custom icon. Defaults to a generic empty box or error circle.' },
           { name: 'action', type: 'React.ReactNode', default: '—', description: 'Action element — typically a Button.' },
-          { name: 'tone', type: '"default" | "error"', default: '"default"', description: 'Canonical semantic color prop.' },
+          { name: 'tone', type: '"neutral" | "info" | "success" | "warning" | "error"', default: '"neutral"', description: 'Semantic tone. Controls icon and text color.' },
         ]}
       />
-    </DocsLayout>
   )
 }

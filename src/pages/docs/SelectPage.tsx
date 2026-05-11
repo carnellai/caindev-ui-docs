@@ -1,11 +1,9 @@
 // SelectPage.tsx
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Select } from '@caindev/ui'
 
 export function SelectPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Select"
         description="Choose a value from a dropdown list. Built on Base UI's Select primitive with keyboard navigation and accessible labeling."
@@ -31,12 +29,7 @@ export function SelectPage() {
             />
           </div>
         }
-        code={`import { Select, ThemeProvider } from '@caindev/ui'
-
-// Theme setup for portaled content
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
+        code={`import { Select } from '@caindev/ui'
 
 <Select
   label="Model"
@@ -66,6 +59,5 @@ const [model, setModel] = useState<string | null>('gpt-4o')
           { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the select.' },
         ]}
       />
-    </DocsLayout>
   )
 }

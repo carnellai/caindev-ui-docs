@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Badge, EvalBadge, RunStatusBadge, Table } from '@caindev/ui'
 
@@ -48,7 +47,6 @@ const runs: Run[] = [
 
 export function TablePage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Table'
         description='Dense data table with typed column definitions, custom cell renderers, keyboard-accessible row click handlers, horizontal overflow handling, and an empty state.'
@@ -76,7 +74,7 @@ export function TablePage() {
                 key: 'model',
                 header: 'Model',
                 render: (r) => (
-                  <Badge variant='default' size='sm'>
+                  <Badge tone='neutral' size='sm'>
                     {r.model}
                   </Badge>
                 ),
@@ -147,6 +145,7 @@ type Run = { id: string; model: string; score: number }
 <Table
   rows={runs}
   keyField="id"
+  caption="Recent evaluation runs"
   onRowClick={r => navigate(\`/runs/\${r.id}\`)}
   columns={[
     {
@@ -158,6 +157,7 @@ type Run = { id: string; model: string; score: number }
       key: 'score',
       header: 'Score',
       align: 'right',
+      width: '120px',
       render: r => <EvalBadge verdict="pass" score={r.score} />,
     },
   ]}
@@ -198,8 +198,43 @@ type Run = { id: string; model: string; score: number }
             default: '"No data"',
             description: 'Message shown when data is empty.',
           },
+          {
+            name: 'caption',
+            type: 'React.ReactNode',
+            default: '—',
+            description: 'Optional table caption rendered above the header.',
+          },
+          {
+            name: 'tableProps',
+            type: 'React.TableHTMLAttributes<HTMLTableElement>',
+            default: '—',
+            description: 'Native props forwarded to the table element.',
+          },
+          {
+            name: 'tableClassName',
+            type: 'string',
+            default: '—',
+            description: 'CSS class applied to the inner table element.',
+          },
+          {
+            name: 'tableStyle',
+            type: 'React.CSSProperties',
+            default: '—',
+            description: 'Inline styles merged onto the inner table element.',
+          },
+        ]}
+        apiSections={[
+          {
+            title: 'Column',
+            props: [
+              { name: 'key', type: 'string', default: '—', description: 'Row field key used for default cell rendering.' },
+              { name: 'header', type: 'string', default: '—', description: 'Column header label.' },
+              { name: 'width', type: 'string', default: '—', description: 'Optional CSS width for the column header.' },
+              { name: 'align', type: '"left" | "center" | "right"', default: '"left"', description: 'Text alignment for header and body cells.' },
+              { name: 'render', type: '(row: T) => React.ReactNode', default: 'String(row[key])', description: 'Custom cell renderer. Bypasses default truncation/clamping.' },
+            ],
+          },
         ]}
       />
-    </DocsLayout>
   )
 }

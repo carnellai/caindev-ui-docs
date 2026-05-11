@@ -1,13 +1,11 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { ToolCallCard } from '@caindev/ui'
 
 export function ToolCallCardPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="ToolCallCard"
-        description="Experimental prototype expandable display for a single tool invocation. Shows the tool name, status, and optionally the input arguments and output. Supports pending, running, completed, and failed states."
+        description="Expandable display for a single tool invocation. Shows the tool name, OperationStatus, and optionally the input arguments, output, and duration."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', maxWidth: '520px' }}>
             <ToolCallCard
@@ -63,7 +61,7 @@ export function ToolCallCardPage() {
 />`}
         props={[
           { name: 'name', type: 'string', default: '—', description: 'The tool function name. Rendered in monospace.' },
-          { name: 'status', type: '"pending" | "running" | "completed" | "failed" | "queued" | "cancelled" | "skipped"', default: '—', description: 'Current execution status.' },
+          { name: 'status', type: 'OperationStatus', default: '—', description: 'Current execution status: idle, pending, running, completed, failed, queued, cancelled, or skipped.' },
           { name: 'input', type: 'Record<string, unknown>', default: '—', description: 'Tool input arguments rendered as formatted JSON.' },
           { name: 'output', type: 'unknown', default: '—', description: 'Tool output rendered as formatted JSON.' },
           { name: 'duration', type: 'number', default: '—', description: 'Execution time in milliseconds.' },
@@ -72,6 +70,5 @@ export function ToolCallCardPage() {
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

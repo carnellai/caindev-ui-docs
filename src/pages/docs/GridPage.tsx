@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Card, Grid, MetricCard } from '@caindev/ui'
 
 export function GridPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Grid"
         description="CSS Grid layout primitive. Supports fixed column counts, custom templates, and auto-fill responsive grids with a minimum column width."
@@ -51,6 +49,5 @@ export function GridPage() {
           { name: 'colGap', type: 'string | number', default: '—', description: 'Column gap override.' },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Button } from '@caindev/ui'
 
 export function ButtonPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Button'
         description="Triggers an action or event. Built on Base UI's Button primitive — stays focusable when disabled and supports rendering as any element."
@@ -98,6 +96,5 @@ export function ButtonPage() {
           },
         ]}
       />
-    </DocsLayout>
   )
 }

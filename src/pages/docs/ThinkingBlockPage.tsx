@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { ThinkingBlock, useSimulatedStream } from '@caindev/ui'
 
@@ -12,10 +11,9 @@ function StreamingThinking() {
 
 export function ThinkingBlockPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="ThinkingBlock"
-        description="Experimental prototype collapsible display for model thinking summaries or internal reasoning-like text. Shows an animated pulse while streaming and a word count when complete."
+        description="Collapsible display for model thinking summaries or internal reasoning-like text. Shows an animated pulse while streaming and a word count when complete."
         preview={
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%', maxWidth: '520px' }}>
             <StreamingThinking />
@@ -51,6 +49,5 @@ export function ThinkingBlockPage() {
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

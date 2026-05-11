@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Checkbox } from '@caindev/ui'
 
 export function CheckboxPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Checkbox"
         description="A styled checkbox with indeterminate state support. Built on Base UI's Checkbox primitive with full keyboard support and form integration."
@@ -76,6 +74,5 @@ const [checked, setChecked] = useState(false)
           },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Container } from '@caindev/ui'
 
 export function ContainerPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Container'
         description='A max-width wrapper that centers content on the page. Use it to constrain layout width consistently across pages without repeating margin and padding logic.'
@@ -118,6 +116,5 @@ export function ContainerPage() {
           },
         ]}
       />
-    </DocsLayout>
   )
 }

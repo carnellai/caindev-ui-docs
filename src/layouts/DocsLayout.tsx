@@ -1,25 +1,33 @@
+import { BrandLogo } from '../components/BrandLogo'
 import { Link, useLocation } from 'react-router'
 import { useState, useEffect } from 'react'
 import { Footer } from '../components/Footer'
 
-const guides = [
+const overviewNav = [
   { label: 'Getting Started', href: '/docs/getting-started' },
-  { label: 'Theming', href: '/docs/theming' },
-  { label: 'Typography', href: '/docs/typography' },
-  { label: 'Design Tokens', href: '/docs/design-tokens' },
-  { label: 'Blocks', href: '/docs/blocks' },
 ]
 
-const foundationsLayout = [
+const themeNav = [
+  { label: 'Overview', href: '/docs/theme/overview' },
+  { label: 'Color', href: '/docs/theme/color' },
+  { label: 'Dark mode', href: '/docs/theme/dark-mode' },
+  { label: 'Typography', href: '/docs/theme/typography' },
+  { label: 'Radius', href: '/docs/theme/radius' },
+  { label: 'Shadows', href: '/docs/theme/shadows' },
+]
+
+const layoutNav = [
   { label: 'Card', href: '/docs/card' },
   { label: 'Separator', href: '/docs/separator' },
   { label: 'Stack', href: '/docs/stack' },
+  { label: 'HStack', href: '/docs/stack' },
+  { label: 'VStack', href: '/docs/stack' },
   { label: 'Grid', href: '/docs/grid' },
   { label: 'Container', href: '/docs/container' },
   { label: 'Section', href: '/docs/section' },
 ]
 
-const foundationsInputs = [
+const inputsNav = [
   { label: 'Button', href: '/docs/button' },
   { label: 'Checkbox', href: '/docs/checkbox' },
   { label: 'Combobox', href: '/docs/combobox' },
@@ -31,7 +39,7 @@ const foundationsInputs = [
   { label: 'Switch', href: '/docs/switch' },
 ]
 
-const foundationsOverlay = [
+const overlaysNav = [
   { label: 'Accordion', href: '/docs/accordion' },
   { label: 'CommandPalette', href: '/docs/command-palette' },
   { label: 'Dialog', href: '/docs/dialog' },
@@ -41,19 +49,18 @@ const foundationsOverlay = [
   { label: 'Tooltip', href: '/docs/tooltip' },
 ]
 
-const foundationsFeedback = [
+const feedbackNav = [
   { label: 'Alert', href: '/docs/alert' },
   { label: 'Badge', href: '/docs/badge' },
   { label: 'Progress', href: '/docs/progress' },
   { label: 'Toast', href: '/docs/toast' },
-]
-
-const foundationsData = [
   { label: 'Pagination', href: '/docs/pagination' },
   { label: 'Table', href: '/docs/table' },
+  { label: 'Skeleton', href: '/docs/skeleton' },
+  { label: 'EmptyState', href: '/docs/empty-state' },
 ]
 
-const chatGeneration = [
+const aiAgentNav = [
   { label: 'PromptInput', href: '/docs/prompt-input' },
   { label: 'MessageBubble', href: '/docs/message-bubble' },
   { label: 'MessageThread', href: '/docs/message-thread' },
@@ -64,21 +71,17 @@ const chatGeneration = [
   { label: 'ApprovalCard', href: '/docs/approval-card' },
   { label: 'AgentStep', href: '/docs/agent-step' },
   { label: 'StructuredOutput', href: '/docs/structured-output' },
+  { label: 'TraceTree', href: '/docs/trace-tree' },
 ]
 
-const observability = [
-  { label: 'TraceTree', href: '/docs/trace-tree' },
+const evalObservabilityNav = [
   { label: 'EvalBadge', href: '/docs/eval-badge' },
   { label: 'MetricCard', href: '/docs/metric-card' },
   { label: 'StatDelta', href: '/docs/stat-delta' },
   { label: 'TokenCost', href: '/docs/token-cost' },
   { label: 'RunStatusBadge', href: '/docs/run-status-badge' },
   { label: 'ScoreBar', href: '/docs/score-bar' },
-  { label: 'Skeleton', href: '/docs/skeleton' },
-  { label: 'EmptyState', href: '/docs/empty-state' },
 ]
-
-const allAiHrefs = [...chatGeneration, ...observability].map((i) => i.href)
 
 const SIDEBAR_W = 220
 const HEADER_H = 56
@@ -117,7 +120,7 @@ function NavGroup({
         const active = pathname === item.href
         return (
           <Link
-            key={item.href}
+            key={`${item.href}::${item.label}`}
             to={item.href}
             onClick={onNavigate}
             className={[
@@ -130,32 +133,6 @@ function NavGroup({
           </Link>
         )
       })}
-    </div>
-  )
-}
-
-function SectionToggle({
-  active,
-  onChange,
-}: {
-  active: 'base' | 'ai'
-  onChange: (v: 'base' | 'ai') => void
-}) {
-  return (
-    <div className='mb-5 flex gap-0.5 rounded-[7px] border border-border bg-background-subtle p-[3px]'>
-      {(['base', 'ai'] as const).map((v) => (
-        <button
-          key={v}
-          onClick={() => onChange(v)}
-          className={[
-            'flex-1 cursor-pointer rounded-[5px] border-0 py-[5px] font-[inherit] text-xs font-medium transition-all duration-[120ms]',
-            active === v
-              ? 'bg-background-elevated text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.3)]'
-              : 'bg-transparent text-foreground-subtle',
-          ].join(' ')}>
-          {v === 'base' ? 'Base UI' : 'AI'}
-        </button>
-      ))}
     </div>
   )
 }
@@ -199,81 +176,38 @@ function GitHubIcon() {
   )
 }
 
-function SidebarContents({
-  section,
-  setSection,
-  onNavigate,
-}: {
-  section: 'base' | 'ai'
-  setSection: (v: 'base' | 'ai') => void
-  onNavigate?: () => void
-}) {
+function SidebarContents({ onNavigate }: { onNavigate?: () => void }) {
   return (
-    <>
-      <div className='mb-6'>
-        <NavGroup label='Guides' items={guides} onNavigate={onNavigate} />
-      </div>
-      <SectionToggle active={section} onChange={setSection} />
-      {section === 'base' && (
-        <div className='flex flex-col gap-6'>
-          <NavGroup
-            label='Layout'
-            items={foundationsLayout}
-            onNavigate={onNavigate}
-          />
-          <NavGroup
-            label='Inputs'
-            items={foundationsInputs}
-            onNavigate={onNavigate}
-          />
-          <NavGroup
-            label='Overlay'
-            items={foundationsOverlay}
-            onNavigate={onNavigate}
-          />
-          <NavGroup
-            label='Feedback'
-            items={foundationsFeedback}
-            onNavigate={onNavigate}
-          />
-          <NavGroup
-            label='Data'
-            items={foundationsData}
-            onNavigate={onNavigate}
-          />
-        </div>
-      )}
-      {section === 'ai' && (
-        <div className='flex flex-col gap-6'>
-          <NavGroup
-            label='Chat & Generation'
-            items={chatGeneration}
-            onNavigate={onNavigate}
-          />
-          <NavGroup
-            label='Observability'
-            items={observability}
-            onNavigate={onNavigate}
-          />
-        </div>
-      )}
-    </>
+    <div className='flex flex-col gap-6'>
+      <NavGroup label='Overview' items={overviewNav} onNavigate={onNavigate} />
+      <NavGroup label='Theme' items={themeNav} onNavigate={onNavigate} />
+      <NavGroup label='Layout' items={layoutNav} onNavigate={onNavigate} />
+      <NavGroup label='Inputs' items={inputsNav} onNavigate={onNavigate} />
+      <NavGroup label='Overlays' items={overlaysNav} onNavigate={onNavigate} />
+      <NavGroup label='Feedback' items={feedbackNav} onNavigate={onNavigate} />
+      <NavGroup label='AI / Agent' items={aiAgentNav} onNavigate={onNavigate} />
+      <NavGroup
+        label='Eval / Observability'
+        items={evalObservabilityNav}
+        onNavigate={onNavigate}
+      />
+    </div>
   )
 }
 
 export function DocsLayout({ children }: { children: React.ReactNode }) {
   const { pathname } = useLocation()
-  const isAiRoute = allAiHrefs.includes(pathname)
-  const [section, setSection] = useState<'base' | 'ai'>(
-    isAiRoute ? 'ai' : 'base',
-  )
   const [mobileOpen, setMobileOpen] = useState(false)
   const isMobile = useIsMobile()
-  const [prevPathname, setPrevPathname] = useState(pathname)
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname)
-    if (mobileOpen) setMobileOpen(false)
-  }
+
+  /* Close mobile drawer when history moves (browser back / forward).
+   * Internal doc-to-doc taps use SidebarContents onNavigate. Avoid pathname +
+   * setState-in-effect pattern (eslint) and redundant closed→closed updates. */
+  useEffect(() => {
+    const onPopState = () => setMobileOpen(false)
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
@@ -292,7 +226,7 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
         style={{ height: HEADER_H }}>
         <div className='container-shell flex h-full items-center justify-between'>
           <Link to='/' className='flex items-center'>
-            <img src='/logo.svg' alt='caindev/ui' className='h-6' />
+            <BrandLogo />
           </Link>
 
           {!isMobile && (
@@ -375,11 +309,7 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
             transform: mobileOpen ? 'translateX(0)' : 'translateX(-100%)',
             transition: 'transform 280ms cubic-bezier(0.32,0.72,0,1)',
           }}>
-          <SidebarContents
-            section={section}
-            setSection={setSection}
-            onNavigate={() => setMobileOpen(false)}
-          />
+          <SidebarContents onNavigate={() => setMobileOpen(false)} />
         </div>
       )}
 
@@ -401,7 +331,7 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
             display: 'flex',
             flexDirection: 'column',
           }}>
-          <SidebarContents section={section} setSection={setSection} />
+          <SidebarContents />
         </div>
       )}
 

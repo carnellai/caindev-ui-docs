@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { ApprovalCard } from '@caindev/ui'
 
@@ -55,10 +54,9 @@ function InteractiveDemo() {
 
 export function ApprovalCardPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="ApprovalCard"
-        description="Experimental prototype human-in-the-loop interrupt UI. Shown when an agent pauses execution and requires human approval before proceeding. Supports three risk levels and displays the proposed action alongside reasoning text."
+        description="Human-in-the-loop interrupt UI. Shown when an agent pauses execution and requires human approval before proceeding. Supports three risk levels and displays the proposed action alongside reasoning text."
         preview={
           <div style={{ width: '100%', maxWidth: '480px' }}>
             <InteractiveDemo />
@@ -94,6 +92,5 @@ export function ApprovalCardPage() {
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the root wrapper.' },
         ]}
       />
-    </DocsLayout>
   )
 }

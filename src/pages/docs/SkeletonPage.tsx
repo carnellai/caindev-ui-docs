@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Skeleton, SkeletonCard, SkeletonText } from '@caindev/ui'
 
 export function SkeletonPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Skeleton"
         description="Loading placeholder with a shimmer animation. Use to represent content while data is fetching. Includes preset layouts for text blocks and cards."
@@ -45,9 +43,27 @@ export function SkeletonPage() {
           { name: 'width', type: 'string | number', default: '"100%"', description: 'Width of the skeleton element.' },
           { name: 'height', type: 'string | number', default: '"16px"', description: 'Height of the skeleton element.' },
           { name: 'borderRadius', type: 'string | number', default: '"4px"', description: 'Border radius.' },
+          { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the skeleton element.' },
           { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Additional inline styles.' },
         ]}
+        apiSections={[
+          {
+            title: 'SkeletonText',
+            props: [
+              { name: 'lines', type: 'number', default: '3', description: 'Number of text skeleton lines to render.' },
+              { name: 'lastLineWidth', type: 'string | number', default: '"60%"', description: 'Width of the final line.' },
+              { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the wrapper.' },
+              { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the wrapper.' },
+            ],
+          },
+          {
+            title: 'SkeletonCard',
+            props: [
+              { name: 'className', type: 'string', default: '—', description: 'CSS class applied to the card skeleton wrapper.' },
+              { name: 'style', type: 'React.CSSProperties', default: '—', description: 'Inline styles merged onto the card skeleton wrapper.' },
+            ],
+          },
+        ]}
       />
-    </DocsLayout>
   )
 }

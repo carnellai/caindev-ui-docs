@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { StreamingText, useSimulatedStream } from '@caindev/ui'
 
@@ -22,7 +21,6 @@ function StreamingDemo() {
 
 export function StreamingTextPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="StreamingText"
         description="Renders text with an animated blinking cursor as it streams from an LLM. For real token streams, pass the growing accumulated string directly — do not pass a complete string to animate character-by-character."
@@ -56,6 +54,5 @@ function Demo() {
           { name: 'useSimulatedStream(text, intervalMs)', type: 'hook — demo/testing helper', default: '—', description: 'Simulates a streaming response by revealing text word-by-word. Not intended for production use with real LLM streams.' },
         ]}
       />
-    </DocsLayout>
   )
 }

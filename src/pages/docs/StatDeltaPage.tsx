@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { StatDelta } from '@caindev/ui'
 
 export function StatDeltaPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="StatDelta"
         description="A metric with a comparison value and directional indicator showing change from a baseline. Duration formatting avoids duplicate unit suffixes. Common in A/B eval comparisons, version diffs, and experiment results."
@@ -68,6 +66,5 @@ export function StatDeltaPage() {
           { name: 'higherIsBetter', type: 'boolean', default: 'true', description: 'Controls whether green means up or down.' },
         ]}
       />
-    </DocsLayout>
   )
 }

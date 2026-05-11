@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Tabs } from '@caindev/ui'
 
 export function TabsPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="Tabs"
         description="Switch between related panels. Built on Base UI's Tabs primitive with keyboard navigation, a refined active indicator, and accessible panel association."
@@ -74,6 +72,5 @@ export function TabsPage() {
           { name: 'onValueChange', type: '(value: string | null) => void', default: '—', description: 'Callback when active tab changes.' },
         ]}
       />
-    </DocsLayout>
   )
 }

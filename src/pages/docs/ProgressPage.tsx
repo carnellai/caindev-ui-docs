@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { Progress } from '@caindev/ui'
 
 export function ProgressPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Progress'
         description="Displays the status of a task that takes a long time. Built on Base UI's Progress primitive with support for determinate, indeterminate, and semantic tone states."
@@ -96,12 +94,11 @@ export function ProgressPage() {
           },
           {
             name: 'tone',
-            type: '"default" | "success" | "warning" | "error"',
-            default: '"default"',
+            type: '"neutral" | "info" | "success" | "warning" | "error"',
+            default: '"neutral"',
             description: 'Canonical semantic color prop for the indicator.',
           },
         ]}
       />
-    </DocsLayout>
   )
 }

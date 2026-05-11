@@ -1,9 +1,7 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 
 export function SectionPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title='Section'
         description='A semantic page section with consistent vertical padding. Compose with Container to build full page layouts quickly — the pattern used throughout this docs site.'
@@ -100,6 +98,5 @@ export function SectionPage() {
           },
         ]}
       />
-    </DocsLayout>
   )
 }

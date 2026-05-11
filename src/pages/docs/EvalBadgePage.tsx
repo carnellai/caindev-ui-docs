@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { EvalBadge } from '@caindev/ui'
 
 export function EvalBadgePage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="EvalBadge"
         description="Displays an evaluation verdict — pass, fail, review, or insufficient. Optionally shows the numeric score alongside the verdict. Used in run lists, eval tables, and span details."
@@ -48,6 +46,5 @@ export function EvalBadgePage() {
           { name: 'size', type: '"sm" | "md"', default: '"md"', description: 'Size of the badge.' },
         ]}
       />
-    </DocsLayout>
   )
 }

@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { NumberField } from '@caindev/ui'
 
 export function NumberFieldPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="NumberField"
         description="A numeric input with increment and decrement buttons and a scrub area. Built on Base UI's NumberField primitive. Drag the label to scrub the value."
@@ -125,6 +123,5 @@ const [value, setValue] = useState<number | null>(50)
           },
         ]}
       />
-    </DocsLayout>
   )
 }

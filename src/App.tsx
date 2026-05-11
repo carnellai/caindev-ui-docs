@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import { DocsShell } from './layouts/DocsShell'
 import { Home } from './pages/Home'
 import { ButtonPage } from './pages/docs/ButtonPage'
 import { SwitchPage } from './pages/docs/SwitchPage'
@@ -48,75 +49,75 @@ import { ComboboxPage } from './pages/docs/ComboboxPage'
 import { PaginationPage } from './pages/docs/PaginationPage'
 import { CommandPalettePage } from './pages/docs/CommandPalettePage'
 import { GettingStartedPage } from './pages/docs/GettingStartedPage'
-import { ThemingPage } from './pages/docs/ThemingPage'
 import { TypographyPage } from './pages/docs/TypographyPage'
-import { DesignTokensPage } from './pages/docs/DesignTokensPage'
-import { BlocksPage } from './pages/docs/BlocksPage'
+import { ThemeOverviewPage } from './pages/docs/theme/ThemeOverviewPage'
+import { ThemeColorPage } from './pages/docs/theme/ThemeColorPage'
+import { ThemeDarkModePage } from './pages/docs/theme/ThemeDarkModePage'
+import { ThemeRadiusPage } from './pages/docs/theme/ThemeRadiusPage'
+import { ThemeShadowsPage } from './pages/docs/theme/ThemeShadowsPage'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route
-          path='/docs'
-          element={<Navigate to='/docs/getting-started' replace />}
-        />
-        <Route path='/docs/getting-started' element={<GettingStartedPage />} />
-        <Route path='/docs/theming' element={<ThemingPage />} />
-        <Route path='/docs/typography' element={<TypographyPage />} />
-        <Route path='/docs/design-tokens' element={<DesignTokensPage />} />
-        <Route path='/docs/blocks' element={<BlocksPage />} />
-        <Route path='/docs/button' element={<ButtonPage />} />
-        <Route path='/docs/switch' element={<SwitchPage />} />
-        <Route path='/docs/checkbox' element={<CheckboxPage />} />
-        <Route path='/docs/input' element={<InputPage />} />
-        <Route path='/docs/dialog' element={<DialogPage />} />
-        <Route path='/docs/select' element={<SelectPage />} />
-        <Route path='/docs/tabs' element={<TabsPage />} />
-        <Route path='/docs/tooltip' element={<TooltipPage />} />
-        <Route path='/docs/menu' element={<MenuPage />} />
-        <Route path='/docs/accordion' element={<AccordionPage />} />
-        <Route path='/docs/slider' element={<SliderPage />} />
-        <Route path='/docs/streaming-text' element={<StreamingTextPage />} />
-        <Route path='/docs/message-bubble' element={<MessageBubblePage />} />
-        <Route path='/docs/message-thread' element={<MessageThreadPage />} />
-        <Route path='/docs/thinking-block' element={<ThinkingBlockPage />} />
-        <Route path='/docs/tool-call-card' element={<ToolCallCardPage />} />
-        <Route path='/docs/code-block' element={<CodeBlockPage />} />
-        <Route path='/docs/approval-card' element={<ApprovalCardPage />} />
-        <Route path='/docs/agent-step' element={<AgentStepPage />} />
-        <Route
-          path='/docs/structured-output'
-          element={<StructuredOutputPage />}
-        />
-        <Route path='/docs/prompt-input' element={<PromptInputPage />} />
-        <Route path='/docs/trace-tree' element={<TraceTreePage />} />
-        <Route path='/docs/eval-badge' element={<EvalBadgePage />} />
-        <Route path='/docs/run-status-badge' element={<RunStatusBadgePage />} />
-        <Route path='/docs/token-cost' element={<TokenCostPage />} />
-        <Route path='/docs/metric-card' element={<MetricCardPage />} />
-        <Route path='/docs/stat-delta' element={<StatDeltaPage />} />
-        <Route path='/docs/score-bar' element={<ScoreBarPage />} />
-        <Route path='/docs/skeleton' element={<SkeletonPage />} />
-        <Route path='/docs/empty-state' element={<EmptyStatePage />} />
-        <Route path='/docs/card' element={<CardPage />} />
-        <Route path='/docs/badge' element={<BadgePage />} />
-        <Route path='/docs/separator' element={<SeparatorPage />} />
-        <Route path='/docs/alert' element={<AlertPage />} />
-        <Route path='/docs/table' element={<TablePage />} />
-        <Route path='/docs/toast' element={<ToastPage />} />
-        <Route path='/docs/form' element={<FormPage />} />
-        <Route path='/docs/stack' element={<StackPage />} />
-        <Route path='/docs/grid' element={<GridPage />} />
-        <Route path='/docs/container' element={<ContainerPage />} />
-        <Route path='/docs/section' element={<SectionPage />} />
-        <Route path='/docs/progress' element={<ProgressPage />} />
-        <Route path='/docs/drawer' element={<DrawerPage />} />
-        <Route path='/docs/number-field' element={<NumberFieldPage />} />
-        <Route path='/docs/combobox' element={<ComboboxPage />} />
-        <Route path='/docs/pagination' element={<PaginationPage />} />
-        <Route path='/docs/command-palette' element={<CommandPalettePage />} />
+        <Route path='/docs' element={<DocsShell />}>
+          <Route index element={<Navigate to='getting-started' replace />} />
+          <Route path='getting-started' element={<GettingStartedPage />} />
+          <Route path='theme/overview' element={<ThemeOverviewPage />} />
+          <Route path='theme/color' element={<ThemeColorPage />} />
+          <Route path='theme/dark-mode' element={<ThemeDarkModePage />} />
+          <Route path='theme/typography' element={<TypographyPage />} />
+          <Route path='theme/radius' element={<ThemeRadiusPage />} />
+          <Route path='theme/shadows' element={<ThemeShadowsPage />} />
+          <Route path='button' element={<ButtonPage />} />
+          <Route path='switch' element={<SwitchPage />} />
+          <Route path='checkbox' element={<CheckboxPage />} />
+          <Route path='input' element={<InputPage />} />
+          <Route path='dialog' element={<DialogPage />} />
+          <Route path='select' element={<SelectPage />} />
+          <Route path='tabs' element={<TabsPage />} />
+          <Route path='tooltip' element={<TooltipPage />} />
+          <Route path='menu' element={<MenuPage />} />
+          <Route path='accordion' element={<AccordionPage />} />
+          <Route path='slider' element={<SliderPage />} />
+          <Route path='streaming-text' element={<StreamingTextPage />} />
+          <Route path='message-bubble' element={<MessageBubblePage />} />
+          <Route path='message-thread' element={<MessageThreadPage />} />
+          <Route path='thinking-block' element={<ThinkingBlockPage />} />
+          <Route path='tool-call-card' element={<ToolCallCardPage />} />
+          <Route path='code-block' element={<CodeBlockPage />} />
+          <Route path='approval-card' element={<ApprovalCardPage />} />
+          <Route path='agent-step' element={<AgentStepPage />} />
+          <Route path='structured-output' element={<StructuredOutputPage />} />
+          <Route path='prompt-input' element={<PromptInputPage />} />
+          <Route path='trace-tree' element={<TraceTreePage />} />
+          <Route path='eval-badge' element={<EvalBadgePage />} />
+          <Route path='run-status-badge' element={<RunStatusBadgePage />} />
+          <Route path='token-cost' element={<TokenCostPage />} />
+          <Route path='metric-card' element={<MetricCardPage />} />
+          <Route path='stat-delta' element={<StatDeltaPage />} />
+          <Route path='score-bar' element={<ScoreBarPage />} />
+          <Route path='skeleton' element={<SkeletonPage />} />
+          <Route path='empty-state' element={<EmptyStatePage />} />
+          <Route path='card' element={<CardPage />} />
+          <Route path='badge' element={<BadgePage />} />
+          <Route path='separator' element={<SeparatorPage />} />
+          <Route path='alert' element={<AlertPage />} />
+          <Route path='table' element={<TablePage />} />
+          <Route path='toast' element={<ToastPage />} />
+          <Route path='form' element={<FormPage />} />
+          <Route path='stack' element={<StackPage />} />
+          <Route path='grid' element={<GridPage />} />
+          <Route path='container' element={<ContainerPage />} />
+          <Route path='section' element={<SectionPage />} />
+          <Route path='progress' element={<ProgressPage />} />
+          <Route path='drawer' element={<DrawerPage />} />
+          <Route path='number-field' element={<NumberFieldPage />} />
+          <Route path='combobox' element={<ComboboxPage />} />
+          <Route path='pagination' element={<PaginationPage />} />
+          <Route path='command-palette' element={<CommandPalettePage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )

@@ -1,10 +1,8 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import { DocsPage } from '../../layouts/DocsPage'
 import { CodeBlock } from '@caindev/ui'
 
 export function CodeBlockPage() {
   return (
-    <DocsLayout>
       <DocsPage
         title="CodeBlock"
         description="Code display with a one-click copy button. Supports filename labels, language badges, and optional line numbers. Useful for generated code, setup snippets, and examples."
@@ -55,11 +53,10 @@ export function Agent() {
 />`}
         props={[
           { name: 'code', type: 'string', default: '—', description: 'The code string to display.' },
-          { name: 'language', type: 'string', default: '—', description: 'Language label shown in the header (e.g. "tsx", "python").' },
+          { name: 'language', type: 'string', default: '—', description: 'Language label shown in the header (e.g. "tsx", "python"). Display only — no syntax highlighting is applied.' },
           { name: 'filename', type: 'string', default: '—', description: 'Filename shown in the header alongside the language.' },
           { name: 'showLineNumbers', type: 'boolean', default: 'false', description: 'Show line numbers in the left gutter.' },
         ]}
       />
-    </DocsLayout>
   )
 }

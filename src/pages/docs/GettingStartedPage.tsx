@@ -1,4 +1,3 @@
-import { DocsLayout } from '../../layouts/DocsLayout'
 import {
   GuideCode,
   GuideNote,
@@ -8,7 +7,6 @@ import {
 
 export function GettingStartedPage() {
   return (
-    <DocsLayout>
       <GuidePage
         title='Getting Started'
         description={
@@ -61,33 +59,43 @@ createRoot(document.getElementById('root')!).render(
           </GuideNote>
         </GuideSection>
 
-        <GuideSection title='ThemeProvider'>
+        <GuideSection title='Theme setup'>
           <p className='m-0'>
-            Wrap your application with <code>ThemeProvider</code> to apply theme
-            attributes. The recommended setup uses{' '}
-            <code>scope=&quot;global&quot;</code> at the app root — it applies
-            theme attributes to <code>document.documentElement</code> so
-            portaled content (dialogs, tooltips, drawers) inherits them
-            correctly.{' '}
-            <code>scope=&quot;global&quot;</code> renders no DOM wrapper element.
+            Wrap your app root with <code>&lt;Theme&gt;</code>. It manages{' '}
+            <code>data-appearance</code>, <code>data-accent</code>, and{' '}
+            <code>data-radius</code> attributes on{' '}
+            <code>document.documentElement</code>, persists preferences to
+            localStorage, and bundles <code>ToastProvider</code> and{' '}
+            <code>TooltipProvider</code> — no extra providers needed.
           </p>
-          <GuideCode>{`import { ThemeProvider } from '@caindev/ui'
+          <GuideCode>{`// main.tsx
+import '@caindev/ui/styles.css'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Theme } from '@caindev/ui'
+import App from './App'
 
-// Recommended: global scope at app root — no wrapper element rendered
-<ThemeProvider scope="global" appearance="dark" accent="violet" radius="md">
-  <App />
-</ThemeProvider>
-
-// Subtree scope — wraps children in a div, useful for isolated sections
-<ThemeProvider appearance="light" accent="emerald" radius="sm">
-  <MarketingSection />
-</ThemeProvider>`}</GuideCode>
-          <p className='m-0'>
-            Defaults: <code>scope=&quot;subtree&quot;</code>,{' '}
-            <code>appearance=&quot;dark&quot;</code>,{' '}
-            <code>accent=&quot;violet&quot;</code>, and{' '}
-            <code>radius=&quot;md&quot;</code>.
-          </p>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Theme appearance="dark" accent="violet" radius="md">
+      <App />
+    </Theme>
+  </StrictMode>,
+)`}</GuideCode>
+          <GuideNote>
+            <p className='m-0'>
+              <strong className='text-foreground'>SSR / static HTML:</strong>{' '}
+              Add <code>&lt;ThemeScript&gt;</code> to your{' '}
+              <code>&lt;head&gt;</code> before the stylesheet to prevent a
+              flash of unstyled content. See the{' '}
+              <a
+                className='text-accent no-underline hover:text-accent-hover'
+                href='/docs/theme/overview'>
+                Theme docs
+              </a>{' '}
+              for details.
+            </p>
+          </GuideNote>
         </GuideSection>
 
         <GuideSection title='Using components'>
@@ -100,7 +108,7 @@ export function Example() {
   return (
     <div>
       <Button variant="solid">Run evaluation</Button>
-      <Badge variant="success">Passed</Badge>
+      <Badge tone="success">Passed</Badge>
       <Switch />
     </div>
   )
@@ -117,6 +125,5 @@ export function Example() {
           </p>
         </GuideSection>
       </GuidePage>
-    </DocsLayout>
   )
 }
